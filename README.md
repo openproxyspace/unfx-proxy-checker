@@ -1,10 +1,10 @@
 # Unfx Proxy Checker
-![](https://i.ibb.co/KG0FJwZ/Screenshot-2.png)
-![](https://i.ibb.co/SwK6DNT/Screenshot-5.png)
-
 With configured hot module replacement. You can use this as electron-react-redux-postcss [template](https://github.com/assnctr/hot-electron-react-redux-postcss).
 
 Download latest build [here](https://github.com/assnctr/unfx-proxy-checker/releases).
+
+![](https://i.ibb.co/KG0FJwZ/Screenshot-2.png)
+![](https://i.ibb.co/SwK6DNT/Screenshot-5.png)
 
 ## Features
 - Support protocols: `http`, `https`, `socks4`, `socks5`.
@@ -23,12 +23,12 @@ Download latest build [here](https://github.com/assnctr/unfx-proxy-checker/relea
 - Sort by: `ip`, `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`.
 - Filter by: `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`.
 - Search by: `ip`, `port`
-  - `country`
-     - `city`
-     - `name`
+  - `country`:
+     - `city`.
+     - `name`.
 - Export formats:
-  - `ip` : `port`
-  - `protocol` :// `ip` : `port`
+  - `ip` : `port`.
+  - `protocol` :// `ip` : `port`.
 
 ## Core
 Threads:
@@ -56,6 +56,7 @@ Data capturing:
     - CentOS.
 
 Options:
+
 `Retry` - Retries the check once, for each protocol separately.
 
 ## Judges
@@ -65,13 +66,16 @@ Currently active:
 - `Validate String` - Response will be valid is this string was found in response body.
 
 Options:
+
 `Swap` - Swaps the judge url after each request, for acceleration and keep min server busy. If disabled - uses judge with min response timeout.
 
 Add new:
+
 `Url` - Must be an unique.
 
 ## Ip
 Ip address lookup:
+
 `Url` - External server, which returned your `ip` in a raw data. Uses for proxy anon detection.
 
 Your `ip` address will be cached before start the checking. Lookup starts only once. If you are changed `ip` address, press the `check` button for re-lookup.
@@ -80,6 +84,7 @@ Your `ip` address will be cached before start the checking. Lookup starts only o
 **If you really no need filtering through blacklist, don't enable this feature**. Loads CPU, and needs more time for prepare results.
 
 Options:
+
 `Filtering` - Enable filter through blacklists.
 
 Add new:
@@ -87,7 +92,8 @@ Add new:
 - `Url` or `Path` - Must be an unique.
 
 Ip addresses can be as `single` (127.0.0.1) or with `mask` (127.0.0.0/24).
-Lists loads every time before start the checking (**Without progress overlay!**)
+
+Lists loads every time before start the checking (**Without progress overlay!**).
 
 ## Results
 Ports:
