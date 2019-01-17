@@ -1,0 +1,9 @@
+{
+    "presets": ["@babel/env", "@babel/react"],
+    "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime", ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": false }]],
+    "env": {
+        "development": {
+            "plugins": ["react-hot-loader/babel"]
+        }
+    }
+}

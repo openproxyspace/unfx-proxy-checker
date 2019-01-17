@@ -1,0 +1,174 @@
+:root {
+    --green-color: #31bc86;
+    --grey-color: #8c99a7;
+    --blue-color: #5396d8;
+}
+
+.update-notify {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    left: 0;
+    top: 0;
+    padding: 2em;
+    overflow: auto;
+    opacity: 1;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: #fff;
+
+    &.closed {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &.checking {
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+
+        & .lds-ripple {
+            opacity: 1;
+        }
+    }
+
+    &.downloading {
+        width: 400px;
+        height: 100px;
+        left: calc(50% - 200px);
+        top: calc(50% - 50px);
+        overflow: hidden;
+        border-radius: 0.75em;
+
+        & .update-container {
+            opacity: 0;
+        }
+    }
+
+    & .lds-ripple {
+        opacity: 0;
+        position: fixed;
+        width: 58px;
+        height: 58px;
+        left: calc(50% - 29px);
+        top: calc(50% - 29px);
+        border-radius: 100%;
+
+        & div {
+            position: absolute;
+            border: 4px solid color-mod(var(--green-color) alpha(50%));
+            opacity: 1;
+            border-radius: 50%;
+            animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+
+            &:nth-child(2) {
+                animation-delay: -0.5s;
+            }
+        }
+    }
+
+    & .update-container {
+        max-width: 1600px;
+        width: 100%;
+        border-radius: 0.75em;
+        transform: translateY(0);
+        opacity: 1;
+        transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        animation-name: fade-one;
+        animation-duration: 0.7s;
+        animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+        & .section-name {
+            display: inline-flex;
+            font-weight: 100;
+            font-size: 1em;
+            color: color-mod(var(--green-color) alpha(50%));
+            border: 1px dashed color-mod(var(--green-color) alpha(50%));
+            padding: 0.25em 0.75em;
+            border-radius: 1.25em;
+            margin-bottom: 1em;
+        }
+
+        & .update-description {
+            color: color-mod(var(--green-color) alpha(50%));
+            margin-bottom: 4em;
+        }
+    }
+}
+
+.download-progress {
+    position: fixed;
+    left: calc(50% - 200px + 2em);
+    top: calc(50% - 5px);
+    width: calc(400px - 4em);
+    height: 10px;
+    overflow: hidden;
+    background-color: color-mod(var(--green-color) alpha(15%));
+    border-radius: 0.25em;
+}
+
+.download-progress-bar {
+    position: absolute;
+    background-color: rgba(49, 188, 135, 0.75);
+    height: 100%;
+    border-radius: 0.25em;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.update-download {
+    margin: 1em 0 2em 0;
+    display: flex;
+    flex-flow: column wrap;
+
+    & a {
+        color: color-mod(var(--green-color) alpha(50%));
+        text-decoration: none;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        margin: 0.15em 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            color: var(--green-color);
+        }
+
+        & span.size {
+            margin-right: 0.5em;
+            color: #607d8b;
+            font-size: 0.85em;
+            text-decoration: none;
+        }
+    }
+}
+
+@keyframes lds-ripple {
+    0% {
+        top: 28px;
+        left: 28px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: -1px;
+        left: -1px;
+        width: 58px;
+        height: 58px;
+        opacity: 0;
+    }
+}
+
+@keyframes fade-one {
+    from {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

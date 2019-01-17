@@ -1,0 +1,39 @@
+:root {
+    --green-color: #31bc86;
+    --grey-color: #8c99a7;
+    --blue-color: #5396d8;
+}
+
+.proxy-input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2em;
+    border-top: 1px solid color-mod(var(--green-color) alpha(15%));
+    border-bottom: 1px solid color-mod(var(--green-color) alpha(15%));
+    
+    & span {
+        margin: 0;
+        padding: 0;
+        width: 50%;
+    }
+
+    & .metrics {
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+        font-weight: 900;
+        color: color-mod(var(--green-color) alpha(50%));
+        margin-bottom: 2em;
+        cursor: default;
+
+        & * {
+            margin-left: 2em;
+            padding: 0.5em 1em;
+            background-color: color-mod(var(--green-color) alpha(50%));
+            color: #fff;
+            border-radius: 1.5em;
+            border-bottom: 1px solid color-mod(var(--green-color) alpha(50%));
+        }
+    }
+}

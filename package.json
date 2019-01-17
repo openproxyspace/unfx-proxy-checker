@@ -1,0 +1,126 @@
+{
+    "name": "unfx-proxy-checker",
+    "version": "1.3.0",
+    "main": "public/main.js",
+    "license": "MIT",
+    "scripts": {
+        "build": "run-p build:*",
+        "build:main": "cross-env NODE_ENV=production webpack -p --config webpack.config.main.babel.js",
+        "build:renderer": "cross-env NODE_ENV=production webpack -p --config webpack.config.renderer.babel.js",
+        "start": "run-p start:*",
+        "start:main": "electron --require @babel/register src/index",
+        "start:renderer": "cross-env NODE_ENV=development webpack-dev-server -d --config webpack.config.renderer.babel.js",
+        "package": "npm run build && electron-builder --linux --win",
+        "publish": "npm run build && electron-builder --linux --win --publish always"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.2.2",
+        "@babel/plugin-proposal-class-properties": "^7.2.3",
+        "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+        "@babel/plugin-transform-runtime": "^7.2.0",
+        "@babel/preset-env": "^7.2.3",
+        "@babel/preset-react": "^7.0.0",
+        "@babel/register": "^7.0.0",
+        "@babel/runtime": "^7.2.0",
+        "babel-loader": "^8.0.5",
+        "cross-env": "^5.2.0",
+        "css-loader": "^1.0.1",
+        "electron": "^4.0.1",
+        "electron-builder": "^20.38.4",
+        "electron-devtools-installer": "^2.2.4",
+        "electron-react-devtools": "^0.5.3",
+        "file-loader": "^2.0.0",
+        "ip": "^1.1.5",
+        "js-flock": "^3.5.3",
+        "mmdb-reader": "*",
+        "npm-run-all": "^4.1.5",
+        "postcss-color-mod-function": "^2.4.3",
+        "postcss-loader": "^3.0.0",
+        "postcss-preset-env": "^5.3.0",
+        "proxy-agent": "3.0.0",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "react-hot-loader": "^4.6.3",
+        "react-markdown": "^4.0.6",
+        "react-redux": "^5.1.1",
+        "react-tabs": "^2.3.0",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0",
+        "request-progress": "^3.0.0",
+        "request-promise": "^4.2.2",
+        "reselect": "^3.0.1",
+        "style-loader": "^0.23.1",
+        "url-loader": "^1.1.2",
+        "webpack": "^4.28.4",
+        "webpack-cli": "^3.2.1",
+        "webpack-dev-server": "^3.1.14"
+    },
+    "build": {
+        "appId": "com.github.assnctr.unfxproxychecker",
+        "win": {
+            "target": [
+                {
+                    "target": "zip",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                },
+                {
+                    "target": "nsis-web",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                },
+                {
+                    "target": "portable",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ],
+            "icon": "/public/icons/icon.ico",
+            "artifactName": "${name}-v${version}-${arch}-${os}.${ext}"
+        },
+        "linux": {
+            "target": [
+                {
+                    "target": "zip",
+                    "arch": [
+                        "x64",
+                        "ia32",
+                        "arm64",
+                        "armv7l"
+                    ]
+                }
+            ],
+            "icon": "/public/icons/icon.ico",
+            "artifactName": "${name}-v${version}-${arch}-${os}.${ext}"
+        },
+        "publish": [
+            {
+                "provider": "github",
+                "owner": "assnctr",
+                "repo": "unfx-proxy-checker",
+                "private": false
+            }
+        ],
+        "productName": "Unfx Proxy Checker",
+        "copyright": "2019 assnctr (openproxy.space)",
+        "extraResources": [
+            "./files/**"
+        ],
+        "portable": {
+            "artifactName": "${name}-v${version}-${arch}-${os}-portable.${ext}"
+        },
+        "nsisWeb": {
+            "oneClick": false,
+            "perMachine": true,
+            "allowToChangeInstallationDirectory": true,
+            "differentialPackage": true
+        }
+    }
+}

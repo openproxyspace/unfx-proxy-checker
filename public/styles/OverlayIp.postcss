@@ -1,0 +1,53 @@
+:root {
+    --green-color: #31bc86;
+    --grey-color: #8c99a7;
+}
+
+.ip-lookup {
+    position: fixed;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: color-mod(#fff alpha(85%));
+
+    &.opened {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    & .checking-status {
+        font-weight: 700;
+        color: #fff;
+
+        & svg {
+            margin: 1.25em;
+            fill: color-mod(var(--green-color) alpha(65%));
+            width: 1.5em;
+            height: 1.5em;
+        }
+
+        &.done {
+            & .ip-address {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        & .ip-address {
+            opacity: 0;
+            padding: 1em 2em;
+            border-radius: 1.5em;
+            background-color: color-mod(var(--green-color) alpha(35%));
+            box-shadow: 0 1em 4em color-mod(var(--green-color) alpha(35%));
+            transform: translateY(-10%);
+            transition: all 0.87s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+    }
+}

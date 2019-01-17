@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+settings.unfx.checker.json
+/public/*.js
+/.vscode
+dist
+package-lock.json
+tests

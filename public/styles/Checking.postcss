@@ -1,0 +1,59 @@
+.checking-page {
+    position: fixed;
+    display: flex;
+    visibility: hidden;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    background-color: color-mod(#fff alpha(95%));
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+    &.opened {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    & button {
+        position: absolute;
+        margin-right: 0;
+        bottom: 0;
+        border-radius: 0.25em 0.25em 0 0;
+        padding: 0.75em 4em;
+    }
+
+    & .preparing-results {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        cursor: default;
+        user-select: none;
+        font-weight: 700;
+        color: #8c99a7;
+        opacity: 0;
+        visibility: hidden;
+        justify-content: center;
+        background-color: #fff;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        & svg {
+            width: 1em;
+            height: 1em;
+            margin-right: 0.5em;
+            fill: #8c99a7;
+        }
+    }
+}

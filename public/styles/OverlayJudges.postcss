@@ -1,0 +1,158 @@
+:root {
+    --green-color: #31bc86;
+    --red-color: #e74856;
+    --grey-color: #8c99a7;
+}
+
+.ping-judges-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: color-mod(#fff alpha(85%));
+    user-select: none;
+    z-index: 0;
+
+    &.opened {
+        opacity: 1;
+        z-index: 3;
+        visibility: visible;
+
+        & .ping-judges {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(-10%);
+        }
+    }
+}
+
+.ping-judges {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    height: auto;
+    top: calc(50% - 175px);
+    left: calc(50% - 225px);
+    overflow: hidden;
+    border-radius: 0.5em;
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(0);
+    box-shadow: 0 1em 4em color-mod(var(--green-color) alpha(35%));
+
+    & .ping-progress {
+        position: relative;
+        font-weight: 700;
+        background-color: color-mod(var(--green-color) alpha(35%));
+        color: #fff;
+        height: 3em;
+
+        & .bar {
+            transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: absolute;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-color: color-mod(var(--green-color) alpha(35%));
+            box-shadow: 0 0.25em 0.95em color-mod(var(--green-color) alpha(35%));
+        }
+
+        & .count {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    & .ping-status {
+        font-weight: 900;
+        overflow: auto;
+        width: 450px;
+        max-height: 400px;
+        height: auto;
+        background-color: color-mod(#fff alpha(95%));
+
+        & .item {
+            display: flex;
+            flex-flow: row wrap;
+            padding: 1.15em 1.5em;
+            height: 4em;
+            align-items: center;
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            color: color-mod(var(--grey-color) alpha(65%));
+            border-bottom: 1px dashed color-mod(var(--grey-color) alpha(15%));
+
+            &.success {
+                color: color-mod(var(--green-color) alpha(65%));
+                border-bottom: 1px dashed color-mod(var(--green-color) alpha(15%));
+
+                & .response {
+                    color: #fff;
+                    background-color: color-mod(var(--green-color) alpha(65%));
+                }
+            }
+
+            &.error {
+                color: color-mod(var(--red-color) alpha(65%));
+                border-bottom: 1px dashed color-mod(var(--red-color) alpha(15%));
+
+                & .response {
+                    color: #fff;
+                    background-color: color-mod(var(--red-color) alpha(65%));
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            & .url {
+                width: 75%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            & .status {
+                width: 25%;
+                text-align: right;
+
+                & svg path {
+                    fill: color-mod(var(--grey-color) alpha(65%));
+                }
+
+                & .response {
+                    display: inline-block;
+                    padding: 0.35em 0.75em;
+                    border-radius: 1em;
+                    font-size: 0.85em;
+                    animation-name: fade-judge-status;
+                    animation-duration: 0.7s;
+                    text-align: center;
+                    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+                }
+            }
+        }
+    }
+}
+
+@keyframes fade-judge-status {
+    from {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

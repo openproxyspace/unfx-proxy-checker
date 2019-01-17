@@ -1,0 +1,142 @@
+:root {
+    --green-color: #31bc86;
+    --grey-color: #8c99a7;
+}
+
+.footer {
+    padding: 2em;
+    border-top: 1px solid color-mod(var(--green-color) alpha(15%));
+    display: flex;
+
+    & .marks {
+        display: flex;
+        align-items: center;
+        width: 60%;
+
+        & .product-name {
+            font-weight: 700;
+            color: color-mod(var(--green-color) alpha(50%));
+        }
+
+        & .version {
+            font-weight: 700;
+            font-size: 0.9em;
+            color: #fff;
+            background-color: color-mod(var(--green-color) alpha(35%));
+            border-radius: 1em;
+            padding: 0.2em 0.65em;
+        }
+
+        & a {
+            font-weight: 900;
+            margin-right: 1em;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+            &:hover {
+                text-decoration: underline;
+                color: color-mod(var(--green-color) alpha(75%));
+            }
+
+            &.copyright {
+                color: var(--grey-color);
+                font-weight: 400;
+                text-decoration: none;
+
+                &:hover {
+                    color: #0088cc;
+
+                    & svg {
+                        fill: #0088cc;
+                    }
+                }
+
+                & svg {
+                    width: 1em;
+                    height: 1em;
+                    fill: #8c99a7;
+                    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+                }
+            }
+        }
+
+        & span,
+        & a {
+            color: color-mod(var(--green-color) alpha(50%));
+        }
+
+        & * {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            margin-right: 0.5em;
+        }
+    }
+
+    & .socials {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: flex-end;
+        width: 40%;
+
+        & a {
+            display: flex;
+            align-items: center;
+            align-content: center;
+
+            &:not(:last-child) {
+                margin-right: 2em;
+            }
+
+            &.become-a-patron {
+                cursor: pointer;
+                font-weight: 700;
+                user-select: none;
+                text-decoration: none;
+                color: #8c99a7;
+
+                & svg {
+                    width: 1.2em;
+                    height: 1.2em;
+                    margin-left: 0.5em;
+                }
+
+                & span {
+                    margin: 0 0.12em;
+                    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+                }
+
+                &:hover {
+                    & span:nth-child(1) {
+                        color: #052d49;
+                    }
+
+                    & span:nth-child(2) {
+                        color: #f96854;
+                    }
+
+                    & svg {
+                        & circle {
+                            fill: #f96854;
+                        }
+
+                        & rect {
+                            fill: #052d49;
+                        }
+                    }
+                }
+            }
+        }
+
+        & svg {
+            height: 1.5em;
+            width: 1.5em;
+            cursor: pointer;
+            fill: var(--grey-color);
+
+            &:hover.github-svg path {
+                fill: #333;
+            }
+        }
+    }
+}
