@@ -15,7 +15,7 @@
     top: 0;
     left: 0;
     overflow-y: auto;
-    background-color: #fff;
+    background-color: color-mod(#fff alpha(95%));
     transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     opacity: 0;
     visibility: hidden;
@@ -36,41 +36,30 @@
         max-width: 960px;
         width: 100%;
         opacity: 0;
-        transform: translateY(-20%);
+        transform: translateY(-10%);
         transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 
         & .top-block {
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 2em;
 
             & .active-count {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                position: relative;
-                border-radius: 1.25em;
-                width: calc(100% - 4em);
-                background-color: color-mod(var(--green-color) alpha(20%));
-                background-image: linear-gradient(to right, color-mod(var(--green-color) alpha(15%)), color-mod(var(--blue-color) alpha(15%)));
+                font-size: 1em;
+                font-weight: 700;
+                user-select: none;
+                border-radius: 1.75em;
+                padding: 0.5em 1.75em;
+                border: 1px solid transparent;
+                color: color-mod(var(--grey-color) alpha(75%));
+                background-color: color-mod(var(--grey-color) alpha(15%));
+                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
-                & .fill {
-                    transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    height: 100%;
-                    background-image: linear-gradient(to right, color-mod(var(--green-color) alpha(15%)), color-mod(var(--blue-color) alpha(15%)));
-                }
-
-                & span {
-                    font-weight: 700;
-                    font-size: 0.9em;
-                    color: #fff;
-                    z-index: 1;
-                    user-select: none;
+                &.yes {
+                    color: color-mod(var(--green-color) alpha(75%));
+                    background-color: color-mod(var(--green-color) alpha(15%));
                 }
             }
 
@@ -107,42 +96,31 @@
                 &.active {
                     color: color-mod(var(--green-color) alpha(65%));
 
-                    & .ico:after {
-                        opacity: 1;
-                        transform: translateY(0%);
+                    & .count {
+                        color: color-mod(var(--grey-color) alpha(75%));
                     }
 
-                    & .count {
-                        color: color-mod(var(--grey-color) alpha(65%));
+                    & .ico-wrap {
+                        border: 1px dashed color-mod(var(--green-color) alpha(65%));
                     }
                 }
 
-                & .ico {
-                    position: relative;
-                    width: 40px;
-                    min-width: 40px;
-                    overflow: hidden;
-                    height: 26px;
-                    background-color: #fafafa;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
-                    border-radius: 1em;
+                & .ico-wrap {
                     margin-right: 0.5em;
+                    border-radius: 1em;
+                    padding: 2px;
+                    border: 1px dashed transparent;
+                    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
-                    &:after {
-                        content: '';
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                        opacity: 0;
-                        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                        background-color: color-mod(#333 alpha(15%));
-                        background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTEuOTk5IDUxMS45OTkiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMS45OTkgNTExLjk5OTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik01MDYuMjMxLDc1LjUwOGMtNy42ODktNy42OS0yMC4xNTgtNy42OS0yNy44NDksMGwtMzE5LjIxLDMxOS4yMTFMMzMuNjE3LDI2OS4xNjNjLTcuNjg5LTcuNjkxLTIwLjE1OC03LjY5MS0yNy44NDksMCAgICBjLTcuNjksNy42OS03LjY5LDIwLjE1OCwwLDI3Ljg0OWwxMzkuNDgxLDEzOS40ODFjNy42ODcsNy42ODcsMjAuMTYsNy42ODksMjcuODQ5LDBsMzMzLjEzMy0zMzMuMTM2ICAgIEM1MTMuOTIxLDk1LjY2Niw1MTMuOTIxLDgzLjE5OCw1MDYuMjMxLDc1LjUwOHoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
-                        background-position: center;
+                    & .ico {
+                        width: 40px;
+                        min-width: 40px;
+                        height: 26px;
+                        background-color: #fafafa;
                         background-repeat: no-repeat;
-                        background-size: 1em;
-                        transform: translateY(-10%);
+                        background-position: center;
+                        background-size: cover;
+                        border-radius: 1em;
                     }
                 }
 
@@ -175,7 +153,7 @@
             border-top: 1px dashed color-mod(var(--grey-color) alpha(15%));
             padding-top: 1.25em;
             user-select: none;
-            
+
             & svg {
                 width: 1.75em;
                 height: 1.75em;

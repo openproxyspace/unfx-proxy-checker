@@ -13,10 +13,12 @@ export default class ResultCountriesItem extends React.PureComponent {
 
     render = () => {
         const { name, active, count, flag } = this.props;
-        
+
         return (
             <div className={`country-item ${active ? 'active' : 'unactive'}`} onClick={this.toggle} onDoubleClick={this.toggleAll}>
-                <div className={`ico ${flag} png`} />
+                <div className="ico-wrap">
+                    <div className={`ico ${flag} png`} />
+                </div>
                 <div className="merge">
                     <div className="name">{name}</div>
                     <div className="count">Proxies: {count}</div>
