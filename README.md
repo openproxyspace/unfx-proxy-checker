@@ -7,53 +7,51 @@ Download latest build [here](https://github.com/assnctr/unfx-proxy-checker/relea
 ![](https://i.ibb.co/SwK6DNT/Screenshot-5.png)
 
 ## Features
-- Support protocols: `http`, `https`, `socks4`, `socks5`.
+- Support protocols: `http`, `https`, `socks4`, `socks5`
 - Data capturing:
-  - Extra data.
-  - All data.
-- Retry.
+  - Extra data
+  - All data
+- Retry
 - Multiple judges support:
-  - Response validation.
-  - Swap.
+  - Response validation
+  - Swap
 - Blacklists support:
-  - Single ips.
-  - Ips with mask.
-- Country checking: `city`, `name`.
-- Anonymity detection: `transparent`, `anonymous`, `elite`.
-- Sort by: `ip`, `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`.
-- Filter by: `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`.
+  - Single ips
+  - Ips with mask
+- Country checking: `city`, `name`
+- Anonymity detection: `transparent`, `anonymous`, `elite`
+- Sort by: `ip`, `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`
+- Filter by: `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`
 - Search by: `ip`, `port`
-  - `country`:
-     - `city`.
-     - `name`.
+  - Country: `city`, `name`
 - Export formats:
-  - `ip` : `port`.
-  - `protocol` :// `ip` : `port`.
+  - `ip` : `port`
+  - `protocol` :// `ip` : `port`
 
 ## Core
 Threads:
-- Min `1`.
-- Max `500`.
+- Min `1`
+- Max `500`
 
 Timeout:
-- Min `1000` ms.
-- Max `60000` ms.
+- Min `1000` ms
+- Max `60000` ms
 
 Data capturing:
-- `Capture full data` - Capture and save all response data (`judge`, `body`, `timings`, `headers`) for looking at the results page.
-- `Capture extra data` - Parses response body at server signatures.
+- `Capture full data` - Capture and save all response data (`judge`, `body`, `timings`, `headers`) for looking at the results page
+- `Capture extra data` - Parses response body at server signatures:
   - Checking connection:
-    - Keep-Alive.
-    - Close.
+    - Keep-Alive
+    - Close
   - Proxy types:
-    - Mikrotik.
-    - Squid.
+    - Mikrotik
+    - Squid
   - Server:
-    - Apache.
-    - Nginx.
+    - Apache
+    - Nginx
   - OS:
-    - Ubuntu.
-    - CentOS.
+    - Ubuntu
+    - CentOS
 
 Options:
 
@@ -61,9 +59,9 @@ Options:
 
 ## Judges
 Currently active:
-- `SSL` - Use this judge only for HTTPS requests. If disabled - uses as 'usual' for HTTP/SOCKS4/SOCKS5.
-- `Validate` - Enable response validation.
-- `Validate String` - Response will be valid is this string was found in response body.
+- `SSL` - Use this judge only for HTTPS requests. If disabled - uses as 'usual' for HTTP/SOCKS4/SOCKS5
+- `Validate` - Enable response validation
+- `Validate String` - Response will be valid is this string was found in response body
 
 Options:
 
@@ -88,8 +86,8 @@ Options:
 `Filtering` - Enable filter through blacklists.
 
 Add new:
-- `Title` - Must be an unique.
-- `Url` or `Path` - Must be an unique.
+- `Title` - Must be an unique
+- `Url` or `Path` - Must be an unique
 
 Ip addresses can be as `single` (127.0.0.1) or with `mask` (127.0.0.0/24).
 
@@ -97,12 +95,12 @@ Lists loads every time before start the checking (**Without progress overlay!**)
 
 ## Results
 Ports:
-- `Allow` - Allow only `input` ports.
-- `Disallow` - Remove `input` ports.
+- `Allow` - Allow only `input` ports
+- `Disallow` - Remove `input` ports
 
 **TIPS**:
 - Export in `protocol` :// `ip` : `port`, always return proxies with protocols priority:
-`socks5` -> `socks4` -> `http`.
+`socks5` -> `socks4` -> `http`
 ```
 Example:
 127.0.0.1:1337 is socks4, socks5 proxy.
@@ -110,8 +108,8 @@ Example:
 Will saved as:
 socks5://127.0.0.1:1337
 ```
-- `Double click` - select or deselect all countries.
-- `Search` - may contain multi words, separated by `space`.
+- `Double click` - select or deselect all countries
+- `Search` - may contain multi words, separated by `space`
 
 ## Updates
 Auto checking at updates and notification is latest version available.
