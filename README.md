@@ -19,6 +19,7 @@ Download latest build [here](https://github.com/assnctr/unfx-proxy-checker/relea
   - Single ips
   - Ips with mask
 - Country checking: `city`, `name`
+- Keep-Alive checking
 - Anonymity detection: `transparent`, `anonymous`, `elite`
 - Sort by: `ip`, `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`
 - Filter by: `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`
@@ -27,6 +28,7 @@ Download latest build [here](https://github.com/assnctr/unfx-proxy-checker/relea
 - Export formats:
   - `ip` : `port`
   - `protocol` :// `ip` : `port`
+- Automatically checking for updates
 
 ## Core
 Threads:
@@ -112,12 +114,12 @@ socks5://127.0.0.1:1337
 - `Search` - may contain multi words, separated by `space`
 
 ## Updates
-Auto checking at updates and notification is latest version available.
+Automatically checking for updates and notification if the latest version is available.
 
 ## Openproxy.space resource:
 * [Open Proxy Space](https://openproxy.space) - It's Largest open proxy lists database. Our proxy lists updated in real-time.
 * [Daily Proxy Lists](https://openproxy.space/lists/) - Daily updated proxy lists archive. Dump from database. Sorted by protocols.
-* [API](https://openproxy.space/api) - Openproxy api - build own app based on our open proxy space.
+* [API](https://openproxy.space/api) - Openproxy api, build own app based on our open proxy space.
 
 ## IP Location database
 This product includes GeoLite2 data created by MaxMind, available [here](https://dev.maxmind.com/geoip/geoip2/geolite2/).
