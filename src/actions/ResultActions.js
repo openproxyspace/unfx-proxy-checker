@@ -2,7 +2,6 @@ import { getFilteredProxies } from '../store/selectors/getFilteredProxies';
 import { writeFile } from 'fs';
 import { sort } from 'js-flock';
 import { remote } from 'electron';
-import { saveSettings } from '../core/settings';
 import {
     SHOW_RESULT,
     TOGGLE_ANON,
@@ -61,9 +60,8 @@ export const getResultsInProtocolIpPort = items => {
 };
 
 export const save = () => (dispatch, getState) => {
-    const { core, judges, blacklist, ip, result } = getState();
-    const saveType = result.exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
-
+    const saveType = getState().exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
+    
     let savePath = dialog.showSaveDialog({
         filters: [
             {
@@ -76,17 +74,6 @@ export const save = () => (dispatch, getState) => {
     if (savePath) {
         writeFile(savePath, saveType(getFilteredProxies(getState())), () => {
             dispatch(toggleExport());
-            saveSettings({
-                core,
-                judges,
-                ip: {
-                    lookupUrl: ip.lookupUrl
-                },
-                blacklist,
-                exporting: {
-                    type: result.exporting.type
-                }
-            });
         });
     }
 };

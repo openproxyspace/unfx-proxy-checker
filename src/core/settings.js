@@ -1,3 +1,5 @@
+import store from '../store';
+import { remote } from 'electron';
 import { writeFile, readFileSync, existsSync } from 'fs';
 import { SETTINGS_FILE_PATH, MERGED_DEFAULT_SETTINGS } from '../constants/SettingsConstants';
 
@@ -21,3 +23,19 @@ const getSettings = () => {
 };
 
 export const initial = getSettings();
+
+remote.getCurrentWindow().on('close', () => {
+    const { core, judges, ip, blacklist, result } = store.getState();
+
+    saveSettings({
+        core,
+        judges,
+        ip: {
+            lookupUrl: ip.lookupUrl
+        },
+        blacklist,
+        exporting: {
+            type: result.exporting.type
+        }
+    });
+});
