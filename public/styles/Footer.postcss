@@ -106,23 +106,41 @@
                     transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
                 }
 
+                &:hover svg {
+                    & circle {
+                        fill: #f96854;
+                    }
+
+                    & rect {
+                        fill: #052d49;
+                    }
+                }
+            }
+
+            &.donate {
+                width: 1.2em;
+                height: 1.2em;
+
                 &:hover {
-                    & span:nth-child(1) {
-                        color: #052d49;
+                    & path:nth-child(1) {
+                        fill: #ff3f2e;
                     }
 
-                    & span:nth-child(2) {
-                        color: #f96854;
+                    & path:nth-child(2) {
+                        fill: #f2d1a5;
                     }
 
-                    & svg {
-                        & circle {
-                            fill: #f96854;
-                        }
+                    & path:nth-child(3) {
+                        fill: #1ea1e3;
+                    }
 
-                        & rect {
-                            fill: #052d49;
-                        }
+                    & path:nth-child(4),
+                    & path:nth-child(5) {
+                        fill: #f2bb88;
+                    }
+
+                    & path:nth-child(6) {
+                        fill: #cf0404;
                     }
                 }
             }
