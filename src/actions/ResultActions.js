@@ -60,7 +60,7 @@ export const getResultsInProtocolIpPort = items => {
 };
 
 export const save = () => (dispatch, getState) => {
-    const saveType = getState().exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
+    const saveType = getState().result.exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
     
     let savePath = dialog.showSaveDialog({
         filters: [
