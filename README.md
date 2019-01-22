@@ -1,10 +1,10 @@
-# Unfx Proxy Checker
-With configured hot module replacement. You can use this as electron-react-redux-postcss [template](https://github.com/assnctr/hot-electron-react-redux-postcss).
+<p align="center">
+    <img width="120px" src="https://i.ibb.co/pyQn5sJ/rocket-ship.png">
+</p>
 
-Download latest build [here](https://github.com/assnctr/unfx-proxy-checker/releases).
-
-![](https://i.ibb.co/KG0FJwZ/Screenshot-2.png)
-![](https://i.ibb.co/SwK6DNT/Screenshot-5.png)
+![](https://openproxy.space/_nuxt/img/0631711.png)
+![](https://openproxy.space/_nuxt/img/216e07b.png)
+![](https://openproxy.space/_nuxt/img/63ff67a.png)
 
 ## Features
 - Support protocols: `http`, `https`, `socks4`, `socks5`
