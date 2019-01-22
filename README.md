@@ -122,6 +122,7 @@ Donation:
 - BTC: `16eS4hfgKHKQcPYPeN1VdSge8yfC4YtftT`
 - ETH: `0xd5bd9af4cf9c60bc8a8f95baff63c829b90db3dd`
 
+[![Beerpay](https://beerpay.io/assnctr/unfx-proxy-checker/badge.svg?style=beer-square)](https://beerpay.io/assnctr/unfx-proxy-checker)  [![Beerpay](https://beerpay.io/assnctr/unfx-proxy-checker/make-wish.svg?style=flat-square)](https://beerpay.io/assnctr/unfx-proxy-checker?focus=wish)  
 Or you can become a [patron](https://www.patreon.com/openproxyspace).
 
 ## Openproxy.space resource:
