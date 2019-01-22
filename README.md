@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="120px" src="https://i.ibb.co/pyQn5sJ/rocket-ship.png">
+    <img width="64px" src="https://i.ibb.co/pyQn5sJ/rocket-ship.png">
 </p>
 
 ![](https://openproxy.space/_nuxt/img/0631711.png)
