@@ -6,42 +6,37 @@
 
 .settings {
     & .react-tabs__tab-list {
+        display: flex;
         margin: 0;
-        padding: 0em 0em 0em 1em;
+        padding: 0;
         margin-bottom: 2em;
-        border-bottom: 1px solid color-mod(var(--green-color) alpha(15%));
 
         & li {
             display: inline-block;
-            color: color-mod(var(--green-color) alpha(35%));
-            font-weight: 900;
+            font-weight: 700;
             cursor: pointer;
-            padding: 1em;
+            padding: 0.5em 1.25em;
+            margin-right: 1em;
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            border-bottom: 3px solid transparent;
-
-            &:focus {
-                outline: none;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
+            outline: none;
+            border-radius: 1.75em;
+            background-color: color-mod(var(--green-color) alpha(15%));
+            color: color-mod(var(--green-color) alpha(45%));
 
             &:not(.react-tabs__tab--selected):hover {
-                color: color-mod(var(--green-color) alpha(75%));
+                color: #fff;
+                background-color: color-mod(var(--green-color) alpha(45%));
             }
         }
 
         & .react-tabs__tab--selected {
-            border-bottom: 3px solid color-mod(var(--green-color) alpha(15%));
-            padding: 1em 1.5em;
-            color: color-mod(var(--green-color) alpha(75%));
+            color: #fff;
+            background-color: color-mod(var(--green-color) alpha(65%));
         }
     }
 
     & .react-tabs__tab-panel {
-        padding-left: 2em;
+        margin-right: -2em;
     }
 
     & .judges-list {
@@ -304,7 +299,7 @@
             display: flex;
             width: 100%;
             padding-bottom: 1em;
-            border-bottom: 1px dashed color-mod(var(--green-color) alpha(15%));
+            border-bottom: 1px solid #fafafa;
 
             &.no-bot {
                 padding-bottom: 0;
