@@ -24,7 +24,7 @@ const prodWindow = () => {
         minWidth: 1000,
         minHeight: 680,
         width: 1220,
-        height: 806,
+        height: 846,
         show: false,
         resizable: true
     });
