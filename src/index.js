@@ -11,8 +11,8 @@ const devWindow = () => {
         .catch(err => console.log('Error:', err));
 
     window = new BrowserWindow({
-        width: 1850,
-        height: 960,
+        width: 1220,
+        height: 846,
         show: false
     });
 
@@ -24,7 +24,7 @@ const prodWindow = () => {
         minWidth: 1000,
         minHeight: 680,
         width: 1220,
-        height: 745,
+        height: 806,
         show: false,
         resizable: true
     });
