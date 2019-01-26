@@ -33,14 +33,14 @@
 
     & .result-content {
         max-width: 1600px;
+        padding: 0 2em;
         margin: auto;
         overflow: hidden;
         background-color: #fff;
 
         & input.search {
             padding: 1em;
-            margin: 2em 2em 0 2em;
-            width: calc(100% - 4em);
+            margin: 2em 2em 0 0;
             border-radius: 1.75em;
             background-color: color-mod(var(--green-color) alpha(15%));
 
@@ -55,7 +55,7 @@
         }
 
         & .filters {
-            padding: 2em;
+            padding: 2em 0;
 
             & .block {
                 display: inline-flex;
@@ -90,7 +90,7 @@
                 & .content {
                     width: 100%;
                     padding-bottom: 1em;
-                    border-bottom: 1px dashed color-mod(var(--green-color) alpha(15%));
+                    border-bottom: 1px solid #fafafa;
 
                     &.no-bot {
                         padding-bottom: 0;
@@ -138,7 +138,7 @@
                             margin-bottom: 2em;
 
                             & .content {
-                                border-bottom: 1px dashed color-mod(var(--green-color) alpha(15%));
+                                border-bottom: 1px solid #fafafa;
                                 padding-bottom: 1em;
                             }
                         }
@@ -179,8 +179,8 @@
             display: flex;
             flex-flow: row no-wrap;
             justify-content: space-between;
-            padding: 2em;
-            border-top: 1px solid color-mod(var(--green-color) alpha(15%));
+            padding: 2em 0;
+            border-top: 1px solid #fafafa;
 
             & .open-countries-button {
                 white-space: nowrap;
@@ -211,9 +211,8 @@
         & .result-list-header {
             display: flex;
             flex-flow: row no-wrap;
-            padding: 0 2em;
             align-items: center;
-            border-top: 1px solid color-mod(var(--green-color) alpha(15%));
+            border-top: 1px solid #fafafa;
             color: color-mod(var(--grey-color) alpha(95%));
             font-weight: 700;
             user-select: none;
@@ -326,6 +325,10 @@
                 }
             }
 
+            & .empty-keep-alive-placeholder {
+                width: 5%;
+            }
+
             & .k-a {
                 width: 5%;
 
@@ -380,21 +383,28 @@
         }
 
         & .result-list {
-            border-top: 1px solid color-mod(var(--green-color) alpha(15%));
+            border-top: 1px solid #fafafa;
 
             & .list-item {
                 opacity: 1;
                 animation-name: fade-one;
                 animation-duration: 0.7s;
                 animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+                border-bottom: 1px solid #fafafa;
 
                 & .main-block {
-                    padding: 0.75em 2em;
+                    padding: 0.75em 0;
                     flex-flow: row wrap;
                     align-items: center;
                     display: flex;
                     width: 100%;
-                    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                    transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+                    &:hover {
+                        & .counts {
+                            background-color: color-mod(#ea2027 alpha(85%));
+                        }
+                    }
                 }
 
                 & span {
@@ -405,11 +415,11 @@
                     border-radius: 1em;
                     margin-right: 0.5em;
                     text-transform: capitalize;
+                    transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
                 }
 
                 &.socks {
                     color: color-mod(var(--blue-color) alpha(65%));
-                    border-bottom: 1px solid color-mod(var(--blue-color) alpha(15%));
 
                     & span {
                         background-color: color-mod(var(--blue-color) alpha(65%));
@@ -421,14 +431,21 @@
                     }
 
                     & .main-block.with-data:hover {
-                        background-color: color-mod(var(--blue-color) alpha(5%));
+                        color: color-mod(var(--blue-color) alpha(85%));
                         cursor: pointer;
+
+                        & span {
+                            background-color: color-mod(var(--blue-color) alpha(85%));
+                        }
+
+                        & .country .city {
+                            color: color-mod(var(--grey-color) alpha(85%));
+                        }
                     }
                 }
 
                 &.http {
                     color: color-mod(var(--green-color) alpha(65%));
-                    border-bottom: 1px solid color-mod(var(--green-color) alpha(15%));
 
                     & span {
                         background-color: color-mod(var(--green-color) alpha(65%));
@@ -440,8 +457,16 @@
                     }
 
                     & .main-block.with-data:hover {
-                        background-color: color-mod(var(--green-color) alpha(5%));
+                        color: color-mod(var(--green-color) alpha(85%));
                         cursor: pointer;
+
+                        & span {
+                            background-color: color-mod(var(--green-color) alpha(85%));
+                        }
+
+                        & .country .city {
+                            color: color-mod(var(--grey-color) alpha(85%));
+                        }
                     }
                 }
 
@@ -509,6 +534,7 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                        transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
                         color: color-mod(var(--grey-color) alpha(75%));
                     }
                 }
@@ -522,6 +548,7 @@
                         padding: 0.25em 0.75em;
                         border-radius: 1em;
                         color: #fff;
+                        transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
                         background-color: color-mod(#ea2027 alpha(65%));
                     }
                 }
@@ -612,7 +639,6 @@
 .data {
     text-align: left;
     overflow: hidden;
-    padding: 0 2em;
 
     & .protocol {
         width: 50%;
@@ -629,7 +655,7 @@
         & .section {
             display: flex;
             font-size: 1em;
-            border-bottom: 1px dashed;
+            border-bottom: 1px solid #fafafa;
             padding-bottom: 1em;
             margin: 2em 0 1em 0;
 
@@ -657,10 +683,6 @@
 
         &.http,
         &.https {
-            & .section {
-                border-color: color-mod(var(--green-color) alpha(15%));
-            }
-
             & textarea {
                 background-color: color-mod(var(--green-color) alpha(5%));
                 color: var(--green-color);
@@ -673,10 +695,6 @@
 
         &.socks4,
         &.socks5 {
-            & .section {
-                border-color: color-mod(var(--blue-color) alpha(15%));
-            }
-
             & textarea {
                 background-color: color-mod(var(--blue-color) alpha(5%));
                 color: var(--blue-color);
