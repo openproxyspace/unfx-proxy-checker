@@ -14,7 +14,9 @@ class Update extends React.PureComponent {
 
     render = () => {
         const { active, isAvailable, isChecking, onDownloading, downloadProgress, info, close, download } = this.props;
-        const progress = { width: downloadProgress + '%' };
+        const progress = {
+            width: downloadProgress + '%'
+        };
 
         return (
             <div className={active ? (onDownloading ? 'update-notify downloading' : isChecking ? 'update-notify checking' : 'update-notify') : 'update-notify closed'}>
@@ -24,15 +26,26 @@ class Update extends React.PureComponent {
                 </div>
                 {isAvailable && (
                     <div className="update-container">
-                        <div className="update-content">
-                            <span className="section-name">Available version: {info.version}</span>
-                            <div className="update-description">
-                                <ReactMarkdown source={info.releaseData.body} />
-                            </div>
-                            <span className="section-name">Downloads</span>
+                        <span className="section-name">Update is available</span>
+                        <div className="release-notes">
+                            {info.releaseNotes.map(note => (
+                                <div className="note">
+                                    <span className="version">Release Notes for v{note.version}</span>
+                                    <ReactMarkdown source={note.body} />
+                                </div>
+                            ))}
                         </div>
-                        <div className="update-download">
-                            {info.releaseData.assets.map(asset => (
+                        <span className="section-name">Downloads</span>
+                        <div className="downloads">
+                            <p>Windows</p>
+                            {info.assets.windows.map(asset => (
+                                <a key={asset.name} href={asset.browser_download_url} title={asset.name} onClick={download}>
+                                    <span className="size">{bytesToSize(asset.size)}</span>
+                                    {asset.name}
+                                </a>
+                            ))}
+                            <p>Linux</p>
+                            {info.assets.linux.map(asset => (
                                 <a key={asset.name} href={asset.browser_download_url} title={asset.name} onClick={download}>
                                     <span className="size">{bytesToSize(asset.size)}</span>
                                     {asset.name}

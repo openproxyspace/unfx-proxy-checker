@@ -85,16 +85,74 @@
             display: inline-flex;
             font-weight: 100;
             font-size: 1em;
-            color: color-mod(var(--green-color) alpha(50%));
+            color: color-mod(var(--green-color) alpha(75%));
             border: 1px dashed color-mod(var(--green-color) alpha(50%));
             padding: 0.25em 0.75em;
             border-radius: 1.25em;
-            margin-bottom: 1em;
+            margin-bottom: 2em;
         }
 
         & .update-description {
             color: color-mod(var(--green-color) alpha(50%));
             margin-bottom: 4em;
+        }
+
+        & .release-notes {
+            color: var(--grey-color);
+            border-top: 1px solid #fafafa;
+            border-bottom: 1px solid #fafafa;
+            padding-top: 2em;
+            margin-bottom: 2em;
+
+            & .note {
+                margin-bottom: 2em;
+
+                & .version {
+                    display: inline-flex;
+                    color: #fff;
+                    padding: 0.25em 0.75em;
+                    border-radius: 1.25em;
+                    background-color: color-mod(var(--green-color) alpha(75%));
+                }
+            }
+        }
+
+        & .downloads {
+            display: flex;
+            flex-flow: column wrap;
+            border-top: 1px solid #fafafa;
+            padding-top: 2em;
+            margin-bottom: 2em;
+
+            & a {
+                color: color-mod(var(--green-color) alpha(65%));
+                text-decoration: none;
+                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+                margin: 0.15em 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &:hover {
+                    color: var(--green-color);
+                }
+
+                & span.size {
+                    margin-right: 0.5em;
+                    color: var(--grey-color);
+                    font-size: 0.85em;
+                    text-decoration: none;
+                }
+            }
+
+            & p {
+                color: var(--grey-color);
+                font-weight: 700;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
         }
     }
 }
@@ -116,33 +174,6 @@
     height: 100%;
     border-radius: 0.25em;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.update-download {
-    margin: 1em 0 2em 0;
-    display: flex;
-    flex-flow: column wrap;
-
-    & a {
-        color: color-mod(var(--green-color) alpha(50%));
-        text-decoration: none;
-        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        margin: 0.15em 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        &:hover {
-            color: var(--green-color);
-        }
-
-        & span.size {
-            margin-right: 0.5em;
-            color: #607d8b;
-            font-size: 0.85em;
-            text-decoration: none;
-        }
-    }
 }
 
 @keyframes lds-ripple {
