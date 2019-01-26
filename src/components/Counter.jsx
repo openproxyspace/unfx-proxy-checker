@@ -6,7 +6,7 @@ const Counter = ({ all, done, protocols }) => {
     const progressStyle = {
         width: Math.floor((done / all) * 100) + '%'
     };
-    
+
     return (
         <div className="counter-container">
             <div className={`protocol http ${protocols.http ? 'active' : ''}`}>

@@ -18,7 +18,9 @@ const Main = ({ start }) => (
             <div className="main-page-content">
                 <Settings />
                 <ProxyInput />
-                <button className="button check-button" onClick={start}>Check</button>
+                <button className="button check-button" onClick={start}>
+                    Check
+                </button>
                 <Footer />
             </div>
         </div>
@@ -33,4 +35,7 @@ const mapDispatchToProps = {
     start
 };
 
-export default connect(null, mapDispatchToProps)(Main);
+export default connect(
+    null,
+    mapDispatchToProps
+)(Main);

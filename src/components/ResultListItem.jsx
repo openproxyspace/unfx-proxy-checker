@@ -53,13 +53,7 @@ export default class ResultListItem extends React.PureComponent {
                             </div>
                         )}
                     </div>
-                    <div className="k-a">
-                        {keepAlive && (
-                            <span title="Connection: Keep-Alive">
-                                K-A
-                            </span>
-                        )}
-                    </div>
+                    <div className="k-a">{keepAlive && <span title="Connection: Keep-Alive">K-A</span>}</div>
                     <div className="extra">
                         {extra &&
                             extra.map(item => (

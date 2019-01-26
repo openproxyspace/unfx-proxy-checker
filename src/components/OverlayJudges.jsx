@@ -15,15 +15,14 @@ const OverlayJudges = ({ isActive, items }) => {
             <div className="ping-judges">
                 <div className="ping-progress">
                     <div className="bar" style={progressStyle} />
-                    <div className="count">Total checked {done} of {all}</div>
+                    <div className="count">
+                        Total checked {done} of {all}
+                    </div>
                 </div>
                 <div className="ping-status">
                     <div className="items">
                         {items.map(item => (
-                            <div
-                                className={`item ${!item.state.checking ? item.state.working ? 'success' : 'error' : 'on-process'}`}
-                                key={item.url}
-                            >
+                            <div className={`item ${!item.state.checking ? (item.state.working ? 'success' : 'error') : 'on-process'}`} key={item.url}>
                                 <div className="url" title={item.url}>
                                     {item.url}
                                 </div>
