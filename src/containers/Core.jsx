@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { changeOption, toggleOption, toggleProtocol } from '../actions/CoreActions';
 import Checkbox from '../components/ui/Checkbox';
 
-const Core = ({ protocols, captureFullData, captureExtraData, threads, timeout, retry, changeOption, toggleOption, toggleProtocol }) => (
+const Core = ({ protocols, captureFullData, captureExtraData, threads, timeout, retry, keepAlive, changeOption, toggleOption, toggleProtocol }) => (
     <>
         <div className="block middle">
             <div className="title">
@@ -50,6 +50,7 @@ const Core = ({ protocols, captureFullData, captureExtraData, threads, timeout, 
                 </div>
                 <div className="content no-flex">
                     <Checkbox id="retry" name="retry" checked={retry} onChange={toggleOption} text="Retry" />
+                    <Checkbox id="core-k-a" name="keepAlive" checked={keepAlive} onChange={toggleOption} text="Keep-Alive" />
                 </div>
             </div>
         </div>

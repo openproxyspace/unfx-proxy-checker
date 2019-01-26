@@ -37,6 +37,7 @@ class Result extends React.PureComponent {
         const {
             state: { isOpened, anons, protocols, misc, search, countries, items, countOfResults, inBlacklists, timeout, ports, sorting, exporting },
             captureExtraData,
+            keepAlive,
             close,
             save,
             onSearchInput,
@@ -88,14 +89,16 @@ class Result extends React.PureComponent {
                                     <Checkbox id="protocol-socks5" name="socks5" checked={protocols.socks5} onChange={toggleProtocol} text="Socks5" />
                                 </div>
                             </div>
-                            <div className="block middle">
-                                <div className="title">
-                                    <span className="name">Misc</span>
+                            {keepAlive && (
+                                <div className="block middle">
+                                    <div className="title">
+                                        <span className="name">Misc</span>
+                                    </div>
+                                    <div className="content">
+                                        <Checkbox id="misc-onlyKeepAlive" name="onlyKeepAlive" checked={misc.onlyKeepAlive} onChange={toggleMisc} text="Only Keep-Alive" />
+                                    </div>
                                 </div>
-                                <div className="content">
-                                    <Checkbox id="misc-onlyKeepAlive" name="onlyKeepAlive" checked={misc.onlyKeepAlive} onChange={toggleMisc} text="Only Keep-Alive" />
-                                </div>
-                            </div>
+                            )}
                             {inBlacklists && inBlacklists.length > 0 && (
                                 <div className="block middle">
                                     <div className="title">
@@ -141,7 +144,7 @@ class Result extends React.PureComponent {
                                 <div className="counter">Total: {items.length}</div>
                             </div>
                         </div>
-                        <ResultItemsHeader sortResults={sortResults} captureExtraData={captureExtraData} inBlacklists={inBlacklists} sorting={sorting} />
+                        <ResultItemsHeader sortResults={sortResults} keepAlive={keepAlive} captureExtraData={captureExtraData} inBlacklists={inBlacklists} sorting={sorting} />
                         <div className="result-list">
                             {filteredItems.slice(0, countOfResults).map(item => (
                                 <ResultListItem key={`${item.ip}:${item.port}`} {...item} />
@@ -185,7 +188,8 @@ class Result extends React.PureComponent {
 const mapStateToProps = state => ({
     filteredItems: getFilteredProxies(state),
     state: state.result,
-    captureExtraData: state.core.captureExtraData
+    captureExtraData: state.core.captureExtraData,
+    keepAlive: state.core.keepAlive
 });
 
 const mapDispatchToProps = {

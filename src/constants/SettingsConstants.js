@@ -5,6 +5,7 @@ export const SETTINGS_FILE_PATH = process.env.PORTABLE_EXECUTABLE_DIR ? path.res
 
 export const DEFAULT_CORE_SETTINGS = {
     threads: 350,
+    keepAlive: false,
     timeout: 15000,
     retry: false,
     captureFullData: false,

@@ -26,7 +26,8 @@ export default class Checker {
         this.initialRequestConfig = {
             time: true,
             timeout: this.options.timeout,
-            resolveWithFullResponse: true
+            resolveWithFullResponse: true,
+            ...(options.keepAlive ? { headers: { connection: 'keep-alive' } } : {})
         };
 
         this.checkAt = {
@@ -149,9 +150,9 @@ export default class Checker {
         }
     }
 
-    setKeepAlive(proxy, body) {
-        if (!this.tempStates[proxy].keepAlive) {
-            this.tempStates[proxy].keepAlive = body.match(/squid/i);
+    setKeepAlive(proxy, headers) {
+        if (!this.tempStates[proxy].keepAlive && headers['keep-alive']) {
+            this.tempStates[proxy].keepAlive = true;
         }
     }
 
@@ -174,7 +175,10 @@ export default class Checker {
             this.tempStates[proxy].timeouts.push(response.elapsedTime);
             this.tempStates[proxy].protocols.push(protocol);
             this.setAnon(proxy, anon);
-            this.setKeepAlive(proxy, response.body);
+
+            if (this.options.keepAlive) {
+                this.setKeepAlive(proxy, response.headers);
+            }
 
             if (this.options.captureFullData) {
                 this.tempStates[proxy].data.push({
