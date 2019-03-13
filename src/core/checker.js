@@ -1,31 +1,25 @@
 import rp from 'request-promise';
 import store from '../store';
-import ProxyAgent from 'proxy-agent';
 import { lookup } from './country';
+import SocksProxyAgent from 'socks-proxy-agent';
 import { openChecking, upCounterStatus } from '../actions/CheckingActions';
 import { showResult } from '../actions/ResultActions';
+import { collar } from 'js-flock';
 
 export default class Checker {
-    constructor(proxies, options, ip, judges, checkProtocols, blacklist) {
-        this.checkProtocols = checkProtocols;
-        this.doneLevel = checkProtocols.length;
-        this.tempStates = {
-            // for temporary check states
-            // this.initTempState()
-        };
-
-        this.judges = judges;
-        this.blacklist = blacklist;
-
+    constructor(proxies, options, ip, judges, targetProtocols, blacklist) {
         this.ip = ip;
+        this.doneLevel = targetProtocols.length;
+        this.states = {};
         this.stopped = false;
         this.queue = proxies;
+        this.judges = judges;
         this.options = options;
-        this.counter = this.initCounter();
+        this.blacklist = blacklist;
 
         this.initialRequestConfig = {
             time: true,
-            timeout: this.options.timeout,
+            timeout: Number(this.options.timeout),
             resolveWithFullResponse: true,
             ...(options.keepAlive ? { headers: { connection: 'keep-alive' } } : {})
         };
@@ -33,96 +27,106 @@ export default class Checker {
         this.checkAt = {
             http: async (proxy, retry) => {
                 try {
-                    const response = await rp.get({ ...this.initialRequestConfig, url: this.judges.getUsual(), agent: this.getAgentConfig('http://', proxy) });
+                    const response = await collar(rp.get(this.judges.getUsual(), { ...this.initialRequestConfig, proxy: 'http://' + proxy }), this.initialRequestConfig.timeout);
+
                     this.onResponse(response, proxy, 'http');
-                } catch (error) {
-                    this.onError(proxy, 'http', retry);
+                } catch ({ statusCode }) {
+                    this.onError(proxy, 'http', retry, statusCode);
                 }
             },
             https: async (proxy, retry) => {
                 try {
-                    const response = await rp.get({ ...this.initialRequestConfig, url: this.judges.getSSL(), agent: this.getAgentConfig('http://', proxy) });
+                    const response = await collar(rp.get(this.judges.getSSL(), { ...this.initialRequestConfig, proxy: 'http://' + proxy }), this.initialRequestConfig.timeout);
+
                     this.onResponse(response, proxy, 'https');
-                } catch (error) {
-                    this.onError(proxy, 'https', retry);
+                } catch ({ statusCode }) {
+                    this.onError(proxy, 'https', retry, statusCode);
                 }
             },
             socks4: async (proxy, retry) => {
                 try {
-                    const response = await rp.get({ ...this.initialRequestConfig, url: this.judges.getUsual(), agent: this.getAgentConfig('socks4://', proxy) });
+                    const agent = new SocksProxyAgent('socks4://' + proxy);
+                    agent.timeout = this.initialRequestConfig.timeout;
+
+                    const response = await collar(rp.get(this.judges.getUsual(), { ...this.initialRequestConfig, agent }), this.initialRequestConfig.timeout);
+
                     this.onResponse(response, proxy, 'socks4');
-                } catch (error) {
-                    this.onError(proxy, 'socks4', retry);
+                } catch ({ statusCode }) {
+                    this.onError(proxy, 'socks4', retry, statusCode);
                 }
             },
             socks5: async (proxy, retry) => {
                 try {
-                    const response = await rp.get({ ...this.initialRequestConfig, url: this.judges.getUsual(), agent: this.getAgentConfig('socks5://', proxy) });
+                    const agent = new SocksProxyAgent('socks5://' + proxy);
+                    agent.timeout = this.initialRequestConfig.timeout;
+
+                    const response = await collar(rp.get(this.judges.getUsual(), { ...this.initialRequestConfig, agent }), this.initialRequestConfig.timeout);
+
                     this.onResponse(response, proxy, 'socks5');
-                } catch (error) {
-                    this.onError(proxy, 'socks5', retry);
+                } catch ({ statusCode }) {
+                    this.onError(proxy, 'socks5', retry, statusCode);
                 }
             }
         };
 
-        this.check = this.buildCheck(this.checkProtocols);
+        this.counter = {
+            all: this.queue.length,
+            done: 0,
+            protocols: {
+                ...(targetProtocols.includes('http') ? { http: 0 } : {}),
+                ...(targetProtocols.includes('https') ? { https: 0 } : {}),
+                ...(targetProtocols.includes('socks4') ? { socks4: 0 } : {}),
+                ...(targetProtocols.includes('socks5') ? { socks5: 0 } : {})
+            }
+        };
+
+        this.check = this.buildCheck(targetProtocols);
 
         this.upCounterStatus = setInterval(() => {
             store.dispatch(upCounterStatus(this.counter));
         }, 250);
     }
 
-    initCounter() {
-        let counter = {
-            all: this.queue.length,
-            done: 0,
-            protocols: {}
-        };
-
-        this.checkProtocols.forEach(protocol => (counter.protocols[protocol] = 0));
-        return counter;
-    }
-
-    initTempState(proxy) {
-        this.tempStates[proxy] = {
-            timeouts: [],
-            anon: 'unknown',
+    initializeProxyState(proxy) {
+        this.states[proxy] = {
             doneLevel: 0,
-            protocols: [],
-            extra: false,
-            keepAlive: false,
-            data: []
+            permanent: {
+                anon: 'elite',
+                protocols: [],
+                timeout: 0,
+                ...(this.options.captureServer ? { server: null } : {}),
+                ...(this.options.keepAlive ? { keepAlive: false } : {}),
+                ...(this.options.captureFullData ? { data: [] } : {})
+            }
         };
     }
 
-    isIssetExtraData(body) {
-        let data = [];
-
+    getServer(body) {
         if (body.match(/squid/i)) {
-            data.push({ title: 'Squid', description: 'Server software' });
-        }
-
-        if (body.match(/ubuntu/i)) {
-            data.push({ title: 'Ubuntu', description: 'Server OS' });
-        }
-
-        if (body.match(/centos/i)) {
-            data.push({ title: 'Centos', description: 'Server OS' });
+            return 'squid';
         }
 
         if (body.match(/mikrotik/i)) {
-            data.push({ title: 'Mikrotik', description: 'Server software' });
+            return 'mikrotik';
         }
 
-        if (body.match(/apache/i)) {
-            data.push({ title: 'Apache', description: 'Server software' });
+        if (body.match(/tinyproxy/i)) {
+            return 'tinyproxy';
         }
 
-        if (body.match(/nginx/i)) {
-            data.push({ title: 'Nginx', description: 'Server software' });
+        if (body.match(/litespeed/i)) {
+            return 'litespeed';
         }
 
-        return data.length > 0 ? data : false;
+        if (body.match(/varnish/i)) {
+            return 'varnish';
+        }
+
+        if (body.match(/haproxy/i)) {
+            return 'haproxy';
+        }
+
+        return null;
     }
 
     getAnon(body) {
@@ -137,22 +141,9 @@ export default class Checker {
         return 'elite';
     }
 
-    setAnon(proxy, anon) {
-        const anonWeights = {
-            transparent: 4,
-            anonymous: 3,
-            elite: 2,
-            unknown: 1
-        };
-
-        if (anonWeights[anon] > anonWeights[this.tempStates[proxy].anon]) {
-            this.tempStates[proxy].anon = anon;
-        }
-    }
-
     setKeepAlive(proxy, headers) {
-        if (!this.tempStates[proxy].keepAlive && headers['keep-alive']) {
-            this.tempStates[proxy].keepAlive = true;
+        if (!this.states[proxy].permanent.keepAlive && headers['keep-alive']) {
+            this.states[proxy].permanent.keepAlive = true;
         }
     }
 
@@ -162,26 +153,26 @@ export default class Checker {
         }
 
         if (this.judges.validate(response.body, response.request.href)) {
-            const anon = this.getAnon(response.body);
+            this.states[proxy].permanent.timeout = response.elapsedTime;
 
-            if (this.options.captureExtraData) {
-                const extra = this.isIssetExtraData(response.body);
+            let anon = 'elite';
 
-                if (extra) {
-                    this.tempStates[proxy].extra = extra;
+            if (protocol == 'http') {
+                anon = this.getAnon(response.body);
+                this.states[proxy].permanent.anon = anon;
+
+                if (this.options.captureServer) {
+                    const server = this.getServer(response.body);
+                    this.states[proxy].permanent.server = server;
                 }
             }
-
-            this.tempStates[proxy].timeouts.push(response.elapsedTime);
-            this.tempStates[proxy].protocols.push(protocol);
-            this.setAnon(proxy, anon);
 
             if (this.options.keepAlive) {
                 this.setKeepAlive(proxy, response.headers);
             }
 
             if (this.options.captureFullData) {
-                this.tempStates[proxy].data.push({
+                this.states[proxy].permanent.data.push({
                     protocol,
                     timings: response.timings,
                     anon,
@@ -193,31 +184,25 @@ export default class Checker {
                 });
             }
 
+            this.states[proxy].permanent.protocols.push(protocol);
             this.counter.protocols[protocol]++;
         }
 
-        this.tempStates[proxy].doneLevel++;
+        this.states[proxy].doneLevel++;
         this.isDone(proxy);
     }
 
-    onError(proxy, protocol, retry) {
+    onError(proxy, protocol, retry, statusCode) {
         if (this.stopped) {
             return;
         }
 
-        if (!retry && this.options.retry) {
-            return this.checkAt[protocol](proxy, true);
+        if (this.options.retry && !statusCode && !retry) {
+            this.checkAt[protocol](proxy, true);
+        } else {
+            this.states[proxy].doneLevel++;
+            this.isDone(proxy);
         }
-
-        this.tempStates[proxy].doneLevel++;
-        this.isDone(proxy);
-    }
-
-    getAgentConfig(scheme, proxy) {
-        let agent = new ProxyAgent(scheme + proxy);
-        agent.timeout = this.options.timeout;
-
-        return agent;
     }
 
     buildCheck(protocols) {
@@ -247,28 +232,24 @@ export default class Checker {
 
     getResult() {
         const result = [];
-        const calcTimeout = timeouts => (timeouts.length > 1 ? Math.floor(timeouts.reduce((a, b) => a + b) / timeouts.length) : timeouts[0]);
 
-        for (let proxy in this.tempStates) {
-            if (this.tempStates[proxy].protocols.length > 0) {
+        for (let proxy in this.states) {
+            const proxyState = this.states[proxy].permanent;
+
+            if (proxyState.protocols.length > 0) {
                 const [ip, port] = proxy.split(':');
 
                 result.push({
                     ip,
                     port: Number(port),
-                    timeout: calcTimeout(this.tempStates[proxy].timeouts),
-                    anon: this.tempStates[proxy].anon,
-                    protocols: this.tempStates[proxy].protocols,
                     country: lookup(ip),
-                    extra: this.tempStates[proxy].extra,
-                    data: this.tempStates[proxy].data,
-                    keepAlive: this.tempStates[proxy].keepAlive,
-                    blacklist: this.blacklist ? this.blacklist.check(ip) : false
+                    ...(this.blacklist ? { blacklist: this.blacklist.check(ip) } : false),
+                    ...proxyState
                 });
             }
         }
 
-        delete this.tempStates;
+        delete this.states;
 
         return {
             items: result,
@@ -277,7 +258,7 @@ export default class Checker {
     }
 
     isDone(proxy) {
-        if (this.tempStates[proxy].doneLevel == this.doneLevel) {
+        if (this.states[proxy].doneLevel == this.doneLevel) {
             this.counter.done++;
 
             if (this.counter.done == this.counter.all) {
@@ -293,8 +274,9 @@ export default class Checker {
             return;
         }
 
-        const proxy = this.queue.pop();
-        this.initTempState(proxy);
+        const proxy = this.queue.shift();
+
+        this.initializeProxyState(proxy);
         this.check(proxy);
     }
 
