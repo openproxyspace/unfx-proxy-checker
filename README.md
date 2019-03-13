@@ -2,14 +2,14 @@
     <img width="64px" src="https://i.ibb.co/pyQn5sJ/rocket-ship.png">
 </p>
 
-![](https://i.ibb.co/wJftT3f/0.png)
-![](https://i.ibb.co/8M7SPTL/3.png)
+![](https://i.ibb.co/yP9q1Tt/0.png)
+![](https://i.ibb.co/f02WP2H/3.png)
 
 ## Features
 - Support protocols: `http`, `https`, `socks4`, `socks5`
 - Data capturing:
-  - Extra data
   - All data
+  - Server data
 - Retry
 - Multiple judges support:
   - Response validation
@@ -20,14 +20,14 @@
 - Country checking: `city`, `name`
 - Keep-Alive checking
 - Anonymity detection: `transparent`, `anonymous`, `elite`
-- Sort by: `ip`, `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`
-- Filter by: `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `extra`, `timeout`
-- Search by: `ip`, `port`
+- Sort by: `ip`, `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `server`, `timeout`
+- Filter by: `port`, `protocols`, `anon`, `country`, `blacklists`, `keep-alive`, `server`, `timeout`
+- Search by: `ip`, `port`, `server`
   - Country: `city`, `name`
 - Export formats:
   - `ip` : `port`
   - `protocol` :// `ip` : `port`
-- Automatically checking for updates
+- Automatically updates
 
 ## Core
 Threads:
@@ -39,30 +39,24 @@ Timeout:
 - Max `60000` ms
 
 Data capturing:
-- `Capture full data` - Capture and save all response data (`judge`, `body`, `timings`, `headers`) for looking at the results page
-- `Capture extra data` - Parses response body at server signatures:
-  - Checking connection:
-    - Keep-Alive
-    - Close
-  - Proxy types:
-    - Mikrotik
-    - Squid
-  - Server:
-    - Apache
-    - Nginx
-  - OS:
-    - Ubuntu
-    - CentOS
+- `Capture Full Data` - Capture and save all response data (`judge`, `body`, `timings`, `headers`) for looking at the results page
+- `Capture Server` - Parses response body at server signatures:
+  - Squid
+  - Mikrotik
+  - Tinyproxy
+  - Litespeed
+  - Varnish
+  - Haproxy
 
 Options:
 
 `Retry` - Retries the check once, for each protocol separately.
 
 ## Judges
-Currently active:
-- `SSL` - Use this judge only for HTTPS requests. If disabled - uses as 'usual' for HTTP/SOCKS4/SOCKS5
-- `Validate` - Enable response validation
-- `Validate String` - Response will be valid is this string was found in response body
+If judge URL starts with 'https://' will be used for HTTPS requests, with 'http://' for HTTP, SOCKS4, SOCKS5. 
+
+**Validate Field:**  
+If not empty - Enable response validation by text which you type. Response will be valid is this string was found in response body. Also support Regexes (Regex builds through Javascript RegExp).
 
 Options:
 
@@ -113,18 +107,8 @@ socks5://127.0.0.1:1337
 - `Search` - may contain multi words, separated by `space`
 
 ## Updates
-Automatically checking for updates and notification if the latest version is available.
-
-## Support 💖 
-Support please my efforts and this tool if you really 👍 it.
-
-Donation:
-- BTC: `16eS4hfgKHKQcPYPeN1VdSge8yfC4YtftT`
-- ETH: `0xd5bd9af4cf9c60bc8a8f95baff63c829b90db3dd`
-- PayPal: ***trollplacez@gmail.com***
-
-<a href='https://ko-fi.com/assnctr' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>  
-[<img width="143px" src="https://c5.patreon.com/external/logo/become_a_patron_button.png">](https://www.patreon.com/bePatron?u=11702471)
+Checking for updates on each start and notification if the latest version is available (is you use portable version).  
+For Installed version update will be downloaded and installed automatically.
 
 ## Open Proxy Space Resource
 - [Real-time Proxy List](https://openproxy.space) - It's Largest open proxy list database. Our proxy list updated in real-time.
