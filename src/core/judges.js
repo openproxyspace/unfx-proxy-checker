@@ -67,8 +67,8 @@ export default class Judges {
     }
 
     validate(body, judge) {
-        if (this.data[judge].validate.enabled) {
-            return body.match(new RegExp(this.data[judge].validate.value));
+        if (this.data[judge].validate.length > 0) {
+            return body.match(new RegExp(this.data[judge].validate));
         }
 
         return true;
@@ -89,7 +89,7 @@ export default class Judges {
     }
 
     onSuccess(judge, response) {
-        const typeLink = judge.ssl ? this.list.ssl : this.list.usual;
+        const typeLink = judge.url.match(/https:\/\//) ? this.list.ssl : this.list.usual;
         typeLink.push(judge.url);
 
         this.data[judge.url] = {

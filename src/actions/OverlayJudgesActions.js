@@ -8,7 +8,7 @@ export const changeState = state => ({
 export const startPing = () => (dispatch, getState) => {
     const { judges } = getState();
 
-    const parsejudges = judges.items.map(item => ({
+    const parsejudges = judges.items.filter(item => item.active).map(item => ({
         url: item.url,
         state: {
             checking: true,
