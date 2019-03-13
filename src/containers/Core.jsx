@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { changeOption, toggleOption, toggleProtocol } from '../actions/CoreActions';
 import Checkbox from '../components/ui/Checkbox';
 
-const Core = ({ protocols, captureFullData, captureExtraData, threads, timeout, retry, keepAlive, changeOption, toggleOption, toggleProtocol }) => (
+const Core = ({ protocols, captureFullData, captureServer, threads, timeout, retry, keepAlive, changeOption, toggleOption, toggleProtocol }) => (
     <>
         <div className="block middle">
             <div className="title">
@@ -21,8 +21,8 @@ const Core = ({ protocols, captureFullData, captureExtraData, threads, timeout, 
                 <span className="name">Data capturing</span>
             </div>
             <div className="content no-flex">
-                <Checkbox id="captureFullData" name="captureFullData" checked={captureFullData} onChange={toggleOption} text="Capture full data" />
-                <Checkbox id="captureExtraData" name="captureExtraData" checked={captureExtraData} onChange={toggleOption} text="Capture extra data" />
+                <Checkbox id="captureFullData" name="captureFullData" checked={captureFullData} onChange={toggleOption} text="Capture Full Data" />
+                <Checkbox id="captureServer" name="captureServer" checked={captureServer} onChange={toggleOption} text="Capture Server" />
             </div>
         </div>
         <div className="blocks-row bottom">
@@ -44,7 +44,7 @@ const Core = ({ protocols, captureFullData, captureExtraData, threads, timeout, 
                     <input type="range" name="timeout" min="1000" max="60000" onChange={changeOption} value={timeout} />
                 </div>
             </div>
-            <div className="block small">
+            <div className="block middle">
                 <div className="title">
                     <span className="name">Options</span>
                 </div>

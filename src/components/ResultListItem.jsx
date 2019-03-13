@@ -17,11 +17,11 @@ export default class ResultListItem extends React.PureComponent {
     getClass = protocols => (protocols[0].match(/http/) ? 'http' : 'socks');
 
     render = () => {
-        const { ip, port, protocols, anon, country, timeout, keepAlive, extra, data, blacklist } = this.props;
+        const { ip, port, protocols, anon, country, timeout, keepAlive, server, data, blacklist } = this.props;
 
         return (
             <div className={`list-item ${this.getClass(protocols)}`}>
-                <div className={`main-block ${data.length > 0 ? 'with-data' : 'no-data'}`} onClick={this.toggleOpenData}>
+                <div className={`main-block ${data ? 'with-data' : 'no-data'}`} onClick={this.toggleOpenData}>
                     <div className="count">
                         <span />
                     </div>
@@ -54,14 +54,7 @@ export default class ResultListItem extends React.PureComponent {
                         )}
                     </div>
                     <div className="k-a">{keepAlive && <span title="Connection: Keep-Alive">K-A</span>}</div>
-                    <div className="extra">
-                        {extra &&
-                            extra.map(item => (
-                                <span key={item.title} title={`${item.title}: ${item.description}`}>
-                                    {item.title.slice(0, 1)}
-                                </span>
-                            ))}
-                    </div>
+                    <div className="server">{server && <span>{server}</span>}</div>
                     <div className="timeout">{timeout}</div>
                 </div>
                 {this.state.isDataOpened && <ResultItemData data={data} />}

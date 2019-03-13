@@ -10,7 +10,7 @@ export default class ResultItemData extends React.Component {
     render = () => {
         const { data } = this.props;
 
-        return (
+        return data ? (
             <div className="data">
                 {data.map(item => (
                     <div className={`protocol ${item.protocol}`} key={item.protocol}>
@@ -74,6 +74,6 @@ export default class ResultItemData extends React.Component {
                     </div>
                 ))}
             </div>
-        );
+        ) : null;
     };
 }
