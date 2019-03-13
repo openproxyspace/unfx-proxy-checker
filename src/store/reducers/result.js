@@ -24,13 +24,7 @@ const initialState = {
     misc: {
         onlyKeepAlive: false
     },
-    timeout: {
-        ranges: {
-            from: 0,
-            to: 0
-        },
-        max: 0
-    },
+    timeout: 0,
     ports: {
         input: '',
         allow: true
@@ -75,7 +69,7 @@ const result = (state = initialState, action) => {
                     items: action.countries
                 },
                 inBlacklists: action.inBlacklists,
-                timeout: action.timeout ? action.timeout : initialState.timeout
+                timeout: action.timeout
             };
         case CHANGE_PORTS_INPUT:
             return {
@@ -168,10 +162,7 @@ const result = (state = initialState, action) => {
             return {
                 ...state,
                 countOfResults: 25,
-                timeout: {
-                    ...state.timeout,
-                    max: action.timeout
-                }
+                timeout: action.timeout
             };
         case TOGGLE_MISC:
             return {
