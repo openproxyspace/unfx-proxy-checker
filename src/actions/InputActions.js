@@ -1,26 +1,55 @@
-import { readFile } from 'fs';
+import { readFile, stat } from 'fs';
 import { remote } from 'electron';
-import { CHANGE_INPUT } from '../constants/ActionTypes';
+import { uniq } from '../misc/array';
+import { findProxies } from '../misc/regexes';
+import { INPUT_SET_LOADED_FILE_DATA } from '../constants/ActionTypes';
+import { promisify } from 'util';
+import { parse } from 'path';
 
 const { dialog } = remote;
 
-export const changeValue = value => ({
-    type: CHANGE_INPUT,
-    value
+const readTextFile = promisify(readFile);
+const getFileStat = promisify(stat);
+
+export const setLoadedData = nextState => ({
+    type: INPUT_SET_LOADED_FILE_DATA,
+    nextState
 });
 
-export const loadFromTxt = () => dispatch => {
-    let readPath = dialog.showOpenDialog({
-        filters: [
-            {
-                name: 'Text Files',
-                extensions: ['txt']
-            }
-        ]
-    });
+export const loadFromTxt = () => async dispatch => {
+    try {
+        let [path] = dialog.showOpenDialog({
+            filters: [
+                {
+                    name: 'Text Files',
+                    extensions: ['txt']
+                }
+            ]
+        });
 
-    if (readPath) {
-        dispatch(changeValue('Loading...'));
-        readFile(readPath[0], 'utf8', (err, contents) => dispatch(changeValue(contents)));
+        if (path) {
+            const fileText = await readTextFile(path, 'utf8');
+            const totalProxies = findProxies(fileText);
+
+            if (!totalProxies) throw { status: 'error', message: 'No proxies found' };
+
+            const { size } = await getFileStat(path);
+            const uniqueProxies = uniq(totalProxies);
+            const total = totalProxies.length;
+            const unique = uniqueProxies.length;
+
+            dispatch(
+                setLoadedData({
+                    loaded: true,
+                    list: uniqueProxies,
+                    name: parse(path).base,
+                    size,
+                    total,
+                    unique
+                })
+            );
+        }
+    } catch ({ status }) {
+        if (status == 'error') alert('No proxies found');
     }
 };
