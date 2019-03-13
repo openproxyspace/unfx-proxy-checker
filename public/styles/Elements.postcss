@@ -1,16 +1,11 @@
-:root {
-    --green-color: #31bc86;
-    --grey-color: #8c99a7;
-}
-
 ::-webkit-scrollbar {
     width: 15px;
-    border-radius: 0.25em;
+    border-radius: 0.5em;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: color-mod(var(--green-color) alpha(15%));
-    border-radius: 0.25em;
+    background-color: color(var(--green-color) alpha(25%));
+    border-radius: 0.5em;
 }
 
 ::-webkit-scrollbar-track {
@@ -30,23 +25,23 @@ button {
     cursor: pointer;
     padding: 0.5em 1.5em;
     margin-right: 2em;
-    background-color: color-mod(var(--green-color) alpha(15%));
-    color: color-mod(var(--green-color) alpha(75%));
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: color(var(--green-color) alpha(25%));
+    color: color(var(--green-color) alpha(85%));
+    transition: color 0.3s easeOne, background-color 0.3s easeOne;
 
     &.less {
         padding: 0;
         background-color: transparent;
-        color: color-mod(var(--green-color) alpha(50%));
+        color: color(var(--green-color) alpha(60%));
 
         &:hover {
-            color: color-mod(var(--green-color) alpha(75%));
+            color: color(var(--green-color) alpha(85%));
         }
     }
 
     &:not(.less):hover {
-        color: rgba(255, 255, 255, 0.75);
-        background-color: rgba(49, 188, 135, 0.65);
+        color: color(#fff alpha(85%));
+        background-color: color(var(--green-color) alpha(85%));
     }
 }
 
@@ -56,42 +51,40 @@ button {
 
 textarea {
     font-weight: 400;
-    border-radius: 0.35em;
+    border-radius: 0.5em;
     border: 0;
     outline: 0;
     padding: 1em;
     width: 100%;
     font-size: 1em;
-    box-shadow: none;
-    background-color: color-mod(var(--green-color) alpha(5%));
-    color: #31bc86;
+    background-color: color(var(--green-color) alpha(5%));
+    color: var(--green-color);
     resize: vertical;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 input.field {
     width: 100%;
     border: 0;
     outline: 0;
-    background-color: color-mod(var(--green-color) alpha(5%));
+    background-color: color(var(--green-color) alpha(25%));
     font-weight: 900;
     padding: 0.5em 1em;
     border-radius: 1.75em;
     font-size: 1em;
-    color: color-mod(var(--green-color) alpha(50%));
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    color: color(var(--green-color) alpha(85%));
+    transition: color 0.5s easeOne, background-color 0.5s easeOne;
 
     &::-webkit-input-placeholder {
-        color: color-mod(var(--green-color) alpha(25%));
+        color: color(var(--green-color) alpha(50%));
     }
 
     &:not([value='']) {
-        background-color: color-mod(var(--green-color) alpha(15%));
+        background-color: color(var(--green-color) alpha(25%));
     }
 
     &:focus {
         color: #fff;
-        background-color: color-mod(var(--green-color) alpha(65%));
+        background-color: color(var(--green-color) alpha(85%));
 
         &::-webkit-input-placeholder {
             color: transparent;
@@ -111,13 +104,13 @@ input[type='range'] {
         height: 0.8em;
         cursor: pointer;
         border-radius: 1em;
-        background-color: color-mod(var(--green-color) alpha(15%));
+        background-color: color(var(--green-color) alpha(25%));
     }
 
     &::-webkit-slider-thumb {
         height: 16px;
         width: 16px;
-        background-color: color-mod(var(--green-color) alpha(75%));
+        background-color: color(var(--green-color) alpha(85%));
         cursor: pointer;
         -webkit-appearance: none;
         border-radius: 1em;
@@ -143,8 +136,8 @@ input[type='range'] {
 
     & span.count {
         margin-left: 0.5em;
-        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        color: color-mod(var(--grey-color) alpha(15%));
+        transition: color 0.3s easeOne;
+        color: color(var(--grey-color) alpha(25%));
     }
 
     & span:not(.count) {
@@ -152,8 +145,8 @@ input[type='range'] {
         vertical-align: middle;
         font-weight: 900;
         transform: translate3d(0, 0, 0);
-        color: color-mod(var(--green-color) alpha(35%));
-        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        color: color(var(--green-color) alpha(45%));
+        transition: all 0.3s easeOne;
 
         &:first-child {
             position: relative;
@@ -161,8 +154,8 @@ input[type='range'] {
             height: 1.25em;
             border-radius: 1.25em;
             vertical-align: middle;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            background-color: color-mod(var(--green-color) alpha(15%));
+            transition: all 0.3s easeOne;
+            background-color: color(var(--green-color) alpha(25%));
 
             & svg {
                 position: absolute;
@@ -175,8 +168,7 @@ input[type='range'] {
                 stroke-linejoin: round;
                 stroke-dasharray: 1em;
                 stroke-dashoffset: 1em;
-                transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-                transition-delay: 0.1s;
+                transition: all 0.3s easeOne;
                 transform: translate3d(0, 0, 0);
             }
 
@@ -184,7 +176,7 @@ input[type='range'] {
                 content: '';
                 width: 100%;
                 height: 100%;
-                background-color: color-mod(var(--green-color) alpha(75%));
+                background-color: color(var(--green-color) alpha(85%));
                 display: block;
                 transform: scale(0);
                 opacity: 1;
@@ -199,7 +191,7 @@ input[type='range'] {
     }
 
     &:hover span:first-child {
-        border-color: color-mod(var(--green-color) alpha(75%));
+        border-color: color(var(--green-color) alpha(85%));
     }
 }
 
@@ -208,15 +200,15 @@ input[type='range'] {
 }
 
 .input-checkbox:checked + .checkbox span.count {
-    color: color-mod(var(--grey-color) alpha(65%));
+    color: color(var(--grey-color) alpha(75%));
 }
 
 .input-checkbox:checked + .checkbox span:not(.count) {
-    color: color-mod(var(--green-color) alpha(75%));
+    color: color(var(--green-color) alpha(85%));
 
     &:first-child {
-        background-color: rgba(49, 188, 135, 0.75);
-        border-color: rgba(49, 188, 135, 0.75);
+        background-color: rgba(49, 188, 135, 0.85);
+        border-color: rgba(49, 188, 135, 0.85);
 
         & svg {
             stroke-dashoffset: 0;
@@ -225,7 +217,7 @@ input[type='range'] {
         &:before {
             transform: scale(3.5);
             opacity: 0;
-            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.7s easeOne;
         }
     }
 }

@@ -1,9 +1,3 @@
-:root {
-    --green-color: #31bc86;
-    --grey-color: #8c99a7;
-    --blue-color: #5396d8;
-}
-
 .update-notify {
     position: fixed;
     width: 100%;
@@ -16,7 +10,7 @@
     padding: 2em;
     overflow: auto;
     opacity: 1;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 0.7s easeOne, visibility 0.7s easeOne;
     background-color: #fff;
 
     &.closed {
@@ -35,19 +29,6 @@
         }
     }
 
-    &.downloading {
-        width: 400px;
-        height: 100px;
-        left: calc(50% - 200px);
-        top: calc(50% - 50px);
-        overflow: hidden;
-        border-radius: 0.75em;
-
-        & .update-container {
-            opacity: 0;
-        }
-    }
-
     & .lds-ripple {
         opacity: 0;
         position: fixed;
@@ -59,7 +40,7 @@
 
         & div {
             position: absolute;
-            border: 4px solid color-mod(var(--green-color) alpha(50%));
+            border: 4px solid color(var(--green-color) alpha(80%));
             opacity: 1;
             border-radius: 50%;
             animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -76,24 +57,22 @@
         border-radius: 0.75em;
         transform: translateY(0);
         opacity: 1;
-        transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-        animation-name: fade-one;
-        animation-duration: 0.7s;
-        animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+        transition: transform 0.7s easeOne;
+        animation: fade-one 0.7s easeOne;
 
         & .section-name {
             display: inline-flex;
             font-weight: 100;
             font-size: 1em;
-            color: color-mod(var(--green-color) alpha(75%));
-            border: 1px dashed color-mod(var(--green-color) alpha(50%));
+            color: color(var(--green-color) alpha(80%));
+            border: 1px dashed color(var(--green-color) alpha(75%));
             padding: 0.25em 0.75em;
             border-radius: 1.25em;
             margin-bottom: 2em;
         }
 
         & .update-description {
-            color: color-mod(var(--green-color) alpha(50%));
+            color: color(var(--green-color) alpha(75%));
             margin-bottom: 4em;
         }
 
@@ -112,68 +91,35 @@
                     color: #fff;
                     padding: 0.25em 0.75em;
                     border-radius: 1.25em;
-                    background-color: color-mod(var(--green-color) alpha(75%));
+                    background-color: color(var(--green-color) alpha(75%));
                 }
             }
         }
 
-        & .downloads {
-            display: flex;
-            flex-flow: column wrap;
-            border-top: 1px solid #fafafa;
-            padding-top: 2em;
-            margin-bottom: 2em;
+        & a.download-update {
+            font-weight: 700;
+            text-decoration: none;
+            color: color(var(--green-color) alpha(75%));
+            background-color: color(var(--green-color) alpha(25%));
+            transition: color 0.7s easeOne, background-color 0.7s easeOne;
+            border-radius: 1.25em;
+            padding: 0.5em 1.25em;
 
-            & a {
-                color: color-mod(var(--green-color) alpha(65%));
-                text-decoration: none;
-                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                margin: 0.15em 0;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                &:hover {
-                    color: var(--green-color);
-                }
-
-                & span.size {
-                    margin-right: 0.5em;
-                    color: var(--grey-color);
-                    font-size: 0.85em;
-                    text-decoration: none;
-                }
+            &:hover {
+                color: #fff;
+                background-color: color(var(--green-color) alpha(80%));
             }
+        }
 
-            & p {
-                color: var(--grey-color);
-                font-weight: 700;
+        & p {
+            color: var(--grey-color);
+            font-weight: 700;
 
-                &:first-child {
-                    margin-top: 0;
-                }
+            &:first-child {
+                margin-top: 0;
             }
         }
     }
-}
-
-.download-progress {
-    position: fixed;
-    left: calc(50% - 200px + 2em);
-    top: calc(50% - 5px);
-    width: calc(400px - 4em);
-    height: 10px;
-    overflow: hidden;
-    background-color: color-mod(var(--green-color) alpha(15%));
-    border-radius: 0.25em;
-}
-
-.download-progress-bar {
-    position: absolute;
-    background-color: rgba(49, 188, 135, 0.75);
-    height: 100%;
-    border-radius: 0.25em;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @keyframes lds-ripple {
@@ -190,16 +136,5 @@
         width: 58px;
         height: 58px;
         opacity: 0;
-    }
-}
-
-@keyframes fade-one {
-    from {
-        opacity: 0;
-        transform: translateY(10%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }

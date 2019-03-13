@@ -1,9 +1,3 @@
-:root {
-    --green-color: #31bc86;
-    --red-color: #e74856;
-    --grey-color: #8c99a7;
-}
-
 .ping-judges-container {
     position: fixed;
     display: flex;
@@ -15,8 +9,8 @@
     top: 0;
     left: 0;
     overflow-y: auto;
-    background-color: color-mod(#fff alpha(95%));
-    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: color(#fff alpha(95%));
+    transition: opacity 0.7s easeOne, visibility 0.7s easeOne, z-index 0.7s easeOne;
     opacity: 0;
     visibility: hidden;
     z-index: -1;
@@ -38,7 +32,7 @@
         width: 100%;
         opacity: 0;
         transform: translateY(-10%);
-        transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        transition: opacity 0.7s easeOne, transform 0.7s easeOne;;
 
         & .ping-progress {
             display: inline-flex;
@@ -48,9 +42,8 @@
             border-radius: 1.75em;
             padding: 0.5em 1.75em;
             border: 1px solid transparent;
-            color: color-mod(var(--grey-color) alpha(75%));
-            background-color: color-mod(var(--grey-color) alpha(15%));
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            color: color(var(--grey-color) alpha(75%));
+            background-color: color(var(--grey-color) alpha(15%));
         }
 
         & .items {
@@ -65,41 +58,41 @@
             height: 4em;
             align-items: center;
             font-weight: 700;
-            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-            color: color-mod(var(--grey-color) alpha(65%));
+            transition: color 0.7s easeOne;
+            color: color(var(--grey-color) alpha(65%));
             border-bottom: 1px solid #fafafa;
 
             & svg {
                 width: 1.25em;
                 height: 1.25em;
                 margin-right: 0.75em;
-                fill: color-mod(var(--grey-color) alpha(65%));
-                transition: fill 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+                fill: color(var(--grey-color) alpha(65%));
+                transition: fill 0.7s easeOne;
             }
 
             &.success {
-                color: color-mod(var(--green-color) alpha(65%));
+                color: color(var(--green-color) alpha(65%));
 
                 & svg {
-                    fill: color-mod(var(--green-color) alpha(65%));
+                    fill: color(var(--green-color) alpha(65%));
                 }
 
                 & .response {
                     color: #fff;
-                    background-color: color-mod(var(--green-color) alpha(65%));
+                    background-color: color(var(--green-color) alpha(65%));
                 }
             }
 
             &.error {
-                color: color-mod(var(--red-color) alpha(65%));
+                color: color(var(--red-color) alpha(65%));
 
                 & svg {
-                    fill: color-mod(var(--red-color) alpha(65%));
+                    fill: color(var(--red-color) alpha(65%));
                 }
 
                 & .response {
                     color: #fff;
-                    background-color: color-mod(var(--red-color) alpha(65%));
+                    background-color: color(var(--red-color) alpha(65%));
                 }
             }
 
@@ -117,7 +110,7 @@
                 margin-left: auto;
 
                 & svg path {
-                    fill: color-mod(var(--grey-color) alpha(65%));
+                    fill: color(var(--grey-color) alpha(65%));
                 }
 
                 & .response {
@@ -125,10 +118,8 @@
                     padding: 0.35em 0.75em;
                     border-radius: 1em;
                     font-size: 0.85em;
-                    animation-name: fade-judge-status;
-                    animation-duration: 0.7s;
+                    animation: fade-judge-status 0.7s easeOne;
                     text-align: center;
-                    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
                 }
             }
         }

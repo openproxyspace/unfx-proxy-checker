@@ -1,9 +1,3 @@
-:root {
-    --green-color: #31bc86;
-    --grey-color: #8c99a7;
-    --blue-color: #5396d8;
-}
-
 .result-container {
     position: fixed;
     width: 100%;
@@ -14,7 +8,7 @@
     overflow: hidden;
     visibility: hidden;
     background-color: #fafafa;
-    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 0.7s easeOne, visibility 0.7s easeOne, transform 0.7s easeOne;
     transform: translateY(5%);
 
     &.opened {
@@ -29,6 +23,10 @@
         width: 100%;
         height: 100%;
         overflow-y: auto;
+
+        & footer {
+            margin-bottom: 4em;
+        }
     }
 
     & .result-content {
@@ -37,16 +35,18 @@
         margin: auto;
         overflow: hidden;
         background-color: #fff;
+        border-radius: 0 0 0.5em 0.5em;
 
         & input.search {
             padding: 1em;
             margin: 2em 2em 0 0;
             border-radius: 1.75em;
-            background-color: color-mod(var(--green-color) alpha(15%));
+            background-color: color(var(--green-color) alpha(25%));
+            transition: padding 0.5s easeOne, background-color 0.5s easeOne;
 
             &:focus {
                 padding: 1em 2em;
-                background-color: color-mod(var(--green-color) alpha(75%));
+                background-color: color(var(--green-color) alpha(85%));
             }
 
             &::-webkit-input-placeholder {
@@ -69,12 +69,12 @@
 
                 &.ports-filter .states {
                     padding: 0.25em 0;
-                    color: color-mod(var(--grey-color) alpha(65%));
+                    color: color(var(--grey-color) alpha(65%));
 
                     &.allow span.allow-key,
                     &.disallow span.disallow-key {
                         color: #fff;
-                        background-color: color-mod(var(--green-color) alpha(75%));
+                        background-color: color(var(--green-color) alpha(85%));
                     }
 
                     & span {
@@ -82,8 +82,8 @@
                         cursor: pointer;
                         padding: 0.25em 0.75em;
                         border-radius: 1em;
-                        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                        background-color: color-mod(var(--grey-color) alpha(5%));
+                        transition: background-color 0.5s easeOne, color 0.5s easeOne;
+                        background-color: color(var(--grey-color) alpha(5%));
                     }
                 }
 
@@ -158,18 +158,18 @@
                     justify-content: space-between;
                     font-size: 0.85em;
                     font-weight: 100;
-                    color: color-mod(var(--green-color) alpha(75%));
+                    color: color(var(--green-color) alpha(85%));
                     width: 100%;
 
                     & span.name {
-                        background-color: color-mod(var(--grey-color) alpha(5%));
+                        background-color: color(var(--grey-color) alpha(7.5%));
                         padding: 0.25em 0.75em;
                         border-radius: 1em;
                     }
 
                     & span.value {
                         padding: 0.25em 0;
-                        color: color-mod(var(--grey-color) alpha(65%));
+                        color: color(var(--grey-color) alpha(65%));
                     }
                 }
             }
@@ -177,7 +177,7 @@
 
         & .up-panel {
             display: flex;
-            flex-flow: row no-wrap;
+            flex-flow: row nowrap;
             justify-content: space-between;
             padding: 2em 0;
             border-top: 1px solid #fafafa;
@@ -193,191 +193,17 @@
 
             & .counters {
                 display: flex;
-                flex-flow: row no-wrap;
+                flex-flow: row nowrap;
                 justify-content: space-between;
 
                 & .counter {
                     padding: 0.5em 1em;
                     margin-left: 2em;
                     font-weight: 700;
-                    background-color: color-mod(var(--green-color) alpha(65%));
+                    background-color: color(var(--green-color) alpha(75%));
                     color: #fff;
                     border-radius: 1.5em;
-                    border-bottom: 1px solid color-mod(var(--green-color) alpha(50%));
-                }
-            }
-        }
-
-        & .result-list-header {
-            display: flex;
-            flex-flow: row no-wrap;
-            align-items: center;
-            border-top: 1px solid #fafafa;
-            color: color-mod(var(--grey-color) alpha(95%));
-            font-weight: 700;
-            user-select: none;
-            min-height: 4em;
-
-            & span {
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-                &.main {
-                    display: flex;
-                    flex-flow: row no-wrap;
-                    align-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                    height: 4em;
-
-                    & svg.sort-svg {
-                        opacity: 0;
-                        transform: translateY(-35%);
-                        margin-left: 0.75em;
-                        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                    }
-
-                    &:hover {
-                        color: color-mod(var(--green-color) alpha(65%));
-
-                        & svg.sort-svg {
-                            opacity: 1;
-                            transform: translateY(0%);
-
-                            & path {
-                                fill: color-mod(var(--green-color) alpha(65%));
-                            }
-                        }
-                    }
-                }
-            }
-
-            & svg.count {
-                width: 1.25em;
-                height: 1.25em;
-                fill: #8c99a7;
-            }
-
-            & svg {
-                width: 1em;
-                height: 1em;
-
-                & path,
-                & rect {
-                    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                    fill: #8c99a7;
-                }
-            }
-
-            & .blacklist svg,
-            & .timeout svg {
-                width: 1.5em;
-                height: 1.5em;
-            }
-
-            & .count {
-                width: 5%;
-                height: 4em;
-                display: flex;
-                align-items: center;
-            }
-
-            & .ip {
-                width: 15%;
-            }
-
-            & .port {
-                width: 10%;
-            }
-
-            & .protocols {
-                width: 12.5%;
-            }
-
-            & .anon {
-                width: 12.5%;
-            }
-
-            & .country {
-                width: 20%;
-            }
-
-            & .empty-blacklist-placeholder {
-                width: 5%;
-            }
-
-            & .blacklist {
-                width: 5%;
-                height: 4em;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-
-                &:hover {
-                    & svg path:nth-child(1) {
-                        fill: #f3705a;
-                    }
-
-                    & svg path:nth-child(2) {
-                        fill: #ffd15c;
-                    }
-                }
-            }
-
-            & .empty-keep-alive-placeholder {
-                width: 5%;
-            }
-
-            & .k-a {
-                width: 5%;
-
-                & svg {
-                    width: 1.5em;
-                    height: 1.5em;
-
-                    & path:nth-child(2) {
-                        fill: color-mod(var(--grey-color) alpha(75%));
-                    }
-                }
-
-                &:hover path:nth-child(1) {
-                    fill: color-mod(var(--green-color) alpha(25%));
-                }
-            }
-
-            & .extra {
-                width: 7.5%;
-            }
-
-            & .timeout {
-                width: 7.5%;
-                margin-left: auto;
-
-                & svg {
-                    margin-left: auto;
-                }
-
-                &:hover {
-                    & svg path:nth-child(1) {
-                        fill: #7383bf;
-                    }
-
-                    & svg path:nth-child(2),
-                    & svg rect:nth-child(3),
-                    & svg rect:nth-child(5) {
-                        fill: #424a60;
-                    }
-
-                    & svg path:nth-child(4),
-                    & svg path:nth-child(6) {
-                        fill: #556080;
-                    }
-
-                    & svg path:nth-child(7),
-                    & svg path:nth-child(8) {
-                        fill: #7fabda;
-                    }
+                    border-bottom: 1px solid color(var(--green-color) alpha(60%));
                 }
             }
         }
@@ -386,10 +212,7 @@
             border-top: 1px solid #fafafa;
 
             & .list-item {
-                opacity: 1;
-                animation-name: fade-one;
-                animation-duration: 0.7s;
-                animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+                animation: fade-one 0.7s easeOne both;
                 border-bottom: 1px solid #fafafa;
 
                 & .main-block {
@@ -398,11 +221,11 @@
                     align-items: center;
                     display: flex;
                     width: 100%;
-                    transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                    transition: color 0.3s easeOne;
 
                     &:hover {
                         & .counts {
-                            background-color: color-mod(#ea2027 alpha(85%));
+                            background-color: var(--red-color);
                         }
                     }
                 }
@@ -415,57 +238,57 @@
                     border-radius: 1em;
                     margin-right: 0.5em;
                     text-transform: capitalize;
-                    transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                    transition: background-color 0.3s easeOne;
                 }
 
                 &.socks {
-                    color: color-mod(var(--blue-color) alpha(65%));
+                    color: color(var(--blue-color) alpha(80%));
 
                     & span {
-                        background-color: color-mod(var(--blue-color) alpha(65%));
+                        background-color: color(var(--blue-color) alpha(80%));
                         color: #fff;
                     }
 
                     & .country .ico-wrap {
-                        border: 1px dashed color-mod(var(--blue-color) alpha(75%));
+                        border: 1px dashed color(var(--blue-color) alpha(75%));
                     }
 
                     & .main-block.with-data:hover {
-                        color: color-mod(var(--blue-color) alpha(85%));
+                        color: var(--blue-color);
                         cursor: pointer;
 
                         & span {
-                            background-color: color-mod(var(--blue-color) alpha(85%));
+                            background-color: var(--blue-color);
                         }
 
                         & .country .city {
-                            color: color-mod(var(--grey-color) alpha(85%));
+                            color: color(var(--grey-color) alpha(85%));
                         }
                     }
                 }
 
                 &.http {
-                    color: color-mod(var(--green-color) alpha(65%));
+                    color: color(var(--green-color) alpha(80%));
 
                     & span {
-                        background-color: color-mod(var(--green-color) alpha(65%));
+                        background-color: color(var(--green-color) alpha(80%));
                         color: #fff;
                     }
 
                     & .country .ico-wrap {
-                        border: 1px dashed color-mod(var(--green-color) alpha(75%));
+                        border: 1px dashed color(var(--green-color) alpha(75%));
                     }
 
                     & .main-block.with-data:hover {
-                        color: color-mod(var(--green-color) alpha(85%));
+                        color: var(--green-color);
                         cursor: pointer;
 
                         & span {
-                            background-color: color-mod(var(--green-color) alpha(85%));
+                            background-color: var(--green-color);
                         }
 
                         & .country .city {
-                            color: color-mod(var(--grey-color) alpha(85%));
+                            color: color(var(--grey-color) alpha(85%));
                         }
                     }
                 }
@@ -503,7 +326,7 @@
                     width: 20%;
                     display: flex;
                     align-items: center;
-                    flex-flow: row no-wrap;
+                    flex-flow: row nowrap;
                     overflow: hidden;
 
                     & .ico-wrap {
@@ -534,8 +357,8 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-                        color: color-mod(var(--grey-color) alpha(75%));
+                        transition: color 0.3s easeOne;
+                        color: color(var(--grey-color) alpha(75%));
                     }
                 }
 
@@ -548,12 +371,12 @@
                         padding: 0.25em 0.75em;
                         border-radius: 1em;
                         color: #fff;
-                        transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-                        background-color: color-mod(#ea2027 alpha(65%));
+                        transition: background-color 0.3s easeOne;
+                        background-color: color(var(--red-color) alpha(80%));
                     }
                 }
 
-                & .extra {
+                & .server {
                     width: 7.5%;
                     display: flex;
                     flex-flow: row nowrap;
@@ -593,7 +416,7 @@
                     font-weight: 700;
                     justify-content: center;
                     color: #fff;
-                    background-image: linear-gradient(to right, color-mod(var(--green-color) alpha(15%)), color-mod(var(--blue-color) alpha(15%)));
+                    background-image: linear-gradient(to right, color(var(--green-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
                     padding: 1em;
                     margin: 2em 0;
                     border-radius: 1.75em;
@@ -607,14 +430,6 @@
         }
     }
 
-    & svg.bottom-rocket {
-        fill: #ddd;
-        height: 2em;
-        width: 100%;
-        margin: 4em auto;
-        margin-bottom: 8em;
-    }
-
     & .bottom-block {
         position: fixed;
         display: flex;
@@ -624,7 +439,7 @@
         width: 250px;
         padding: 0.5em;
         border-radius: 2em;
-        background-color: color-mod(var(--green-color) alpha(15%));
+        background-color: color(var(--green-color) alpha(15%));
         margin-left: calc(50% - 125px);
 
         & button {
@@ -672,13 +487,9 @@
         }
 
         & textarea {
-            border: none;
             width: 100%;
             min-height: 350px;
             height: 100%;
-            outline: 0;
-            box-shadow: 0;
-            border-radius: 0.35em;
             padding: 1em;
             resize: none;
         }
@@ -686,24 +497,24 @@
         &.http,
         &.https {
             & textarea {
-                background-color: color-mod(var(--green-color) alpha(5%));
+                background-color: color(var(--green-color) alpha(7.5%));
                 color: var(--green-color);
             }
 
             & textarea::-webkit-scrollbar-thumb {
-                background-color: color-mod(var(--green-color) alpha(15%));
+                background-color: color(var(--green-color) alpha(25%));
             }
         }
 
         &.socks4,
         &.socks5 {
             & textarea {
-                background-color: color-mod(var(--blue-color) alpha(5%));
+                background-color: color(var(--blue-color) alpha(7.5%));
                 color: var(--blue-color);
             }
 
             & textarea::-webkit-scrollbar-thumb {
-                background-color: color-mod(var(--blue-color) alpha(15%));
+                background-color: color(var(--blue-color) alpha(25%));
             }
         }
 
@@ -716,7 +527,7 @@
             }
 
             & .key {
-                color: #8c99a7;
+                color: color(var(--grey-color) alpha(85%));
                 font-weight: 900;
                 width: 40%;
                 text-transform: capitalize;

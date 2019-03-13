@@ -1,0 +1,173 @@
+.result-container .result-list-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    border-top: 1px solid #fafafa;
+    color: color(var(--grey-color) alpha(75%));
+    font-weight: 700;
+    user-select: none;
+    min-height: 4em;
+
+    & span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        transition: color 0.3s easeOne;
+
+        &.main {
+            display: flex;
+            flex-flow: row nowrap;
+            align-content: center;
+            align-items: center;
+            cursor: pointer;
+            height: 4em;
+
+            & svg.sort-svg {
+                opacity: 0;
+                transform: translateY(-35%);
+                margin-left: 0.75em;
+                transition: opacity 0.5s easeOne, transform 0.5s easeOne;
+            }
+
+            &:hover {
+                color: color(var(--green-color) alpha(85%));
+
+                & svg.sort-svg {
+                    opacity: 1;
+                    transform: translateY(0%);
+
+                    & path {
+                        fill: color(var(--green-color) alpha(85%));
+                    }
+                }
+            }
+        }
+    }
+
+    & svg.count {
+        width: 1.25em;
+        height: 1.25em;
+        fill: color(var(--grey-color) alpha(75%));
+    }
+
+    & svg {
+        width: 1em;
+        height: 1em;
+
+        & path,
+        & rect {
+            transition: fill 0.5s easeOne;
+            fill: color(var(--grey-color) alpha(75%));
+        }
+    }
+
+    & .blacklist svg,
+    & .timeout svg {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+    & .count {
+        width: 5%;
+        height: 4em;
+        display: flex;
+        align-items: center;
+    }
+
+    & .ip {
+        width: 15%;
+    }
+
+    & .port {
+        width: 10%;
+    }
+
+    & .protocols {
+        width: 12.5%;
+    }
+
+    & .anon {
+        width: 12.5%;
+    }
+
+    & .country {
+        width: 20%;
+    }
+
+    & .empty-blacklist-placeholder {
+        width: 5%;
+    }
+
+    & .blacklist {
+        width: 5%;
+        height: 4em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            & svg path:nth-child(1) {
+                fill: #f3705a;
+            }
+
+            & svg path:nth-child(2) {
+                fill: #ffd15c;
+            }
+        }
+    }
+
+    & .empty-keep-alive-placeholder {
+        width: 5%;
+    }
+
+    & .k-a {
+        width: 5%;
+
+        & svg {
+            width: 1.5em;
+            height: 1.5em;
+
+            & path:nth-child(2) {
+                fill: color(var(--grey-color) alpha(65%));
+            }
+        }
+
+        &:hover path:nth-child(1) {
+            fill: color(var(--green-color) alpha(25%));
+        }
+    }
+
+    & .server {
+        width: 7.5%;
+    }
+
+    & .timeout {
+        width: 7.5%;
+        margin-left: auto;
+
+        & svg {
+            margin-left: auto;
+        }
+
+        &:hover {
+            & svg path:nth-child(1) {
+                fill: #7383bf;
+            }
+
+            & svg path:nth-child(2),
+            & svg rect:nth-child(3),
+            & svg rect:nth-child(5) {
+                fill: #424a60;
+            }
+
+            & svg path:nth-child(4),
+            & svg path:nth-child(6) {
+                fill: #556080;
+            }
+
+            & svg path:nth-child(7),
+            & svg path:nth-child(8) {
+                fill: #7fabda;
+            }
+        }
+    }
+}

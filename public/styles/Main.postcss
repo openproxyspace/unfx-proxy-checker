@@ -27,8 +27,6 @@ body {
     font-family: 'Lato';
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: grayscale;
-    font-smoothing: antialiased;
     counter-reset: items-counter;
 }
 
@@ -42,8 +40,6 @@ button {
     font-family: 'Lato';
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: grayscale;
-    font-smoothing: antialiased;
 }
 
 *,
@@ -70,16 +66,12 @@ button {
     left: 0;
     overflow-y: auto;
     background-color: #fafafa;
-    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 
     & .main-page-content {
         max-width: 1600px;
         margin: auto;
         padding: 2em;
         background-color: #fff;
-
-        & button.check-button {
-            margin: 2em 0;
-        }
+        border-radius: 0 0 0.5em 0.5em;
     }
 }

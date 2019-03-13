@@ -1,16 +1,9 @@
-:root {
-    --green-color: #31bc86;
-    --grey-color: #8c99a7;
-    --blue-color: #5396d8;
-}
-
 .settings {
     & .react-tabs__tab-list {
         display: flex;
         margin: 0;
         padding: 0;
         margin-bottom: 2em;
-        -webkit-app-region: drag;
 
         & li {
             display: inline-block;
@@ -18,21 +11,21 @@
             cursor: pointer;
             padding: 0.5em 1.25em;
             margin-right: 1em;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: color 0.3s easeOne, background-color 0.3s easeOne;
             outline: none;
             border-radius: 1.75em;
-            background-color: color-mod(var(--green-color) alpha(15%));
-            color: color-mod(var(--green-color) alpha(45%));
+            background-color: color(var(--green-color) alpha(25%));
+            color: color(var(--green-color) alpha(65%));
 
             &:not(.react-tabs__tab--selected):hover {
                 color: #fff;
-                background-color: color-mod(var(--green-color) alpha(45%));
+                background-color: color(var(--green-color) alpha(75%));
             }
         }
 
         & .react-tabs__tab--selected {
             color: #fff;
-            background-color: color-mod(var(--green-color) alpha(65%));
+            background-color: color(var(--green-color) alpha(85%));
         }
     }
 
@@ -41,7 +34,7 @@
     }
 
     & .judges-list {
-        background-image: linear-gradient(to right, color-mod(var(--green-color) alpha(15%)), color-mod(var(--blue-color) alpha(15%)));
+        background-image: linear-gradient(to right, color(var(--green-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
         border-radius: 0.35em;
         overflow: hidden;
 
@@ -60,125 +53,7 @@
                     font-weight: 700;
                     justify-content: center;
                     color: #fff;
-                    background-color: color-mod(var(--green-color) alpha(35%));
-                    padding: 1em;
-                    border-radius: 0.35em;
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-
-            & .item {
-                padding: 1em 0;
-                font-weight: 700;
-                width: 100%;
-                color: color-mod(var(--green-color) alpha(75%));
-                border-bottom: 1px solid color-mod(#fff alpha(65%));
-
-                &:first-child {
-                    padding-top: 0;
-                }
-
-                &:last-child {
-                    border-bottom: none;
-                    padding-bottom: 0;
-                }
-
-                &:hover {
-                    & svg.close-svg {
-                        opacity: 1 !important;
-                    }
-                }
-
-                & .sides {
-                    display: flex;
-
-                    & .left {
-                        width: 30%;
-                        display: flex;
-                        flex-flow: column wrap;
-
-                        & .checkbox {
-                            padding-top: 0em;
-                        }
-
-                        & label {
-                            width: 100%;
-                            margin: 0;
-
-                            &:not(:last-child) {
-                                margin-bottom: 0.95em;
-                            }
-                        }
-                    }
-
-                    & .right {
-                        width: 70%;
-
-                        & .url-remove {
-                            display: flex;
-                            justify-content: space-between;
-                            width: 100%;
-                            margin-bottom: 0.75em;
-
-                            & span {
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                            }
-
-                            & svg.close-svg {
-                                margin-left: auto;
-                                fill: color-mod(var(--green-color) alpha(35%));
-                                cursor: pointer;
-                                width: 1em;
-                                height: 1em;
-                                opacity: 0;
-                                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-
-                                &:hover {
-                                    fill: color-mod(var(--green-color) alpha(75%));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    & .judges-add-new {
-        display: flex;
-        flex-flow: row no-wrap;
-
-        & button {
-            margin-left: 1em !important;
-            margin-right: 0;
-        }
-    }
-
-    & .black-list {
-        overflow: hidden;
-        background-image: linear-gradient(to right, color-mod(var(--green-color) alpha(15%)), color-mod(var(--blue-color) alpha(15%)));
-        border-radius: 0.35em;
-        margin-top: 1em;
-
-        & .items {
-            padding: 1em;
-            max-height: 250px;
-            overflow: auto;
-
-            &:empty {
-                position: relative;
-                padding: 0;
-
-                &::after {
-                    content: 'No items';
-                    display: flex;
-                    font-weight: 700;
-                    justify-content: center;
-                    color: #fff;
-                    background-color: color-mod(var(--green-color) alpha(35%));
+                    background-color: color(var(--green-color) alpha(35%));
                     padding: 1em;
                     border-radius: 0.35em;
                     width: 100%;
@@ -189,7 +64,7 @@
             & .item {
                 margin-bottom: 1em;
                 padding-bottom: 1em;
-                border-bottom: 1px solid color-mod(#fff alpha(65%));
+                border-bottom: 1px solid color(#fff alpha(35%));
 
                 &:last-child {
                     margin-bottom: 0;
@@ -217,15 +92,105 @@
 
                     & svg.close-svg {
                         margin-left: auto;
-                        fill: color-mod(var(--green-color) alpha(35%));
+                        fill: color(var(--green-color) alpha(35%));
                         cursor: pointer;
                         width: 1em;
                         height: 1em;
                         opacity: 0;
-                        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+                        transition: fill 0.5s easeOne;
 
                         &:hover {
-                            fill: color-mod(var(--green-color) alpha(75%));
+                            fill: color(var(--green-color) alpha(75%));
+                        }
+                    }
+                }
+
+                & input {
+                    margin-top: 1em;
+                }
+            }
+        }
+    }
+
+    & .judges-add-new {
+        display: flex;
+        flex-flow: row nowrap;
+
+        & button {
+            margin-left: 1em !important;
+            margin-right: 0;
+        }
+    }
+
+    & .black-list {
+        overflow: hidden;
+        background-image: linear-gradient(to right, color(var(--green-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
+        border-radius: 0.35em;
+        margin-top: 1em;
+
+        & .items {
+            padding: 1em;
+            max-height: 250px;
+            overflow: auto;
+
+            &:empty {
+                position: relative;
+                padding: 0;
+
+                &::after {
+                    content: 'No items';
+                    display: flex;
+                    font-weight: 700;
+                    justify-content: center;
+                    color: #fff;
+                    background-color: color(var(--green-color) alpha(35%));
+                    padding: 1em;
+                    border-radius: 0.35em;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            & .item {
+                margin-bottom: 1em;
+                padding-bottom: 1em;
+                border-bottom: 1px solid color(#fff alpha(35%));
+
+                &:last-child {
+                    margin-bottom: 0;
+                    border-bottom: none;
+                    padding-bottom: 0em;
+                }
+
+                &:hover {
+                    & svg.close-svg {
+                        opacity: 1 !important;
+                    }
+                }
+
+                & .title-remove {
+                    width: 100%;
+                    display: flex;
+                    flex-flow: row wrap;
+
+                    & label {
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        padding: 0;
+                        width: calc(100% - 1em);
+                    }
+
+                    & svg.close-svg {
+                        margin-left: auto;
+                        fill: color(var(--green-color) alpha(35%));
+                        cursor: pointer;
+                        width: 1em;
+                        height: 1em;
+                        opacity: 0;
+                        transition: fill 0.5s easeOne;
+
+                        &:hover {
+                            fill: color(var(--green-color) alpha(75%));
                         }
                     }
                 }
@@ -249,7 +214,7 @@
 
         & .path {
             display: flex;
-            flex-flow: row no-wrap;
+            flex-flow: row nowrap;
             margin-top: 1em;
 
             & button {
@@ -280,9 +245,7 @@
         flex-flow: row wrap;
         margin-bottom: 2em;
         padding-right: 2em;
-        animation-name: fade-one;
-        animation-duration: 0.7s;
-        animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+        animation: fade-one 0.7s easeOne;
 
         &.slider .content {
             padding-top: 1em;
@@ -343,7 +306,7 @@
             justify-content: space-between;
             font-size: 0.85em;
             font-weight: 100;
-            color: color-mod(var(--green-color) alpha(75%));
+            color: color(var(--green-color) alpha(85%));
             width: 100%;
 
             &.space-bot {
@@ -351,14 +314,14 @@
             }
 
             & span.name {
-                background-color: color-mod(var(--grey-color) alpha(5%));
+                background-color: color(var(--grey-color) alpha(7.5%));
                 padding: 0.25em 0.75em;
                 border-radius: 0.75em;
             }
 
             & span.value {
                 padding: 0.25em 0;
-                color: color-mod(var(--grey-color) alpha(65%));
+                color: color(var(--grey-color) alpha(65%));
             }
         }
     }

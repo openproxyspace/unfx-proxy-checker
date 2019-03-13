@@ -1,159 +1,61 @@
-:root {
-    --green-color: #31bc86;
-    --grey-color: #8c99a7;
-}
-
-.footer {
-    padding-top: 2em;
+footer {
+    padding: 2em;
     border-top: 1px solid #fafafa;
     display: flex;
 
-    & .marks {
+    & .links {
+        border-right: 1px solid #fafafa;
+        margin-right: 1.5em;
         display: flex;
+        flex-flow: row wrap;
         align-items: center;
-        width: 60%;
-
-        & .product-name {
-            font-weight: 700;
-            color: color-mod(var(--green-color) alpha(50%));
-        }
-
-        & .version {
-            font-weight: 700;
-            font-size: 0.9em;
-            color: #fff;
-            background-color: color-mod(var(--green-color) alpha(35%));
-            border-radius: 1em;
-            padding: 0.2em 0.65em;
-        }
-
-        & a {
-            font-weight: 900;
-            margin-right: 1em;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-
-            &:hover {
-                text-decoration: underline;
-                color: color-mod(var(--green-color) alpha(75%));
-            }
-
-            &.copyright {
-                color: var(--grey-color);
-                font-weight: 400;
-                text-decoration: none;
-
-                &:hover {
-                    color: #0088cc;
-
-                    & svg {
-                        fill: #0088cc;
-                    }
-                }
-
-                & svg {
-                    width: 1em;
-                    height: 1em;
-                    fill: #8c99a7;
-                    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-                }
-            }
-        }
-
-        & span,
-        & a {
-            color: color-mod(var(--green-color) alpha(50%));
-        }
-
-        & * {
-            display: flex;
-            align-content: center;
-            align-items: center;
-            margin-right: 0.5em;
-        }
-    }
-
-    & .socials {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: flex-end;
-        width: 40%;
 
         & a {
             display: flex;
-            align-items: center;
-            align-content: center;
 
-            &:not(:last-child) {
-                margin-right: 2em;
-            }
-
-            &.become-a-patron {
-                cursor: pointer;
-                font-weight: 700;
-                user-select: none;
-                text-decoration: none;
-                color: #8c99a7;
-
-                & svg {
-                    width: 1.2em;
-                    height: 1.2em;
-                    margin-left: 0.5em;
-                }
-
-                & span {
-                    margin: 0 0.12em;
-                    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-                }
-
-                &:hover svg {
-                    & circle {
-                        fill: #f96854;
-                    }
-
-                    & rect {
-                        fill: #052d49;
-                    }
-                }
-            }
-
-            &.donate {
-                width: 1.2em;
-                height: 1.2em;
-
-                &:hover {
-                    & path:nth-child(1) {
-                        fill: #ff3f2e;
-                    }
-
-                    & path:nth-child(2) {
-                        fill: #f2d1a5;
-                    }
-
-                    & path:nth-child(3) {
-                        fill: #1ea1e3;
-                    }
-
-                    & path:nth-child(4),
-                    & path:nth-child(5) {
-                        fill: #f2bb88;
-                    }
-
-                    & path:nth-child(6) {
-                        fill: #cf0404;
-                    }
-                }
+            &:nth-child(2) svg {
+                height: 1.75em;
+                width: 1.75em;
             }
         }
 
         & svg {
-            height: 1.5em;
-            width: 1.5em;
-            cursor: pointer;
-            fill: var(--grey-color);
+            width: 2em;
+            height: 2em;
+            margin-right: 1.5em;
+            fill: color(var(--grey-color) alpha(80%));
+            transition: fill 0.5s easeOne;
 
-            &:hover.github-svg path {
-                fill: #333;
+            &:hover {
+                fill: var(--grey-color);
+            }
+        }
+    }
+
+    & .bottom-rocket {
+        display: flex;
+        flex-flow: row wrap;
+        user-select: none;
+        margin: 2em auto;
+        padding: 1em 2em;
+        background-color: #fff;
+        border-radius: 2.75em;
+
+        & .details {
+            display: flex;
+            flex-flow: column wrap;
+
+            & h2 {
+                font-weight: 700;
+                font-size: 0.9em;
+                margin: 0;
+                color: color(var(--grey-color) alpha(80%));
+            }
+
+            & span {
+                font-size: 0.78em;
+                font-weight: 700;
+                color: color(var(--green-color) alpha(85%));
             }
         }
     }

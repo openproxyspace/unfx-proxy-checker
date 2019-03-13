@@ -1,9 +1,3 @@
-:root {
-    --green-color: #31bc86;
-    --grey-color: #8c99a7;
-    --blue-color: #5396d8;
-}
-
 .export-container {
     position: fixed;
     display: flex;
@@ -16,8 +10,8 @@
     top: 0;
     left: 0;
     overflow-y: auto;
-    background-color: color-mod(#fff alpha(95%));
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: color(#fff alpha(95%));
+    transition: visibility 0.5s easeOne, opacity 0.5s easeOne;
     opacity: 0;
     visibility: hidden;
 
@@ -37,7 +31,7 @@
         flex-flow: column nowrap;
         align-items: flex-start;
         justify-content: center;
-        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        transition: transform 0.5s easeOne, opacity 0.5s easeOne;
         transform: translateY(15%);
         opacity: 0;
 
@@ -47,11 +41,11 @@
             cursor: pointer;
             margin-left: auto;
             margin-bottom: 2em;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            fill: color-mod(var(--grey-color) alpha(35%));
+            transition: fill 0.5s easeOne;
+            fill: color(var(--grey-color) alpha(45%));
 
             &:hover {
-                fill: color-mod(var(--green-color) alpha(75%));
+                fill: color(var(--green-color) alpha(85%));
             }
         }
 
@@ -71,18 +65,18 @@
                     display: none;
 
                     &:checked + .type-card {
-                        border: 1px solid color-mod(var(--green-color) alpha(35%));
+                        border: 1px solid color(var(--green-color) alpha(45%));
 
                         & textarea {
-                            color: color-mod(var(--green-color) alpha(75%));
+                            color: color(var(--green-color) alpha(85%));
                         }
 
                         & .type-desc {
-                            border-bottom: 1px dashed color-mod(var(--green-color) alpha(35%));
-                            color: color-mod(var(--green-color) alpha(50%));
+                            border-bottom: 1px dashed color(var(--green-color) alpha(45%));
+                            color: color(var(--green-color) alpha(60%));
 
                             & span {
-                                background-color: color-mod(var(--green-color) alpha(75%));
+                                background-color: color(var(--green-color) alpha(85%));
                             }
                         }
                     }
@@ -91,7 +85,8 @@
                 & .type-card {
                     padding: 0.75em 1em;
                     border-radius: 0.5em;
-                    border: 1px solid color-mod(var(--grey-color) alpha(15%));
+                    border: 1px solid color(var(--grey-color) alpha(15%));
+                    transition: border-color 0.5s easeOne;
 
                     & textarea {
                         resize: none;
@@ -101,25 +96,28 @@
                         background-color: transparent;
                         font-size: 0.9em;
                         width: 275px;
-                        color: color-mod(var(--grey-color) alpha(35%));
+                        color: color(var(--grey-color) alpha(45%));
                         user-select: none;
+                        transition: color 0.5s easeOne;
                     }
 
                     & .type-desc {
-                        border-bottom: 1px dashed color-mod(var(--grey-color) alpha(15%));
+                        border-bottom: 1px dashed color(var(--grey-color) alpha(15%));
                         padding-bottom: 0.75em;
                         margin-bottom: 0.75em;
                         font-weight: 700;
-                        color: color-mod(var(--grey-color) alpha(35%));
+                        color: color(var(--grey-color) alpha(45%));
+                        transition: color 0.5s easeOne, border-color 0.5s easeOne;
 
                         & span {
                             font-size: 0.75em;
                             display: inline-block;
                             padding: 0.25em 0.75em;
                             border-radius: 1.75em;
-                            background-color: color-mod(var(--grey-color) alpha(35%));
+                            background-color: color(var(--grey-color) alpha(45%));
                             color: #fff;
                             margin: 0 0.25em;
+                            transition: background-color 0.5s easeOne;
 
                             &:first-child {
                                 margin-left: 0;

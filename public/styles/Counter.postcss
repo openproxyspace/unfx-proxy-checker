@@ -1,12 +1,9 @@
-:root {
-    --green-color: #31bc86;
-    --blue-color: #5396d8;
-}
-
 .counter-container {
     display: flex;
     flex-flow: row wrap;
     width: 75%;
+    max-width: 1600px;
+    margin: auto;
 
     & .protocol {
         display: inline-flex;
@@ -18,19 +15,19 @@
             color: var(--green-color);
 
             & .protocol-wrap {
-                background-color: color-mod(var(--green-color) alpha(15%));
+                background-color: color(var(--green-color) alpha(25%));
             }
 
             &.active {
                 color: #fff;
 
                 & .type {
-                    background-color: color-mod(var(--green-color) alpha(65%));
+                    background-color: color(var(--green-color) alpha(85%));
                 }
 
                 & .count {
                     opacity: 1;
-                    color: color-mod(var(--green-color) alpha(65%));
+                    color: color(var(--green-color) alpha(85%));
                 }
             }
         }
@@ -39,19 +36,19 @@
             color: var(--blue-color);
 
             & .protocol-wrap {
-                background-color: color-mod(var(--blue-color) alpha(15%));
+                background-color: color(var(--blue-color) alpha(25%));
             }
 
             &.active {
                 color: #fff;
 
                 & .type {
-                    background-color: color-mod(var(--blue-color) alpha(65%));
+                    background-color: color(var(--blue-color) alpha(85%));
                 }
 
                 & .count {
                     opacity: 1;
-                    color: color-mod(var(--blue-color) alpha(65%));
+                    color: color(var(--blue-color) alpha(85%));
                 }
             }
         }
@@ -63,16 +60,16 @@
 
             & .type {
                 padding: 0.5em 0.75em;
-                opacity: 0.35;
+                opacity: 0.75;
                 border-radius: 1em;
-                transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+                transition: background-color 0.7s easeOne;
             }
 
             & .count {
                 padding: 0.5em 0.75em;
                 margin-left: 1em;
-                opacity: 0.35;
-                transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+                opacity: 0.5;
+                transition: color 0.7s easeOne, opacity 0.7s easeOne;
 
                 &:empty {
                     padding: 0;
@@ -85,11 +82,11 @@
     & .progress {
         position: relative;
         width: 100%;
-        height: 1.25em;
+        height: 1.5em;
         margin: 3em 0;
         border-radius: 1em;
         overflow: hidden;
-        background-image: linear-gradient(to right, color-mod(var(--green-color) alpha(15%)), color-mod(var(--blue-color) alpha(15%)));
+        background-image: linear-gradient(to right, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
 
         & .bar {
             position: absolute;
@@ -97,18 +94,20 @@
             top: 0;
             left: 0;
             border-radius: 1em;
-            transition: width 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-            background-color: color-mod(#333 alpha(5%));
+            transition: width 0.7s easeOne;
+            background-color: color(#333 alpha(5%));
         }
 
         & h1 {
+            display: flex;
+            margin: 0;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
             position: absolute;
             width: 100%;
-            height: 100%;
-            left: 0;
-            top: -0.60em;
             font-size: 0.90em;
-            color: color-mod(#fff alpha(95%));
+            color: #fff;
             text-align: center;
         }
     }

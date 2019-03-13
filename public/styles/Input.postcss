@@ -1,0 +1,107 @@
+.proxy-input {
+    display: flex;
+    flex-flow: column wrap;
+    padding-top: 2em;
+    border-top: 1px solid #fafafa;
+
+    & section.load-file-area {
+        display: flex;
+        justify-content: space-between;
+        user-select: none;
+        margin-bottom: 2em;
+        align-items: center;
+
+        & .select-event {
+            min-height: 11em;
+            display: flex;
+            width: calc(50% - 1em);
+            background-color: color(var(--green-color) alpha(25%));
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.5em;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.5s easeOne, color 0.5s easeOne;
+
+            &:hover {
+                color: color(#fff alpha(85%));
+                background-color: color(var(--green-color) alpha(75%));
+
+                & svg {
+                    fill: color(#fff alpha(85%));
+                }
+            }
+
+            & svg {
+                width: 2em;
+                height: 2em;
+                fill: #fff;
+                margin-right: 1em;
+                transition: fill 0.5s easeOne;
+            }
+        }
+
+        & .data {
+            width: calc(50% - 1em);
+            animation: fade-left 0.7s easeOne both;
+
+            & .stat {
+                margin-top: 1em;
+
+                & .item {
+                    padding-bottom: 0.5em;
+
+                    &:last-child {
+                        padding-bottom: 0;
+                    }
+
+                    & span {
+                        display: inline-block;
+                        padding: 0.25em 0.75em;
+                        font-size: 0.75em;
+                        border-radius: 1em;
+                        font-weight: 700;
+                        color: #fff;
+
+                        &:nth-child(1) {
+                            margin-right: 0.5em;
+                            background-color: color(var(--green-color) alpha(80%));
+                        }
+
+                        &:nth-child(2) {
+                            color: color(var(--green-color) alpha(80%));
+                            background-color: color(var(--grey-color) alpha(5%));
+                        }
+                    }
+                }
+            }
+
+            & label.checkbox {
+                padding: 0;
+            }
+        }
+
+        & svg.metrics-svg {
+            width: 2em;
+            height: 2em;
+            margin: auto;
+            fill: color(var(--green-color) alpha(75%));
+        }
+
+        & .preview {
+            width: calc(50% - 1em);
+        }
+    }
+}
+
+@keyframes fade-left {
+    from {
+        opacity: 0;
+        transform: translateX(-5%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
