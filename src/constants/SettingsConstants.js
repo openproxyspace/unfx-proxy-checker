@@ -8,8 +8,9 @@ export const DEFAULT_CORE_SETTINGS = {
     keepAlive: false,
     timeout: 15000,
     retry: false,
+    shuffle: false,
     captureFullData: false,
-    captureExtraData: false,
+    captureServer: false,
     protocols: {
         http: true,
         https: true,
@@ -22,77 +23,50 @@ export const DEFAULT_JUDGES_SETTINGS = {
     swap: true,
     items: [
         {
+            active: true,
             url: 'http://proxyjudge.info/azenv.php',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'proxyjudge.info'
-            }
+            validate: 'AZ Environment variables'
         },
         {
-            url: 'https://yandex.ru/company',
-            ssl: true,
-            validate: {
-                enabled: true,
-                value: 'yandex'
-            }
-        },
-        {
-            url: 'https://www.wikipedia.org/',
-            ssl: true,
-            validate: {
-                enabled: true,
-                value: 'wikipedia'
-            }
-        },
-        {
+            active: true,
             url: 'http://www.sbjudge3.com/azenv.php',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'sbjudge3.com'
-            }
+            validate: 'AZ Environment variables'
         },
         {
+            active: true,
             url: 'http://proxyjudge.us/azenv.php',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'proxyjudge.us'
-            }
+            validate: 'AZ Environment variables'
         },
         {
+            active: true,
             url: 'http://azenv.net/',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'azenv.net'
-            }
+            validate: 'AZ Environment variables'
         },
         {
+            active: true,
             url: 'http://www.cooleasy.com/azenv.php',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'cooleasy.com'
-            }
+            validate: 'AZ Environment variables'
         },
         {
+            active: true,
             url: 'http://pascal.hoez.free.fr/azenv.php',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'pascal.hoez.free.fr'
-            }
+            validate: 'AZ Environment variables'
         },
         {
+            active: true,
             url: 'http://www.proxy-listen.de/azenv.php',
-            ssl: false,
-            validate: {
-                enabled: true,
-                value: 'proxy-listen.de'
-            }
-        }
+            validate: 'AZ Environment variables'
+        },
+        {
+            active: true,
+            url: 'https://api.ipify.org/',
+            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+        },
+        {
+            active: true,
+            url: 'https://ident.me/',
+            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+        },
     ]
 };
 
