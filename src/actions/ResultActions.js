@@ -61,7 +61,7 @@ export const getResultsInProtocolIpPort = items => {
 
 export const save = () => (dispatch, getState) => {
     const saveType = getState().result.exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
-    
+
     let savePath = dialog.showSaveDialog({
         filters: [
             {
@@ -108,31 +108,17 @@ const createCountries = items => {
     return sort(res).desc(item => item.count);
 };
 
-const createTimeoutRanges = items => {
-    const timeouts = items.map(item => item.timeout);
+export const showResult = result => async (dispatch, getState) => {
+    const {
+        core: { timeout }
+    } = getState();
 
-    if (!timeouts.length) {
-        return false;
-    }
-
-    const ranges = {
-        from: Math.min(...timeouts),
-        to: Math.max(...timeouts)
-    };
-
-    return {
-        ranges,
-        max: ranges.to
-    };
-};
-
-export const showResult = result => async dispatch => {
     dispatch({
         type: SHOW_RESULT,
         items: result.items,
         countries: createCountries(result.items),
         inBlacklists: result.inBlacklists,
-        timeout: createTimeoutRanges(result.items)
+        timeout
     });
 
     await wait(300);
