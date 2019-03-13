@@ -5,7 +5,7 @@ const getItems = state => state.result.items;
 
 const isOnlyKeepAlive = state => state.result.misc.onlyKeepAlive;
 
-const getMaxTimeout = state => state.result.timeout.max;
+const getMaxTimeout = state => (state.result.timeout == state.core.timeout ? false : state.result.timeout);
 
 const getCurrentSorting = state => state.result.sorting;
 
@@ -13,13 +13,16 @@ const getProtocols = state => {
     const protocols = state.result.protocols;
     const result = Object.keys(protocols).filter(item => protocols[item]);
 
-    return result.length == 4 ? 'all' : result;
+    return result.length == 4 ? false : result;
 };
 
 const getInBlacklists = state => {
     const inLists = state.result.inBlacklists;
+
     if (!inLists) return 'allow-all';
+
     const result = inLists.filter(item => !item.active).map(item => item.title);
+
     return inLists.length == result.length ? 'disallow-all' : result.length == 0 ? 'allow-all' : result;
 };
 
@@ -27,7 +30,7 @@ const getAnons = state => {
     const anons = state.result.anons;
     const result = Object.keys(anons).filter(item => anons[item]);
 
-    return result.length == 3 ? 'all' : result;
+    return result.length == 3 ? false : result;
 };
 
 const getCountries = state => {
@@ -35,15 +38,13 @@ const getCountries = state => {
     const count = countries.length;
     const result = countries.filter(item => item.active).map(item => item.name);
 
-    return count == result.length ? 'all' : result;
+    return count == result.length ? false : result;
 };
 
 const getSearch = state => {
     const input = state.result.search;
 
-    if (input.length == 0) {
-        return false;
-    }
+    if (input.length == 0) return false;
 
     return input
         .toLowerCase()
@@ -54,9 +55,7 @@ const getSearch = state => {
 const getPorts = state => {
     const { input, allow } = state.result.ports;
 
-    if (input.length == 0) {
-        return false;
-    }
+    if (input.length == 0) return false;
 
     const ports = input
         .split(',')
@@ -69,16 +68,16 @@ const getPorts = state => {
     };
 };
 
-const filter = (items, protocols, anons, countries, search, isKeepAlive, inBlacklists, maxTimeout, ports, sorting) => {
-    let next = items
-        .filter(item => protocols == 'all' || arrayContainsArray(protocols, item.protocols))
-        .filter(item => anons == 'all' || arrayContainsArray(item.anon, anons))
-        .filter(item => countries == 'all' || arrayContainsArray(item.country.name, countries))
-        .filter(item => item.timeout <= maxTimeout);
-
-    if (isKeepAlive) {
-        next = next.filter(item => item.keepAlive);
+const arrayContainsArray = (superset, subset) => {
+    if (0 === subset.length || !superset) {
+        return false;
     }
+
+    return subset.some(value => superset.indexOf(value) !== -1);
+};
+
+const filter = (items, protocols, anons, countries, search, isKeepAlive, inBlacklists, maxTimeout, ports, sorting) => {
+    let next = maxTimeout ? items.filter(item => item.timeout <= maxTimeout) : items;
 
     if (search) {
         next = next.filter(
@@ -86,22 +85,27 @@ const filter = (items, protocols, anons, countries, search, isKeepAlive, inBlack
                 arrayContainsArray(item.ip, search) ||
                 arrayContainsArray(item.port.toString(), search) ||
                 arrayContainsArray(item.country.name.toLowerCase(), search) ||
-                arrayContainsArray(item.country.city.toLowerCase(), search)
+                arrayContainsArray(item.country.city.toLowerCase(), search) ||
+                arrayContainsArray(item.server, search)
         );
     }
 
-    if (ports) {
-        next = ports.allow ? next.filter(item => containsPorts(item.port, ports.ports)) : next.filter(item => !containsPorts(item.port, ports.ports));
-    }
+    if (protocols) next = next.filter(item => protocols.some(value => item.protocols.includes(value)));
+    if (anons) next = next.filter(item => anons.includes(item.anon));
+    if (countries) next = next.filter(item => countries.includes(item.country.name));
+    if (isKeepAlive) next = next.filter(item => item.keepAlive);
+    if (ports) next = ports.allow ? next.filter(item => filterPorts(item.port, ports.ports)) : next.filter(item => !filterPorts(item.port, ports.ports));
 
     if (inBlacklists === 'disallow-all') {
         next = next.filter(item => !item.blacklist);
     } else if (inBlacklists !== 'allow-all') {
-        next = next.filter(item => !item.blacklist || !arrayContainsArray(inBlacklists, item.blacklist));
+        next = next.filter(item => !item.blacklist || !inBlacklists.some(value => item.blacklist.includes(value)));
     }
 
     return sortFilter(next, sorting);
 };
+
+const filterPorts = (proxyPort, inputPorts) => inputPorts.some(value => value == proxyPort);
 
 const sortFilter = (items, sorting) => {
     switch (sorting.by) {
@@ -109,8 +113,8 @@ const sortFilter = (items, sorting) => {
             return sorting.reverse ? sort(items).desc(item => item.timeout) : sort(items).asc(item => item.timeout);
         case 'blacklist':
             return sorting.reverse ? sort(items).desc(item => item.blacklist.length) : sort(items).asc(item => (item.blacklist == false ? -1 : 1));
-        case 'extra':
-            return sorting.reverse ? sort(items).desc(item => item.extra.length) : sort(items).asc(item => (item.extra == false ? -1 : 1));
+        case 'server':
+            return sorting.reverse ? sort(items).desc(item => item.server) : sort(items).asc(item => item.server);
         case 'keep-alive':
             return sorting.reverse ? sort(items).desc(item => (item.keepAlive ? 1 : -1)) : sort(items).asc(item => (!item.keepAlive ? -1 : 1));
         case 'country':
@@ -128,22 +132,6 @@ const sortFilter = (items, sorting) => {
         case 'ip':
             return sorting.reverse ? sort(items).desc(item => item.ip) : sort(items).asc(item => item.ip);
     }
-};
-
-const arrayContainsArray = (superset, subset) => {
-    if (0 === subset.length || !superset) {
-        return false;
-    }
-
-    return subset.some(value => superset.indexOf(value) !== -1);
-};
-
-const containsPorts = (proxyPort, inputPorts) => {
-    if (0 === inputPorts.length) {
-        return false;
-    }
-
-    return inputPorts.some(value => value == proxyPort);
 };
 
 export const getFilteredProxies = createSelector(
