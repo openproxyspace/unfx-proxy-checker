@@ -66,10 +66,11 @@ export const start = () => async (dispatch, getState) => {
         if (blacklist.filter) {
             validateBlacklist(blacklist.items);
         }
-
+        
+        const proxyList = core.shuffle ? shuffle([...input.list]) : [...input.list];
         const initJudges = await new Judges({ swap: judges.swap, items: activeJudges }, protocols);
         const initBlacklist = blacklist.filter ? await new Blacklist(blacklist.items) : false;
-        const chainCheck = ip => Core.start(core.shuffle ? shuffle(input.list) : input.list, core, initJudges, protocols, ip, initBlacklist);
+        const chainCheck = ip => Core.start(proxyList, core, initJudges, protocols, ip, initBlacklist);
 
         if (isIP(ip.current)) {
             chainCheck(ip.current);
