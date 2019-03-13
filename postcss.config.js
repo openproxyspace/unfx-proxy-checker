@@ -1,11 +1,30 @@
 module.exports = {
     plugins: {
+        'postcss-css-variables': {
+            variables: {
+                '--green-color': {
+                    value: '#31bc86'
+                },
+                '--blue-color': {
+                    value: '#5396d8'
+                },
+                '--grey-color': {
+                    value: '#424a60'
+                },
+                '--red-color': {
+                    value: '#e74856'
+                }
+            }
+        },
         'postcss-preset-env': {
             stage: 4,
             features: {
                 'nesting-rules': true
             }
         },
-        'postcss-color-mod-function': {}
+        'postcss-color-function': {},
+        'postcss-easings': {
+            easings: { easeOne: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+        }
     }
 };
