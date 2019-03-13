@@ -78,8 +78,7 @@
                 }
             ],
             "icon": "/public/icons/icon.ico",
-            "publisherName": "Open Proxy Space",
-            "artifactName": "${productName} v${version} ${arch} Win Installer.${ext}"
+            "publisherName": "Open Proxy Space"
         },
         "publish": [
             {
@@ -95,13 +94,14 @@
             "./files/**"
         ],
         "portable": {
-            "artifactName": "${productName} v${version} Win Portable.${ext}"
+            "artifactName": "${name}-v${version}-${arch}-${os}-portable.${ext}"
         },
         "nsis": {
             "oneClick": false,
             "perMachine": true,
             "allowToChangeInstallationDirectory": true,
-            "differentialPackage": true
+            "differentialPackage": true,
+            "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
         }
     }
 }
