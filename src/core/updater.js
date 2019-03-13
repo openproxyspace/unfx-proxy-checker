@@ -1,6 +1,5 @@
 import rp from 'request-promise';
 import { remote } from 'electron';
-import { sort } from 'js-flock';
 import { FETCH_CONFIG } from '../constants/UpdateConstants';
 
 const {
@@ -8,6 +7,7 @@ const {
 } = remote;
 
 export const currentVersion = getVersion();
+export const isPortable = process.env.PORTABLE_EXECUTABLE_DIR ? true : false;
 
 export const getLatestVersionInfo = async () => {
     try {
@@ -23,17 +23,13 @@ export const getLatestVersionInfo = async () => {
                     body: item.body
                 }));
 
-            sort(latest.assets).desc(item => item.size);
-
-            const assets = {
-                windows: latest.assets.filter(asset => asset.name.match(/win|nsis/i)),
-                linux: latest.assets.filter(asset => asset.name.match(/linux/i))
-            };
+            const [portableAsset] = latest.assets.filter(asset => asset.name.match(/portable/i));
 
             return {
                 latestVersion: version,
+                isPortable,
                 releaseNotes,
-                assets
+                portableAsset
             };
         } else {
             return false;
