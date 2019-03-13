@@ -1,6 +1,6 @@
 import util from 'util';
 import rp from 'request-promise';
-import { uniq } from '../misc/uniq';
+import { uniq } from '../misc/array';
 import { readFile } from 'fs';
 import { isURL, findIPs, findIPsWithRanges } from '../misc/regexes';
 import { cidrSubnet } from 'ip';
