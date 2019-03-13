@@ -29,7 +29,13 @@ remote.getCurrentWindow().on('close', () => {
 
     saveSettings({
         core,
-        judges,
+        judges: {
+            ...judges,
+            items: judges.items.map(judge => ({
+                ...judge,
+                validate: judge.validate.toString()
+            }))
+        },
         ip: {
             lookupUrl: ip.lookupUrl
         },
