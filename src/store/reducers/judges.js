@@ -25,11 +25,7 @@ const judges = (state = initial.judges, action) => {
                         ...state.items,
                         {
                             url: action.url,
-                            ssl: false,
-                            validate: {
-                                enabled: false,
-                                value: ''
-                            }
+                            validate: ''
                         }
                     ]
                 };
