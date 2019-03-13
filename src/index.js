@@ -1,6 +1,7 @@
 import path from 'path';
 import url from 'url';
 import { BrowserWindow, app } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 let window;
@@ -24,7 +25,7 @@ const prodWindow = () => {
         minWidth: 1000,
         minHeight: 680,
         width: 1220,
-        height: 846,
+        height: 834,
         show: false,
         resizable: true
     });
@@ -47,6 +48,11 @@ const createWindow = () => {
 
     window.on('ready-to-show', () => {
         window.show();
+
+        autoUpdater.checkForUpdatesAndNotify();
+        autoUpdater.on('update-downloaded', () => {
+            autoUpdater.quitAndInstall();
+        });
     });
 
     window.on('closed', () => {
