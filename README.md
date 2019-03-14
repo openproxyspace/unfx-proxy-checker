@@ -27,7 +27,7 @@
 - Export formats:
   - `ip` : `port`
   - `protocol` :// `ip` : `port`
-- Automatically updates
+- Auto updates support
 
 ## Core
 Threads:
@@ -107,8 +107,8 @@ socks5://127.0.0.1:1337
 - `Search` - may contain multi words, separated by `space`
 
 ## Updates
-Checking for updates on each start and notification if the latest version is available (is you use portable version).  
-For Installed version update will be downloaded and installed automatically.
+Checking for updates on each start and notification if latest version is available.  
+For Installed version update will be downloaded automatically and installed when app was closed or by click on 'Install' button.
 
 ## Open Proxy Space Resource
 - [Real-time Proxy List](https://openproxy.space) - It's Largest open proxy list database. Our proxy list updated in real-time.
