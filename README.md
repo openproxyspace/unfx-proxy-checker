@@ -108,7 +108,8 @@ socks5://127.0.0.1:1337
 
 ## Updates
 Checking for updates on each start and notification if latest version is available.  
-For Installed version update will be downloaded automatically and installed when app was closed or by click on 'Install' button.
+For installed application update will be downloaded automatically and installed when app was closed or by click on 'Install' button.  
+If you use portable application, download update is available manually (will download through your browser).
 
 ## Open Proxy Space Resource
 - [Real-time Proxy List](https://openproxy.space) - It's Largest open proxy list database. Our proxy list updated in real-time.
