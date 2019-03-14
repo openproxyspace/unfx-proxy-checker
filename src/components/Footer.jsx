@@ -1,13 +1,8 @@
 import React from 'react';
-import { shell } from 'electron';
 import { currentVersion } from '../core/updater';
+import { openLink } from '../misc/other';
 
 import '../../public/styles/Footer.postcss';
-
-const openLink = e => {
-    e.preventDefault();
-    shell.openExternal(e.currentTarget.href);
-};
 
 const Footer = () => (
     <footer>
