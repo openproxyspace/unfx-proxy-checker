@@ -1,6 +1,6 @@
 import path from 'path';
 import url from 'url';
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
@@ -14,7 +14,12 @@ const devWindow = () => {
     window = new BrowserWindow({
         width: 1220,
         height: 846,
-        show: false
+        show: false,
+        webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true,
+            webviewTag: true
+        }
     });
 
     window.webContents.openDevTools();
@@ -27,7 +32,12 @@ const prodWindow = () => {
         width: 1220,
         height: 836,
         show: false,
-        resizable: true
+        resizable: true,
+        webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true,
+            webviewTag: true
+        }
     });
 
     window.setMenu(null);
@@ -48,11 +58,6 @@ const createWindow = () => {
 
     window.on('ready-to-show', () => {
         window.show();
-
-        autoUpdater.checkForUpdatesAndNotify();
-        autoUpdater.on('update-downloaded', () => {
-            autoUpdater.quitAndInstall();
-        });
     });
 
     window.on('closed', () => {
@@ -60,12 +65,21 @@ const createWindow = () => {
     });
 };
 
-app.on('ready', createWindow);
+autoUpdater.on('update-downloaded', () => {
+    window.webContents.send('update-is-downloaded');
+});
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+autoUpdater.on('download-progress', progress => {
+    window.webContents.send('update-download-progress', progress.percent);
+});
+
+ipcMain.on('quit-and-install', () => {
+    autoUpdater.quitAndInstall(true, true);
+});
+
+app.on('ready', () => {
+    createWindow();
+    autoUpdater.checkForUpdates();
 });
 
 app.on('activate', () => {

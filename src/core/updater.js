@@ -1,13 +1,13 @@
 import rp from 'request-promise';
 import { remote } from 'electron';
 import { FETCH_CONFIG } from '../constants/UpdateConstants';
+import { isPortable } from '.';
 
 const {
     app: { getVersion }
 } = remote;
 
 export const currentVersion = getVersion();
-export const isPortable = process.env.PORTABLE_EXECUTABLE_DIR ? true : false;
 
 export const getLatestVersionInfo = async () => {
     try {

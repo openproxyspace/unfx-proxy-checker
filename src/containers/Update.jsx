@@ -2,23 +2,40 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import { checkAtAvailable } from '../actions/UpdateActions';
-import { shell } from 'electron';
+import { openLink } from '../misc/other';
+import { ipcRenderer } from 'electron';
 
 import '../../public/styles/Update.postcss';
 
-const openLink = e => {
-    e.preventDefault();
-    shell.openExternal(e.currentTarget.href);
-};
-
 class Update extends React.PureComponent {
-    componentWillMount = () => {
+    state = {
+        downloadProgress: 0,
+        isDownloaded: false
+    };
+
+    componentDidMount = () => {
         const { checkAtAvailable } = this.props;
         checkAtAvailable();
+
+        ipcRenderer.on('update-download-progress', (event, percent) => {
+            this.setState({ downloadProgress: Math.floor(percent) });
+        });
+
+        ipcRenderer.on('update-is-downloaded', () => {
+            this.setState({ isDownloaded: true });
+        });
+    };
+
+    install = () => {
+        ipcRenderer.send('quit-and-install');
     };
 
     render = () => {
         const { active, isAvailable, isChecking, info } = this.props;
+
+        const progressStyle = {
+            width: this.state.downloadProgress + '%'
+        };
 
         return (
             <div className={active ? (isChecking ? 'update-notify checking' : 'update-notify') : 'update-notify closed'}>
@@ -41,8 +58,13 @@ class Update extends React.PureComponent {
                             <a className="download-update" onClick={openLink} href={info.portableAsset.browser_download_url}>
                                 Download
                             </a>
+                        ) : this.state.isDownloaded ? (
+                            <button onClick={this.install}>Install</button>
                         ) : (
-                            <p>Update is downloading and will be installed automatically in silent mode.</p>
+                            <div className="progress">
+                                <div className="bar" style={progressStyle} />
+                                <h1>Downloading {this.state.downloadProgress}%</h1>
+                            </div>
                         )}
                     </div>
                 )}

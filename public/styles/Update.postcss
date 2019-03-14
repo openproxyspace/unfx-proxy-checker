@@ -29,6 +29,38 @@
         }
     }
 
+    & .progress {
+        position: relative;
+        width: 100%;
+        height: 1.5em;
+        border-radius: 1em;
+        overflow: hidden;
+        background-image: linear-gradient(to right, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+
+        & .bar {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 1em;
+            transition: width 0.7s easeOne;
+            background-color: color(#333 alpha(5%));
+        }
+
+        & h1 {
+            display: flex;
+            margin: 0;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            font-size: 0.90em;
+            color: #fff;
+            text-align: center;
+        }
+    }
+
     & .lds-ripple {
         opacity: 0;
         position: fixed;
