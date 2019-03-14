@@ -3,6 +3,7 @@
     "version": "1.5.1",
     "main": "public/main.js",
     "license": "MIT",
+    "author": "Open Proxy Space",
     "scripts": {
         "build": "run-p build:*",
         "build:main": "cross-env NODE_ENV=production webpack -p --config webpack.config.main.babel.js",
@@ -26,7 +27,7 @@
         "babel-loader": "^8.0.5",
         "cross-env": "^5.2.0",
         "css-loader": "^2.1.0",
-        "electron": "^4.0.8",
+        "electron": "^5.0.0-beta.5",
         "electron-builder": "^20.38.5",
         "electron-devtools-installer": "^2.2.4",
         "electron-react-devtools": "^0.5.3",
@@ -78,7 +79,7 @@
                 }
             ],
             "icon": "/public/icons/icon.ico",
-            "publisherName": "Open Proxy Space"
+            "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
         },
         "publish": [
             {
@@ -100,8 +101,7 @@
             "oneClick": false,
             "perMachine": true,
             "allowToChangeInstallationDirectory": true,
-            "differentialPackage": true,
-            "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
+            "differentialPackage": true
         }
     }
 }
