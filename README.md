@@ -112,9 +112,10 @@ For installed application update will be downloaded automatically and installed 
 If you use portable application, download update is available manually (will download through your browser).
 
 ## Open Proxy Space Resource
-- [Real-time Proxy List](https://openproxy.space) - It's Largest open proxy list database. Our proxy list updated in real-time.
-- [Daily Fresh Proxy Lists](https://openproxy.space/lists/) - Daily fresh proxy lists archive. Easy sorting by countries. Dump alive proxies in 24 hour, splitted by protocols: socks4/5, http/s.
-- [API](https://openproxy.space/api) - API documentation. Build own app based on our open proxy space.
+- [Open Proxy Space](https://openproxy.space) - The distant proxy galaxy. Open source proxy tools and free daily proxy lists, all here.
+- [Open Public Proxy Lists](https://openproxy.space/lists/) - Latest open proxy lists database. Upload and share your own proxy list, make public or private. Daily fresh proxy lists uploads here.
+- [Proxy List](https://openproxy.space/proxy-list/) - Online real-time updated proxy list.
+- [API](https://openproxy.space/api) - API Reference.
 
 ## Unfx Proxy Tools
 - [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker) - Powerful proxy checker with huge features and beautiful design. Easy sorting and filtering by all parameters.
