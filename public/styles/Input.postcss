@@ -105,3 +105,34 @@
         transform: translateX(0);
     }
 }
+
+.container.dark .proxy-input {
+    border-top: 1px solid color(#fff alpha(5%));
+
+    & section.load-file-area {
+        & .select-event {
+            color: color(var(--neo-black-color) alpha(75%));
+
+            &:hover {
+                color: color(var(--neo-black-color) alpha(95%));
+
+                & svg {
+                    fill: color(var(--neo-black-color) alpha(95%));
+                }
+            }
+
+            & svg {
+                fill: color(var(--neo-black-color) alpha(75%));
+            }
+        }
+
+        & .data .stat .item span {
+            color: color(var(--neo-black-color) alpha(85%));
+
+            &:nth-child(2) {
+                color: color(var(--green-color) alpha(80%));
+                background-color: color(var(--grey-color) alpha(35%));
+            }
+        }
+    }
+}

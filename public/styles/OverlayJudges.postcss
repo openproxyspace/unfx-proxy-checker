@@ -5,8 +5,8 @@
     align-items: center;
     padding: 2em;
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: calc(100% - 2em);
+    top: 2em;
     left: 0;
     overflow-y: auto;
     background-color: color(#fff alpha(95%));
@@ -32,7 +32,7 @@
         width: 100%;
         opacity: 0;
         transform: translateY(-10%);
-        transition: opacity 0.7s easeOne, transform 0.7s easeOne;;
+        transition: opacity 0.7s easeOne, transform 0.7s easeOne;
 
         & .ping-progress {
             display: inline-flex;
@@ -134,5 +134,57 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.container.dark .ping-judges-container {
+    background-color: color(var(--neo-black-color) alpha(95%));
+
+    & .ping-judges-content {
+        & .ping-progress {
+            color: color(#ddd alpha(50%));
+            background-color: color(var(--back-black-color) alpha(35%));
+        }
+
+        & .items {
+            border-top: 1px solid color(#fff alpha(5%));
+        }
+
+        & .item {
+            color: color(#ddd alpha(50%));
+            border-bottom: 1px solid color(#fff alpha(5%));
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            & svg {
+                fill: color(#ddd alpha(50%));
+            }
+
+            &.success {
+                color: color(var(--green-color) alpha(65%));
+
+                & svg {
+                    fill: color(var(--green-color) alpha(65%));
+                }
+            }
+
+            &.error {
+                color: color(var(--red-color) alpha(65%));
+
+                & svg {
+                    fill: color(var(--red-color) alpha(65%));
+                }
+            }
+        }
+
+        & .response {
+            color: color(var(--neo-black-color) alpha(85%));
+        }
+
+        & .status svg path {
+            fill: color(#ddd alpha(50%));
+        }
     }
 }

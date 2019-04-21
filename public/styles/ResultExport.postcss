@@ -129,3 +129,59 @@
         }
     }
 }
+
+.container.dark .export-container {
+    background-color: color(var(--neo-black-color) alpha(95%));
+
+    & .export-content {
+        & svg {
+            fill: color(#ddd alpha(45%));
+
+            &:hover {
+                fill: color(var(--green-color) alpha(85%));
+            }
+        }
+
+        & .export-types label {
+            & input:checked + .type-card {
+                border: 1px solid color(var(--green-color) alpha(45%));
+
+                & textarea {
+                    color: color(var(--green-color) alpha(85%));
+                }
+
+                & .type-desc {
+                    border-bottom: 1px dashed color(var(--green-color) alpha(45%));
+                    color: color(var(--green-color) alpha(60%));
+
+                    & span {
+                        color: color(var(--neo-black-color) alpha(85%));
+                        background-color: color(var(--green-color) alpha(85%));
+                    }
+                }
+            }
+
+            & .type-card {
+                border: 1px solid color(#ddd alpha(15%));
+
+                & textarea {
+                    color: color(#ddd alpha(45%));
+                }
+
+                & .type-desc {
+                    border-bottom: 1px dashed color(#ddd alpha(15%));
+                    color: color(#ddd alpha(45%));
+
+                    & span {
+                        background-color: color(#ddd alpha(5%));
+                        color: color(#ddd alpha(65%));
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

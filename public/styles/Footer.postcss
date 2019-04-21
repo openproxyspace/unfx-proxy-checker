@@ -1,6 +1,5 @@
 footer {
     padding: 2em;
-    border-top: 1px solid #fafafa;
     display: flex;
 
     & .links {
@@ -57,6 +56,28 @@ footer {
                 font-weight: 700;
                 color: color(var(--green-color) alpha(85%));
             }
+        }
+    }
+}
+
+.container.dark footer {
+    & .links {
+        border-right: 1px solid color(var(--green-color) alpha(5%));
+
+        & svg {
+            fill: color(var(--green-color) alpha(60%));
+
+            &:hover {
+                fill: var(--green-color);
+            }
+        }
+    }
+
+    & .bottom-rocket {
+        background-color: color(var(--neo-black-color) alpha(85%));
+
+        & .details h2 {
+            color: color(#ddd alpha(65%));
         }
     }
 }

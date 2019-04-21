@@ -348,3 +348,69 @@
         transform: translateY(10%);
     }
 }
+
+.container.dark .settings {
+    & .react-tabs__tab-list {
+        & li {
+            color: color(var(--back-black-color) alpha(85%));
+
+            &:not(.react-tabs__tab--selected):hover {
+                color: color(var(--neo-black-color) alpha(55%));
+            }
+        }
+
+        & .react-tabs__tab--selected {
+            color: var(--grey-color);
+        }
+    }
+
+    & .judges-list .items {
+        &:empty {
+            &::after {
+                color: color(var(--neo-black-color) alpha(90%));
+            }
+        }
+
+        & .item {
+            border-bottom: 1px solid color(#fff alpha(5%));
+        }
+    }
+
+    & .black-list .items {
+        &:empty {
+            &::after {
+                color: color(var(--neo-black-color) alpha(90%));
+            }
+        }
+
+        & .item {
+            border-bottom: 1px solid color(#fff alpha(5%));
+        }
+    }
+
+    & .blocks-row.bottom .block .content {
+        border: none;
+    }
+
+    & .block {
+        & .content {
+            border-bottom: 1px solid color(#fff alpha(5%));
+
+            &.no-bot {
+                border-bottom: none;
+            }
+        }
+
+        & .title {
+            color: color(var(--green-color) alpha(85%));
+
+            & span.name {
+                background-color: color(#ddd alpha(5%));
+            }
+
+            & span.value {
+                color: color(var(--green-color) alpha(50%));
+            }
+        }
+    }
+}
