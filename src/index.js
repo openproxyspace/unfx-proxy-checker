@@ -2,6 +2,7 @@ import path from 'path';
 import url from 'url';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
+import { isDev, isPortable } from './constants/AppConstants';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 let window;
@@ -15,11 +16,7 @@ const devWindow = () => {
         width: 1220,
         height: 846,
         show: false,
-        webPreferences: {
-            contextIsolation: false,
-            nodeIntegration: true,
-            webviewTag: true
-        }
+        frame: false
     });
 
     window.webContents.openDevTools();
@@ -32,22 +29,18 @@ const prodWindow = () => {
         width: 1220,
         height: 836,
         show: false,
-        resizable: true,
-        webPreferences: {
-            contextIsolation: false,
-            nodeIntegration: true,
-            webviewTag: true
-        }
+        frame: false,
+        resizable: true
     });
 
     window.setMenu(null);
 };
 
 const createWindow = () => {
-    process.env.NODE_ENV !== 'production' ? devWindow() : prodWindow();
+    isDev ? devWindow() : prodWindow();
 
     window.loadURL(
-        process.env.NODE_ENV !== 'production'
+        isDev
             ? 'http://localhost:8080'
             : url.format({
                   pathname: path.join(__dirname, 'index.html'),
@@ -63,7 +56,29 @@ const createWindow = () => {
     window.on('closed', () => {
         window = null;
     });
+
+    window.on('maximize', () => {
+        window.webContents.send('on-window-maximize');
+    });
+
+    window.on('unmaximize', () => {
+        window.webContents.send('on-window-unmaximize');
+    });
 };
+
+app.on('ready', () => {
+    createWindow();
+
+    if (!isDev && !isPortable) autoUpdater.checkForUpdates();
+});
+
+app.on('activate', () => {
+    if (window === null) {
+        createWindow();
+    }
+});
+
+// updater events
 
 autoUpdater.on('update-downloaded', () => {
     window.webContents.send('update-is-downloaded');
@@ -77,13 +92,20 @@ ipcMain.on('quit-and-install', () => {
     autoUpdater.quitAndInstall(true, true);
 });
 
-app.on('ready', () => {
-    createWindow();
-    autoUpdater.checkForUpdates();
+// window control events
+
+ipcMain.on('window-minimize', () => {
+    window.minimize();
 });
 
-app.on('activate', () => {
-    if (window === null) {
-        createWindow();
-    }
+ipcMain.on('window-maximize', () => {
+    window.maximize();
+});
+
+ipcMain.on('window-unmaximize', () => {
+    window.unmaximize();
+});
+
+ipcMain.on('window-close', () => {
+    window.close();
 });

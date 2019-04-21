@@ -1,0 +1,104 @@
+.titlebar {
+    background-color: #fafafa;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+    -webkit-app-region: drag;
+    user-select: none;
+    padding-left: 1em;
+    color: var(--grey-color);
+
+    &.dark {
+        background-color: var(--back-black-color);
+    }
+
+    & svg {
+        width: 1em;
+        height: 1em;
+        animation: color-change 6s infinite;
+    }
+
+    & span.title {
+        font-size: 0.85em;
+        display: inline-flex;
+        margin-left: 1em;
+        animation: color-change 6s infinite;
+    }
+
+    & .misc {
+        margin-left: auto;
+        -webkit-app-region: no-drag;
+
+        & svg {
+            width: 0.85em;
+            height: 0.85em;
+            cursor: pointer;
+        }
+    }
+
+    & ul.buttons {
+        display: flex;
+        list-style: none;
+        height: 100%;
+
+        & svg {
+            width: 0.75em;
+            height: 0.75em;
+
+            &.minimize {
+                padding: 0.15em;
+            }
+        }
+
+        & li {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            -webkit-app-region: no-drag;
+            width: 3em;
+
+            &:hover {
+                background-color: color(var(--grey-color) a(5%));
+            }
+
+            &:nth-child(3):hover {
+                background-color: color(var(--red-color));
+
+                & svg polygon {
+                    fill: #fafafa !important;
+                }
+            }
+        }
+    }
+
+    &.dark ul.buttons li {
+        &:hover {
+            background-color: color(var(--grey-color) a(35%)) !important;
+        }
+
+        &:nth-child(3):hover {
+            background-color: color(var(--red-color)) !important;
+
+            & svg polygon {
+                fill: var(--back-black-color) !important;
+            }
+        }
+    }
+}
+
+@keyframes color-change {
+    0% {
+        color: #31bc86;
+        fill: #31bc86;
+    }
+    50% {
+        color: #5396d8;
+        fill: #5396d8;
+    }
+    100% {
+        color: #31bc86;
+        fill: #31bc86;
+    }
+}
