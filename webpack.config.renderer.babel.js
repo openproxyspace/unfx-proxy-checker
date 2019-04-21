@@ -1,11 +1,12 @@
 import path from 'path';
 import webpack from 'webpack';
 import baseConfig from './webpack.config.base';
+import { isDev } from './src/constants/AppConstants';
 
 export default {
     ...baseConfig,
     entry: {
-        renderer: ['react-hot-loader/patch', path.join(__dirname, process.env.NODE_ENV === 'production' ? 'src/renderer' : 'src/renderer.dev')]
+        renderer: ['react-hot-loader/patch', path.join(__dirname, isDev ? 'src/renderer.dev' : 'src/renderer')]
     },
     devServer: {
         headers: {
@@ -16,10 +17,10 @@ export default {
         historyApiFallback: true,
         hotOnly: true
     },
-    ...(process.env.NODE_ENV === 'production'
-        ? {}
-        : {
+    ...(isDev
+        ? {
               plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()]
-          }),
+          }
+        : {}),
     target: 'electron-renderer'
 };

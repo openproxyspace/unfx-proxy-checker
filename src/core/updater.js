@@ -1,7 +1,7 @@
 import rp from 'request-promise';
 import { remote } from 'electron';
 import { FETCH_CONFIG } from '../constants/UpdateConstants';
-import { isPortable } from '.';
+import { isPortable } from '../constants/AppConstants';
 
 const {
     app: { getVersion }
