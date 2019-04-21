@@ -106,9 +106,31 @@
             align-items: center;
             position: absolute;
             width: 100%;
-            font-size: 0.90em;
+            font-size: 0.9em;
             color: #fff;
             text-align: center;
+        }
+    }
+}
+
+.container.dark .counter-container {
+    & .protocol {
+        &.http.active {
+            color: color(var(--grey-color) alpha(95%));
+        }
+
+        &.socks.active {
+            color: color(var(--grey-color) alpha(95%));
+        }
+    }
+
+    & .progress {
+        & .bar {
+            background-color: color(#ddd alpha(15%));
+        }
+
+        & h1 {
+            color: var(--neo-black-color);
         }
     }
 }

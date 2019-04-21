@@ -11,7 +11,6 @@
     & span {
         white-space: nowrap;
         text-overflow: ellipsis;
-        transition: color 0.3s easeOne;
 
         &.main {
             display: flex;
@@ -20,6 +19,11 @@
             align-items: center;
             cursor: pointer;
             height: 4em;
+            
+
+            & span {
+                transition: color 0.3s easeOne;
+            }
 
             & svg.sort-svg {
                 opacity: 0;
@@ -169,5 +173,34 @@
                 fill: #7fabda;
             }
         }
+    }
+}
+
+.container.dark .result-container .result-list-header {
+    border-top: 1px solid color(#fff alpha(5%));
+
+    & span.main {
+        color: color(#ddd alpha(65%));
+
+        &:hover {
+            color: color(var(--green-color) alpha(85%));
+        }
+    }
+
+    & svg.count {
+        width: 1.25em;
+        height: 1.25em;
+        fill: color(#ddd alpha(65%));
+    }
+
+    & svg {
+        & path,
+        & rect {
+            fill: color(#ddd alpha(65%));
+        }
+    }
+
+    & .k-a svg path:nth-child(2) {
+        fill: color(var(--grey-color) alpha(95%));
     }
 }

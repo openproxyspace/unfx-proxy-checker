@@ -6,8 +6,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: calc(100% - 2em);
+    top: 2em;
     opacity: 0;
     background-color: color(#fff alpha(95%));
     transition: all 0.5s easeOne;
@@ -48,12 +48,14 @@
             visibility: visible;
             opacity: 1;
         }
+    }
+}
 
-        & svg {
-            width: 1em;
-            height: 1em;
-            margin-right: 0.5em;
-            fill: color(var(--grey-color) alpha(85%));
-        }
+.container.dark .checking-page {
+    background-color: color(var(--neo-black-color) alpha(95%));
+    
+    & .preparing-results {
+        color: color(var(--green-color) alpha(85%));
+        background-color: color(var(--neo-black-color) alpha(98%));
     }
 }

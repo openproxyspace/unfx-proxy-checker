@@ -3,8 +3,6 @@ import Checker from './checker';
 
 EventEmitter.defaultMaxListeners = 0;
 
-export const isPortable = process.env.PORTABLE_EXECUTABLE_DIR ? true : false;
-
 export default class Core {
     static checker;
 

@@ -1,8 +1,8 @@
 .result-container {
     position: fixed;
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: calc(100% - 2em);
+    top: 2em;
     left: 0;
     opacity: 0;
     overflow: hidden;
@@ -38,14 +38,13 @@
         border-radius: 0 0 0.5em 0.5em;
 
         & input.search {
-            padding: 1em;
+            padding: 1em 2em;
             margin: 2em 2em 0 0;
             border-radius: 1.75em;
             background-color: color(var(--green-color) alpha(25%));
             transition: padding 0.5s easeOne, background-color 0.5s easeOne;
 
             &:focus {
-                padding: 1em 2em;
                 background-color: color(var(--green-color) alpha(85%));
             }
 
@@ -227,6 +226,10 @@
                         & .counts {
                             background-color: var(--red-color);
                         }
+
+                        & .country .city {
+                            color: color(var(--grey-color) alpha(85%));
+                        }
                     }
                 }
 
@@ -260,10 +263,6 @@
                         & span {
                             background-color: var(--blue-color);
                         }
-
-                        & .country .city {
-                            color: color(var(--grey-color) alpha(85%));
-                        }
                     }
                 }
 
@@ -285,10 +284,6 @@
 
                         & span {
                             background-color: var(--green-color);
-                        }
-
-                        & .country .city {
-                            color: color(var(--grey-color) alpha(85%));
                         }
                     }
                 }
@@ -557,5 +552,107 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.container.dark .result-container {
+    background-color: color(var(--back-black-color));
+
+    & .result-content {
+        background-color: color(var(--neo-black-color));
+
+        & input.search::-webkit-input-placeholder {
+            color: #ddd;
+        }
+
+        & .filters .block {
+            &.ports-filter .states {
+                &.allow span.allow-key,
+                &.disallow span.disallow-key {
+                    color: color(var(--neo-black-color) alpha(85%));
+                    background-color: color(var(--green-color) alpha(85%));
+                }
+
+                & span {
+                    color: color(#ddd alpha(65%));
+                    background-color: color(#ddd alpha(5%));
+                }
+            }
+
+            & .content {
+                border-bottom: 1px solid color(#fff alpha(5%));
+
+                &.no-bot {
+                    padding-bottom: 0;
+                    border-bottom: 0;
+                }
+            }
+
+            &:nth-child(even):last-child,
+            &:nth-child(odd):nth-last-of-type(-n + 2) {
+                & .content {
+                    border: none;
+                }
+            }
+
+            & .title {
+                color: color(var(--green-color) alpha(85%));
+
+                & span.name {
+                    background-color: color(#ddd alpha(5%));
+                }
+
+                & span.value {
+                    color: color(var(--green-color) alpha(50%));
+                }
+            }
+        }
+
+        & .up-panel {
+            border-top: 1px solid color(#fff alpha(5%));
+
+            & .counters .counter {
+                color: color(var(--neo-black-color) alpha(85%));
+            }
+        }
+
+        & .result-list {
+            border-top: 1px solid color(#fff alpha(5%));
+
+            & .list-item {
+                border-bottom: 1px solid color(#fff alpha(5%));
+
+                &.socks span,
+                &.http span {
+                    color: color(var(--neo-black-color) alpha(85%));
+                }
+
+                &:hover .country .city {
+                    color: color(#ddd alpha(85%)) !important;
+                }
+
+                & .country .city:not(:empty) {
+                    color: color(#ddd alpha(75%));
+                }
+
+                & .blacklists .counts {
+                    color: color(var(--neo-black-color) alpha(95%));
+                }
+            }
+
+            &:empty::after {
+                color: color(var(--neo-black-color) alpha(95%));
+            }
+        }
+    }
+}
+
+.container.dark .data .protocol {
+    & .section {
+        border-bottom: 1px solid color(#fff alpha(5%));
+    }
+
+    & .item .key {
+        color: color(#ddd alpha(75%));
     }
 }

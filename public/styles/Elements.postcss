@@ -1,6 +1,7 @@
 ::-webkit-scrollbar {
     width: 15px;
     border-radius: 0.5em;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -9,6 +10,7 @@
 }
 
 ::-webkit-scrollbar-track {
+    border-radius: 0.5em;
     background-color: #fafafa;
 }
 
@@ -98,6 +100,7 @@ input[type='range'] {
     margin: 0;
     outline: none;
     padding: 0;
+    background-color: transparent;
 
     &::-webkit-slider-runnable-track {
         width: 100%;
@@ -219,5 +222,27 @@ input[type='range'] {
             opacity: 0;
             transition: all 0.7s easeOne;
         }
+    }
+}
+
+.container.dark {
+    & ::-webkit-scrollbar-thumb {
+        background-color: color(var(--neo-black-color) alpha(75%));
+    }
+
+    & ::-webkit-scrollbar-track {
+        background-color: color(var(--back-black-color) alpha(15%));
+    }
+
+    & .checkbox span:not(.count):first-child svg {
+        stroke: color(var(--neo-black-color) alpha(75%));
+    }
+
+    & span.count {
+        color: color(#ddd alpha(25%));
+    }
+
+    & .input-checkbox:checked + .checkbox span.count {
+        color: color(#ddd alpha(65%));
     }
 }

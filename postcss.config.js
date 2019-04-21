@@ -13,6 +13,12 @@ module.exports = {
                 },
                 '--red-color': {
                     value: '#e74856'
+                },
+                '--back-black-color': {
+                    value: '#1e272e'
+                },
+                '--neo-black-color': {
+                    value: '#2C3A47'
                 }
             }
         },

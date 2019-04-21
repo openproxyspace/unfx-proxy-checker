@@ -6,8 +6,8 @@
     justify-content: center;
     opacity: 0;
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: calc(100% - 2em);
+    top: 2em;
     left: 0;
     transition: visibility 0.5s easeOne, opacity 0.5s easeOne;
     background-color: color(#fff alpha(85%));
@@ -40,9 +40,16 @@
             padding: 1em 2em;
             border-radius: 1.5em;
             background-color: color(var(--green-color) alpha(35%));
-            box-shadow: 0 1em 4em color(var(--green-color) alpha(35%));
             transform: translateY(-10%);
             transition: opacity 0.87s easeOne, transform 0.87s easeOne;
         }
+    }
+}
+
+.container.dark .ip-lookup {
+    background-color: color(var(--neo-black-color) alpha(95%));
+
+    & .ip-address {
+        color: color(var(--neo-black-color) alpha(85%));
     }
 }

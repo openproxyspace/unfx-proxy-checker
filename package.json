@@ -1,9 +1,13 @@
 {
     "name": "unfx-proxy-checker",
-    "version": "1.5.1",
+    "version": "1.5.3",
     "main": "public/main.js",
     "license": "MIT",
-    "author": "Open Proxy Space",
+    "author": {
+        "name": "Open Proxy Space",
+        "email": "r060773d@openproxy.space",
+        "url": "https://openproxy.space/"
+    },
     "scripts": {
         "build": "run-p build:*",
         "build:main": "cross-env NODE_ENV=production webpack -p --config webpack.config.main.babel.js",
@@ -27,7 +31,7 @@
         "babel-loader": "^8.0.5",
         "cross-env": "^5.2.0",
         "css-loader": "^2.1.0",
-        "electron": "^5.0.0-beta.5",
+        "electron": "^4.1.4",
         "electron-builder": "^20.38.5",
         "electron-devtools-installer": "^2.2.4",
         "electron-react-devtools": "^0.5.3",
@@ -80,6 +84,26 @@
             ],
             "icon": "/public/icons/icon.ico",
             "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
+        },
+        "dmg": {
+            "contents": [
+                {
+                    "x": 130,
+                    "y": 220
+                },
+                {
+                    "x": 410,
+                    "y": 220,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ]
         },
         "publish": [
             {

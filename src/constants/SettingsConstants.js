@@ -1,7 +1,13 @@
 import path from 'path';
+import { remote } from 'electron';
+import { isDev, isPortable } from './AppConstants';
 
 export const SETTINGS_FILE_NAME = 'settings.unfx.checker.json';
-export const SETTINGS_FILE_PATH = process.env.PORTABLE_EXECUTABLE_DIR ? path.resolve(process.env.PORTABLE_EXECUTABLE_DIR, SETTINGS_FILE_NAME) : SETTINGS_FILE_NAME;
+export const SETTINGS_FILE_PATH = isPortable
+    ? path.resolve(process.env.PORTABLE_EXECUTABLE_DIR, SETTINGS_FILE_NAME)
+    : isDev
+    ? path.resolve(SETTINGS_FILE_NAME)
+    : path.resolve(remote.app.getPath('userData'), SETTINGS_FILE_NAME);
 
 export const DEFAULT_CORE_SETTINGS = {
     threads: 350,
@@ -60,13 +66,15 @@ export const DEFAULT_JUDGES_SETTINGS = {
         {
             active: true,
             url: 'https://api.ipify.org/',
-            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+            validate:
+                '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
         },
         {
             active: true,
             url: 'https://ident.me/',
-            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
-        },
+            validate:
+                '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+        }
     ]
 };
 
@@ -100,10 +108,15 @@ export const DEFAULT_EXPORTING_SETTINGS = {
     type: 1
 };
 
+export const DEFAULT_MAIN_SETTINGS = {
+    dark: false
+};
+
 export const MERGED_DEFAULT_SETTINGS = {
     core: DEFAULT_CORE_SETTINGS,
     judges: DEFAULT_JUDGES_SETTINGS,
     ip: DEFAULT_IP_SETTINGS,
     blacklist: DEFAULT_BLACKLIST_SETTINGS,
-    exporting: DEFAULT_EXPORTING_SETTINGS
+    exporting: DEFAULT_EXPORTING_SETTINGS,
+    main: DEFAULT_MAIN_SETTINGS
 };

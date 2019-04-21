@@ -169,3 +169,65 @@
         }
     }
 }
+
+.container.dark .countries-container {
+    background-color: color(var(--neo-black-color) alpha(95%));
+
+    & .countries-content {
+        & .top-block {
+            & .active-count {
+                color: color(#ddd alpha(65%));
+                background-color: color(#ddd alpha(5%));
+
+                &.yes {
+                    color: color(var(--green-color) alpha(85%));
+                    background-color: color(var(--green-color) alpha(25%));
+                }
+            }
+
+            & svg {
+                fill: color(#ddd alpha(45%));
+
+                &:hover {
+                    fill: color(var(--green-color) alpha(85%));
+                }
+            }
+        }
+
+        & .items {
+            border-top: 1px solid color(#fff alpha(5%));
+
+            & .country-item {
+                color: color(#ddd alpha(45%));
+
+                &.active {
+                    color: color(var(--green-color) alpha(85%));
+
+                    & .count {
+                        color: color(#ddd alpha(85%));
+                    }
+
+                    & .ico-wrap {
+                        border: 1px dashed color(var(--green-color) alpha(75%));
+
+                        & .ico {
+                            background-color: color(#ddd alpha(5%));
+                        }
+                    }
+                }
+            }
+        }
+
+        & .tip {
+            border-top: 1px solid color(#fff alpha(5%));
+
+            & svg {
+                fill: color(#ddd alpha(85%));
+            }
+
+            & span {
+                color: color(#ddd alpha(85%));
+            }
+        }
+    }
+}

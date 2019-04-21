@@ -50,19 +50,20 @@ button {
     box-sizing: border-box;
 }
 
-.container {
+#root {
+    position: relative;
     overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
+}
+
+.container {
     background-color: #fafafa;
 }
 
 .main-page-container {
     position: fixed;
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: calc(100% - 2em);
+    top: 2em;
     left: 0;
     overflow-y: auto;
     background-color: #fafafa;
@@ -73,5 +74,17 @@ button {
         padding: 2em;
         background-color: #fff;
         border-radius: 0 0 0.5em 0.5em;
+    }
+}
+
+.container.dark {
+    background-color: var(--grey-color);
+
+    & .main-page-container {
+        background-color: var(--back-black-color);
+
+        & .main-page-content {
+            background-color: var(--neo-black-color);
+        }
     }
 }
