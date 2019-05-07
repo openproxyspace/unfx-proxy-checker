@@ -6,6 +6,9 @@
 ![](https://i.ibb.co/f02WP2H/3.png)
 
 ## Features
+- Themes:
+  - Light
+  - Dark (NEON)
 - Support protocols: `http`, `https`, `socks4`, `socks5`
 - Data capturing:
   - All data
