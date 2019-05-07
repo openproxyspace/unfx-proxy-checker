@@ -118,7 +118,7 @@ If you use portable application, download update is available manually (will dow
 - [Open Proxy Space](https://openproxy.space) - The distant proxy galaxy. Open source proxy tools and free daily proxy lists, all here.
 - [Open Public Proxy Lists](https://openproxy.space/lists/) - Latest open proxy lists database. Upload and share your own proxy list, make public or private. Daily fresh proxy lists uploads here.
 - [Proxy List](https://openproxy.space/proxy-list/) - Online real-time updated proxy list.
-- [API](https://openproxy.space/api) - API Reference.
+- [Proxy Filter](https://openproxy.space/filter) - Online proxy extractor and filter from raw text data. 
 
 ## Unfx Proxy Tools
 - [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker) - Powerful proxy checker with huge features and beautiful design. Easy sorting and filtering by all parameters.
