@@ -115,10 +115,11 @@ For installed application update will be downloaded automatically and installed 
 If you use portable application, download update is available manually (will download through your browser).
 
 ## Open Proxy Space Resource
-- [Open Proxy Space](https://openproxy.space) - The distant proxy galaxy. Open source proxy tools and free daily proxy lists, all here.
-- [Open Public Proxy Lists](https://openproxy.space/lists/) - Latest open proxy lists database. Upload and share your own proxy list, make public or private. Daily fresh proxy lists uploads here.
-- [Proxy List](https://openproxy.space/proxy-list/) - Online real-time updated proxy list.
-- [Proxy Filter](https://openproxy.space/filter) - Online proxy extractor and filter from raw text data. 
+- [Open Proxy Space](https://openproxy.space)
+- [Public Proxy Lists](https://openproxy.space/lists/)
+- [Buy Proxies](https://openproxy.space/darth)
+- [Free Proxy List](https://openproxy.space/free-proxy-list)
+- [Proxy Filter](https://openproxy.space/filter)
 
 ## Unfx Proxy Tools
 - [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker) - Powerful proxy checker with huge features and beautiful design. Easy sorting and filtering by all parameters.
