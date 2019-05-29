@@ -114,12 +114,20 @@ Checking for updates on each start and notification if latest version is availab
 For installed application update will be downloaded automatically and installed when app was closed or by click on 'Install' button.  
 If you use portable application, download update is available manually (will download through your browser).
 
-## Open Proxy Space Resource
+## Open Proxy Space
 - [Open Proxy Space](https://openproxy.space)
 - [Public Proxy Lists](https://openproxy.space/lists/)
 - [Buy Proxies](https://openproxy.space/darth)
 - [Free Proxy List](https://openproxy.space/free-proxy-list)
 - [Proxy Filter](https://openproxy.space/filter)
+
+## Utilify
+- [Password Generator](https://utilify.space/password-generator)
+- [Hash Generator](https://utilify.space/hash-generator)
+- [Remove Duplicates](https://utilify.space/remove-duplicates)
+- [Randomize Lines](https://utilify.space/randomize-lines)
+- [Github Release Stats](https://utilify.space/github-release-stats)
+- [Hide Referrer](https://utilify.space/hide-referrer)
 
 ## Unfx Proxy Tools
 - [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker) - Powerful proxy checker with huge features and beautiful design. Easy sorting and filtering by all parameters.
