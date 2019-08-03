@@ -32,8 +32,7 @@
   - `protocol` :// `ip` : `port`
 - Auto updates support
 
-## NOTICE:
-Documentation for [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker).
+## Documentation for [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker).
 
 ## Utilify
 - [Password Generator](https://utilify.me/password-generator)
