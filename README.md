@@ -35,9 +35,4 @@ Documentation for [Unfx Proxy Checker](https://openproxy.space/software/proxy-ch
 - Auto updates support
 
 ## Utilify
-- [Password Generator](https://utilify.me/password-generator)
-- [Hash Generator](https://utilify.me/hash-generator)
-- [Remove Duplicates](https://utilify.me/remove-duplicates)
-- [Randomize Lines](https://utilify.me/randomize-lines)
-- [Github Release Stats](https://utilify.me/github-release-stats)
-- [Hide Referrer](https://utilify.me/hide-referrer)
+https://utilify.me/ - The house of online utilities.
