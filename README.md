@@ -35,7 +35,7 @@ Documentation for [Unfx Proxy Checker](https://openproxy.space/software/proxy-ch
 - Auto updates support
 
 ## Open Proxy Space
-[Free Proxy List](https://openproxy.space/free-proxy-list).
+[Free Proxy List](https://openproxy.space/free-proxy-list).  
 [Buy Proxy List](https://openproxy.space/darth).
 
 ## Utilify
