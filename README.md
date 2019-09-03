@@ -9,5 +9,5 @@ Full description & Documentation for [Unfx Proxy Checker](https://openproxy.spac
 
 #### Check out
 https://openproxy.space/darth - Buy Proxy List  
-https://openproxy.space/free-proxy-list - Free Proxy List  
+https://openproxy.space/lists/ - Daily Fresh Proxy Lists   
 https://utilify.me/ - Our side project with web tools.
