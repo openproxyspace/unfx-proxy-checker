@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ResultCountriesItem from './ResultCountriesItem';
 
 import '../../public/styles/ResultCountries.postcss';
 
-const ResultCountries = ({ items, active, toggle, toggleCountries, activeCount }) => (
+const ResultCountries = memo(({ items, active, toggle, toggleCountries, activeCount }) => (
     <div className={`countries-container ${active ? 'active' : 'unactive'}`}>
         <div className="countries-content">
             <div className="top-block">
                 <span className={`active-count ${activeCount > 0 ? 'yes' : 'no'}`}>
                     Selected {activeCount} of {items.length}
                 </span>
-                <svg className="close-svg" onClick={toggleCountries} xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 512 512">
+                <svg className="close-svg" onClick={toggleCountries} viewBox="0 0 512 512">
                     <path d="M505.943,6.058c-8.077-8.077-21.172-8.077-29.249,0L6.058,476.693c-8.077,8.077-8.077,21.172,0,29.249    C10.096,509.982,15.39,512,20.683,512c5.293,0,10.586-2.019,14.625-6.059L505.943,35.306    C514.019,27.23,514.019,14.135,505.943,6.058z" />
                     <path d="M505.942,476.694L35.306,6.059c-8.076-8.077-21.172-8.077-29.248,0c-8.077,8.076-8.077,21.171,0,29.248l470.636,470.636    c4.038,4.039,9.332,6.058,14.625,6.058c5.293,0,10.587-2.019,14.624-6.057C514.018,497.866,514.018,484.771,505.942,476.694z" />
                 </svg>
@@ -21,7 +21,7 @@ const ResultCountries = ({ items, active, toggle, toggleCountries, activeCount }
                 ))}
             </div>
             <div className="tip">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 511.63 511.63" width="512px" height="512px">
+                <svg viewBox="0 0 511.63 511.63">
                     <path d="M255.888,320.081c-2.327-0.141-4.021,1.733-4.052,3.942c-0.054,4.161-1.725,8.088-4.684,11.055    c-6.254,6.23-16.403,6.223-22.625,0c-6.23-6.238-6.23-16.379,0.008-22.617c1.562-1.56,1.562-4.089,0-5.651    c-1.561-1.562-4.091-1.562-5.652,0c-9.353,9.353-9.361,24.576-0.008,33.921c4.676,4.676,10.812,7.019,16.956,7.011    c6.144,0,12.296-2.335,16.973-7.019c4.442-4.45,6.94-10.336,7.026-16.59C259.862,321.924,258.097,320.112,255.888,320.081z" />
                     <path d="M227.79,203.134c-4.38-3.888-10.04-6.027-15.926-6.027c-13.225,0-23.983,10.761-23.983,23.99    c0,13.222,10.758,23.976,23.983,23.976c2.209,0,3.997-1.788,3.997-3.998c0-2.21-1.788-3.997-3.997-3.997    c-8.815,0-15.989-7.17-15.989-15.981c0-8.821,7.175-15.996,15.989-15.996c3.934,0,7.705,1.425,10.617,4.013    c1.656,1.456,4.177,1.315,5.645-0.336C229.594,207.127,229.437,204.598,227.79,203.134z" />
                     <path d="M191.878,259.813c-8.814,0-15.989,7.175-15.989,15.996c0,6.363,3.763,12.108,9.587,14.653    c0.516,0.219,1.062,0.328,1.593,0.328c1.538,0,3.014-0.898,3.66-2.404c0.883-2.022-0.039-4.372-2.068-5.262    c-2.904-1.264-4.778-4.137-4.778-7.315c0-4.411,3.584-8.002,7.995-8.002c2.209,0,3.997-1.788,3.997-3.997    C195.875,261.601,194.087,259.813,191.878,259.813z" />
@@ -60,6 +60,6 @@ const ResultCountries = ({ items, active, toggle, toggleCountries, activeCount }
             </div>
         </div>
     </div>
-);
+));
 
 export default ResultCountries;

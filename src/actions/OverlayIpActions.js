@@ -64,7 +64,7 @@ export const IpLookup = chainEvent => async (dispatch, getState) => {
 
         await wait(500);
         dispatch(toInitialState());
-    } catch (error) {
+    } catch {
         onError();
     }
 };
