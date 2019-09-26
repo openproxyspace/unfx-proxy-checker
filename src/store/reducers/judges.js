@@ -1,9 +1,9 @@
 import { initial } from '../../core/settings';
-import { CHANGE_JUDGE, ADD_JUDGE, REMOVE_JUDGE, TOGGLE_JUDGES_OPTION } from '../../constants/ActionTypes';
+import { JUDGES_CHANGE, JUDGES_ADD, JUDGES_REMOVE, JUDGES_TOGGLE_OPTION } from '../../constants/ActionTypes';
 
 const judges = (state = initial.judges, action) => {
     switch (action.type) {
-        case CHANGE_JUDGE:
+        case JUDGES_CHANGE:
             return {
                 ...state,
                 items: state.items.map(item => {
@@ -17,7 +17,7 @@ const judges = (state = initial.judges, action) => {
                     return item;
                 })
             };
-        case ADD_JUDGE:
+        case JUDGES_ADD:
             if (state.items.every(item => item.url != action.url)) {
                 return {
                     ...state,
@@ -32,12 +32,12 @@ const judges = (state = initial.judges, action) => {
             }
 
             return state;
-        case REMOVE_JUDGE:
+        case JUDGES_REMOVE:
             return {
                 ...state,
                 items: state.items.filter(item => item.url != action.url)
             };
-        case TOGGLE_JUDGES_OPTION:
+        case JUDGES_TOGGLE_OPTION:
             return {
                 ...state,
                 [action.target]: !state[action.target]
