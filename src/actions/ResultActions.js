@@ -3,19 +3,19 @@ import { writeFile } from 'fs';
 import { sort } from 'js-flock';
 import { remote } from 'electron';
 import {
-    SHOW_RESULT,
-    TOGGLE_ANON,
-    TOGGLE_PROTOCOL,
-    TOGGLE_COUNTRY,
-    TOGGLE_MISC,
-    SET_SEARCH,
-    LOAD_MORE,
+    RESULT_SHOW,
+    RESULT_TOGGLE_ANON,
+    RESULT_TOGGLE_PROTOCOL,
+    RESULT_TOGGLE_COUNTRY,
+    RESULT_TOGGLE_MISC,
+    RESULT_SET_SEARCH,
+    RESULT_LOAD_MORE,
     RESULT_CLOSE,
-    TOGGLE_BLACKLIST,
+    RESULT_TOGGLE_BLACKLIST,
     RESULT_TOGGLE_COUNTRIES,
-    SET_MAX_TIMEOUT,
-    CHANGE_PORTS_INPUT,
-    SET_PORTS_ALLOW,
+    RESULT_SET_MAX_TIMEOUT,
+    RESULT_CHANGE_PORTS_INPUT,
+    RESULT_SET_PORTS_ALLOW,
     RESULT_SORT,
     RESULT_EXPORT_TOGGLE,
     RESULT_EXPORT_CHANGE_TYPE
@@ -59,10 +59,10 @@ export const getResultsInProtocolIpPort = items => {
     return content;
 };
 
-export const save = () => (dispatch, getState) => {
+export const save = () => async (dispatch, getState) => {
     const saveType = getState().result.exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
 
-    let savePath = dialog.showSaveDialog({
+    const { filePath } = await dialog.showSaveDialog({
         filters: [
             {
                 name: 'Text Files',
@@ -71,8 +71,8 @@ export const save = () => (dispatch, getState) => {
         ]
     });
 
-    if (savePath) {
-        writeFile(savePath, saveType(getFilteredProxies(getState())), () => {
+    if (filePath) {
+        writeFile(filePath, saveType(getFilteredProxies(getState())), () => {
             dispatch(toggleExport());
         });
     }
@@ -83,7 +83,7 @@ export const close = () => ({
 });
 
 const createCountries = items => {
-    let countries = {};
+    const countries = {};
     const res = [];
 
     items.forEach(item => {
@@ -114,7 +114,7 @@ export const showResult = result => async (dispatch, getState) => {
     } = getState();
 
     dispatch({
-        type: SHOW_RESULT,
+        type: RESULT_SHOW,
         items: result.items,
         countries: createCountries(result.items),
         inBlacklists: result.inBlacklists,
@@ -128,12 +128,12 @@ export const showResult = result => async (dispatch, getState) => {
 };
 
 export const toggleBlacklist = title => ({
-    type: TOGGLE_BLACKLIST,
+    type: RESULT_TOGGLE_BLACKLIST,
     title
 });
 
 export const toggleAnon = e => ({
-    type: TOGGLE_ANON,
+    type: RESULT_TOGGLE_ANON,
     anon: e.target.name
 });
 
@@ -142,43 +142,43 @@ export const toggleCountries = () => ({
 });
 
 export const toggleProtocol = e => ({
-    type: TOGGLE_PROTOCOL,
+    type: RESULT_TOGGLE_PROTOCOL,
     protocol: e.target.name
 });
 
 export const toggleMisc = e => ({
-    type: TOGGLE_MISC,
+    type: RESULT_TOGGLE_MISC,
     misc: e.target.name
 });
 
 export const setMaxTimeout = e => ({
-    type: SET_MAX_TIMEOUT,
+    type: RESULT_SET_MAX_TIMEOUT,
     timeout: e.target.value
 });
 
 export const onSearchInput = e => ({
-    type: SET_SEARCH,
+    type: RESULT_SET_SEARCH,
     value: e.target.value
 });
 
 export const toggleCountry = (name, all, state) => ({
-    type: TOGGLE_COUNTRY,
+    type: RESULT_TOGGLE_COUNTRY,
     name,
     all,
     state
 });
 
 export const loadMore = () => ({
-    type: LOAD_MORE
+    type: RESULT_LOAD_MORE
 });
 
 export const changePortsInput = e => ({
-    type: CHANGE_PORTS_INPUT,
+    type: RESULT_CHANGE_PORTS_INPUT,
     input: e.target.value
 });
 
 const setPortsAllow = allow => ({
-    type: SET_PORTS_ALLOW,
+    type: RESULT_SET_PORTS_ALLOW,
     allow
 });
 
