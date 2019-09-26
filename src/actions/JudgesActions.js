@@ -1,22 +1,22 @@
-import { CHANGE_JUDGE, ADD_JUDGE, REMOVE_JUDGE, TOGGLE_JUDGES_OPTION } from '../constants/ActionTypes';
+import { JUDGES_CHANGE, JUDGES_ADD, JUDGES_REMOVE, JUDGES_TOGGLE_OPTION } from '../constants/ActionTypes';
 
 export const change = (url, settings) => ({
-    type: CHANGE_JUDGE,
+    type: JUDGES_CHANGE,
     url,
     settings
 });
 
 export const add = url => ({
-    type: ADD_JUDGE,
+    type: JUDGES_ADD,
     url
 });
 
 export const remove = url => ({
-    type: REMOVE_JUDGE,
+    type: JUDGES_REMOVE,
     url
 });
 
 export const toggleOption = e => ({
-    type: TOGGLE_JUDGES_OPTION,
+    type: JUDGES_TOGGLE_OPTION,
     target: e.target.name
 });

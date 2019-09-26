@@ -13,10 +13,9 @@ const getSettings = () => {
         try {
             return {
                 ...MERGED_DEFAULT_SETTINGS,
-                ...JSON.parse(readFileSync(SETTINGS_FILE_PATH, 'utf8'))
-                // ...transformPrevSettings(JSON.parse(readFileSync(SETTINGS_FILE_PATH, 'utf8')))
+                ...transformPrevSettings(JSON.parse(readFileSync(SETTINGS_FILE_PATH, 'utf8')))
             };
-        } catch (error) {
+        } catch {
             return MERGED_DEFAULT_SETTINGS;
         }
     }
@@ -24,27 +23,33 @@ const getSettings = () => {
     return MERGED_DEFAULT_SETTINGS;
 };
 
-// const transformPrevSettings = settings => {
-//     const transforms = [
-//         {
-//             version: '4.1.1',
-//             action: input => {
-                
-//             }
-//         }
-//     ]
-    
+const removeOldPropertyAndAddNew = (object, removeName, { name, value }) => {
+    delete object[removeName];
 
-//     if (settings.version == undefined) return MERGED_DEFAULT_SETTINGS;
+    return { ...object, [name]: value };
+};
 
-//     if (transforms[settings.version] != undefined) {
-//         transforms[settings.version]();
-//         return settings;
-//     } else {
-//         console.log('NOFUFU');
-//         return settings;
-//     }
-// };
+const transformPrevSettings = settings => {
+    const transforms = [
+        {
+            version: '1.5.3',
+            action: input => {
+                return {
+                    ...input,
+                    core: removeOldPropertyAndAddNew(input.core, 'retry', { name: 'retries', value: 0 })
+                };
+            }
+        }
+    ];
+
+    if (settings.version == undefined) return MERGED_DEFAULT_SETTINGS;
+
+    if (settings.version < currentVersion) {
+        return transforms.filter(({ version }) => version > settings.version).reduce((prev, { action }) => action(prev), settings);
+    } else {
+        return settings;
+    }
+};
 
 remote.getCurrentWindow().on('close', () => {
     const { core, judges, ip, blacklist, result, main } = store.getState();
@@ -65,7 +70,9 @@ remote.getCurrentWindow().on('close', () => {
         exporting: {
             type: result.exporting.type
         },
-        main,
+        main: {
+            dark: main.dark
+        },
         version: currentVersion
     });
 });

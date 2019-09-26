@@ -4,13 +4,14 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    justify-content: center;
     left: 0;
     height: calc(100% - 2em);
     top: 2em;
     overflow: auto;
     opacity: 1;
     transition: opacity 0.7s easeOne, visibility 0.7s easeOne;
-    background-color: #fff;
+    background-color: var(--white-color-back);
 
     &.closed {
         opacity: 0;
@@ -25,38 +26,6 @@
 
         & .lds-ripple {
             opacity: 1;
-        }
-    }
-
-    & .progress {
-        position: relative;
-        width: 100%;
-        height: 1.5em;
-        border-radius: 1em;
-        overflow: hidden;
-        background-image: linear-gradient(to right, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
-
-        & .bar {
-            position: absolute;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border-radius: 1em;
-            transition: width 0.7s easeOne;
-            background-color: color(#333 alpha(5%));
-        }
-
-        & h1 {
-            display: flex;
-            margin: 0;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            width: 100%;
-            font-size: 0.9em;
-            color: #fff;
-            text-align: center;
         }
     }
 
@@ -82,72 +51,51 @@
         }
     }
 
-    & .update-container {
-        max-width: 1600px;
-        width: 100%;
-        transform: translateY(0);
-        opacity: 1;
-        transition: transform 0.7s easeOne;
+    & .transition-wrap {
         animation: fade-one 0.7s easeOne;
-        padding: 2em;
 
-        & .section-name {
-            display: inline-flex;
-            font-weight: 100;
-            font-size: 1em;
-            color: color(var(--green-color) alpha(80%));
-            border: 1px dashed color(var(--green-color) alpha(75%));
-            padding: 0.25em 0.75em;
-            border-radius: 1.25em;
-            margin-bottom: 2em;
-        }
+        & .update-container {
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(0);
+            border-radius: 0.75em;
+            background-color: var(--white-color);
+            background: linear-gradient(127deg, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+            opacity: 1;
+            transition: transform 0.7s easeOne;
+            padding: 2em;
+            animation: background-color-change 6s infinite;
 
-        & .update-description {
-            color: color(var(--green-color) alpha(75%));
-            margin-bottom: 4em;
-        }
+            & a {
+                font-weight: 700;
+                text-decoration: none;
+                color: color(var(--green-color) alpha(75%));
+                background-color: color(var(--green-color) alpha(25%));
+                transition: color 0.7s easeOne, background-color 0.7s easeOne;
+                border-radius: 1.25em;
+                padding: 0.5em 1.25em;
 
-        & .release-notes {
-            color: var(--grey-color);
-            border-top: 1px solid #fafafa;
-            border-bottom: 1px solid #fafafa;
-            padding-top: 2em;
-            margin-bottom: 2em;
-
-            & .note {
-                margin-bottom: 2em;
-
-                & .version {
-                    display: inline-flex;
-                    color: #fff;
-                    padding: 0.25em 0.75em;
-                    border-radius: 1.25em;
-                    background-color: color(var(--green-color) alpha(75%));
+                &:hover {
+                    color: var(--white-color);
+                    background-color: color(var(--green-color) alpha(80%));
                 }
             }
-        }
 
-        & a.download-update {
-            font-weight: 700;
-            text-decoration: none;
-            color: color(var(--green-color) alpha(75%));
-            background-color: color(var(--green-color) alpha(25%));
-            transition: color 0.7s easeOne, background-color 0.7s easeOne;
-            border-radius: 1.25em;
-            padding: 0.5em 1.25em;
-
-            &:hover {
-                color: #fff;
-                background-color: color(var(--green-color) alpha(80%));
+            & svg {
+                width: 1.75em;
+                height: 1.75em;
+                margin-right: 0.75em;
+                fill: var(--white-color);
             }
-        }
 
-        & p {
-            color: var(--grey-color);
-            font-weight: 700;
-
-            &:first-child {
-                margin-top: 0;
+            & span {
+                padding: 0.25em 1em;
+                border-radius: 1em;
+                font-weight: 700;
+                background: linear-gradient(107deg, color(var(--white-color) alpha(10%)), transparent);
+                color: var(--white-color);
             }
         }
     }
@@ -170,24 +118,18 @@
     }
 }
 
+@keyframes background-color-change {
+    0% {
+        background-color: color(var(--green-color) alpha(35%));
+    }
+    50% {
+        background-color: color(var(--blue-color) alpha(35%));
+    }
+    100% {
+        background-color: color(var(--green-color) alpha(35%));
+    }
+}
+
 .container.dark .update-notify {
     background-color: var(--back-black-color);
-
-    & .update-container {
-        background-color: var(--neo-black-color);
-
-        & .release-notes {
-            color: color(#ddd alpha(75%));
-            border-top: 1px solid color(#fff alpha(5%));
-            border-bottom: 1px solid color(#fff alpha(5%));
-
-            & .note .version {
-                color: color(var(--neo-black-color) alpha(85%));
-            }
-        }
-
-        & p {
-            color: color(#ddd alpha(75%));
-        }
-    }
 }

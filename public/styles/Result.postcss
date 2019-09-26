@@ -7,7 +7,7 @@
     opacity: 0;
     overflow: hidden;
     visibility: hidden;
-    background-color: #fafafa;
+    background-color: var(--white-color-back);
     transition: opacity 0.7s easeOne, visibility 0.7s easeOne, transform 0.7s easeOne;
     transform: translateY(5%);
 
@@ -34,7 +34,7 @@
         padding: 0 2em;
         margin: auto;
         overflow: hidden;
-        background-color: #fff;
+        background-color: var(--white-color);
         border-radius: 0 0 0.5em 0.5em;
 
         & input.search {
@@ -49,7 +49,7 @@
             }
 
             &::-webkit-input-placeholder {
-                color: #fff;
+                color: var(--white-color);
             }
         }
 
@@ -72,7 +72,7 @@
 
                     &.allow span.allow-key,
                     &.disallow span.disallow-key {
-                        color: #fff;
+                        color: var(--white-color);
                         background-color: color(var(--green-color) alpha(85%));
                     }
 
@@ -89,7 +89,7 @@
                 & .content {
                     width: 100%;
                     padding-bottom: 1em;
-                    border-bottom: 1px solid #fafafa;
+                    border-bottom: 1px solid var(--white-color-back);
 
                     &.no-bot {
                         padding-bottom: 0;
@@ -137,7 +137,7 @@
                             margin-bottom: 2em;
 
                             & .content {
-                                border-bottom: 1px solid #fafafa;
+                                border-bottom: 1px solid var(--white-color-back);
                                 padding-bottom: 1em;
                             }
                         }
@@ -161,7 +161,7 @@
                     width: 100%;
 
                     & span.name {
-                        background-color: color(var(--grey-color) alpha(7.5%));
+                        background-color: color(var(--grey-color) alpha(5%));
                         padding: 0.25em 0.75em;
                         border-radius: 1em;
                     }
@@ -179,7 +179,7 @@
             flex-flow: row nowrap;
             justify-content: space-between;
             padding: 2em 0;
-            border-top: 1px solid #fafafa;
+            border-top: 1px solid var(--white-color-back);
 
             & .open-countries-button {
                 white-space: nowrap;
@@ -200,7 +200,7 @@
                     margin-left: 2em;
                     font-weight: 700;
                     background-color: color(var(--green-color) alpha(75%));
-                    color: #fff;
+                    color: var(--white-color);
                     border-radius: 1.5em;
                     border-bottom: 1px solid color(var(--green-color) alpha(60%));
                 }
@@ -208,11 +208,11 @@
         }
 
         & .result-list {
-            border-top: 1px solid #fafafa;
+            border-top: 1px solid var(--white-color-back);
 
             & .list-item {
                 animation: fade-one 0.7s easeOne both;
-                border-bottom: 1px solid #fafafa;
+                border-bottom: 1px solid var(--white-color-back);
 
                 & .main-block {
                     padding: 0.75em 0;
@@ -249,7 +249,7 @@
 
                     & span {
                         background-color: color(var(--blue-color) alpha(80%));
-                        color: #fff;
+                        color: var(--white-color);
                     }
 
                     & .country .ico-wrap {
@@ -271,7 +271,7 @@
 
                     & span {
                         background-color: color(var(--green-color) alpha(80%));
-                        color: #fff;
+                        color: var(--white-color);
                     }
 
                     & .country .ico-wrap {
@@ -365,7 +365,7 @@
                         font-size: 0.75em;
                         padding: 0.25em 0.75em;
                         border-radius: 1em;
-                        color: #fff;
+                        color: var(--white-color);
                         transition: background-color 0.3s easeOne;
                         background-color: color(var(--red-color) alpha(80%));
                     }
@@ -410,7 +410,7 @@
                     display: flex;
                     font-weight: 700;
                     justify-content: center;
-                    color: #fff;
+                    color: var(--white-color);
                     background-image: linear-gradient(to right, color(var(--green-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
                     padding: 1em;
                     margin: 2em 0;
@@ -467,7 +467,7 @@
         & .section {
             display: flex;
             font-size: 1em;
-            border-bottom: 1px solid #fafafa;
+            border-bottom: 1px solid var(--white-color-back);
             padding-bottom: 1em;
             margin: 2em 0 1em 0;
 
@@ -580,7 +580,7 @@
             }
 
             & .content {
-                border-bottom: 1px solid color(#fff alpha(5%));
+                border-bottom: 1px solid color(var(--white-color) alpha(5%));
 
                 &.no-bot {
                     padding-bottom: 0;
@@ -609,7 +609,7 @@
         }
 
         & .up-panel {
-            border-top: 1px solid color(#fff alpha(5%));
+            border-top: 1px solid color(var(--white-color) alpha(5%));
 
             & .counters .counter {
                 color: color(var(--neo-black-color) alpha(85%));
@@ -617,10 +617,10 @@
         }
 
         & .result-list {
-            border-top: 1px solid color(#fff alpha(5%));
+            border-top: 1px solid color(var(--white-color) alpha(5%));
 
             & .list-item {
-                border-bottom: 1px solid color(#fff alpha(5%));
+                border-bottom: 1px solid color(var(--white-color) alpha(5%));
 
                 &.socks span,
                 &.http span {
@@ -649,7 +649,7 @@
 
 .container.dark .data .protocol {
     & .section {
-        border-bottom: 1px solid color(#fff alpha(5%));
+        border-bottom: 1px solid color(var(--white-color) alpha(5%));
     }
 
     & .item .key {

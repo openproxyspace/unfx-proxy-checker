@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: column wrap;
     padding-top: 2em;
-    border-top: 1px solid #fafafa;
+    border-top: 1px solid var(--white-color-back);
 
     & section.load-file-area {
         display: flex;
@@ -19,24 +19,24 @@
             justify-content: center;
             align-items: center;
             border-radius: 0.5em;
-            color: #fff;
+            color: var(--white-color);
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.5s easeOne, color 0.5s easeOne;
 
             &:hover {
-                color: color(#fff alpha(85%));
+                color: color(var(--white-color) alpha(85%));
                 background-color: color(var(--green-color) alpha(75%));
 
                 & svg {
-                    fill: color(#fff alpha(85%));
+                    fill: color(var(--white-color) alpha(85%));
                 }
             }
 
             & svg {
                 width: 2em;
                 height: 2em;
-                fill: #fff;
+                fill: var(--white-color);
                 margin-right: 1em;
                 transition: fill 0.5s easeOne;
             }
@@ -62,7 +62,7 @@
                         font-size: 0.75em;
                         border-radius: 1em;
                         font-weight: 700;
-                        color: #fff;
+                        color: var(--white-color);
 
                         &:nth-child(1) {
                             margin-right: 0.5em;
@@ -107,7 +107,7 @@
 }
 
 .container.dark .proxy-input {
-    border-top: 1px solid color(#fff alpha(5%));
+    border-top: 1px solid color(var(--white-color) alpha(5%));
 
     & section.load-file-area {
         & .select-event {

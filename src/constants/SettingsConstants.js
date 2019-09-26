@@ -13,7 +13,7 @@ export const DEFAULT_CORE_SETTINGS = {
     threads: 350,
     keepAlive: false,
     timeout: 15000,
-    retry: false,
+    retries: 0,
     shuffle: false,
     captureFullData: false,
     captureServer: false,

@@ -6,38 +6,59 @@ import Checking from './Checking';
 import Overlay from './Overlay';
 import Update from './Update';
 import Footer from '../components/Footer';
+import Info from '../components/Info';
 import Result from './Result';
 import Titlebar from './Titlebar';
-import { toggleDark } from '../actions/MainActions';
+import { toggleDark, setFooterStats } from '../actions/MainActions';
 
 import '../../public/styles/Main.postcss';
 import '../../public/styles/Elements.postcss';
 
-const Main = ({ dark, toggleDark }) => (
-    <>
-        <Titlebar dark={dark} toggleDark={toggleDark} />
-        <div className={`container ${dark ? 'dark' : ''}`}>
-            <div className="main-page-container">
-                <div className="main-page-content">
-                    <Settings />
-                    <Input />
+class Main extends React.PureComponent {
+    state = {
+        showInfo: false
+    };
+
+    componentDidMount = () => {
+        const { setFooterStats } = this.props;
+        setFooterStats();
+    };
+
+    toggleInfo = () => this.setState({ showInfo: !this.state.showInfo });
+
+    render = () => {
+        const { dark, toggleDark, stats, releases } = this.props;
+
+        return (
+            <>
+                <Titlebar dark={dark} toggleInfo={this.toggleInfo} toggleDark={toggleDark} />
+                <div className={`container ${dark ? 'dark' : ''}`}>
+                    <div className="main-page-container">
+                        <div className="main-page-content">
+                            <Settings />
+                            <Input />
+                        </div>
+                        <Footer stats={stats} />
+                    </div>
+                    <Info show={this.state.showInfo} releases={releases} />
+                    <Result />
+                    <Checking />
+                    <Overlay />
+                    <Update />
                 </div>
-                <Footer />
-            </div>
-            <Result />
-            <Checking />
-            <Overlay />
-            <Update />
-        </div>
-    </>
-);
+            </>
+        );
+    };
+}
 
 const mapStateToProps = state => ({
-    ...state.main
+    ...state.main,
+    releases: state.update.releases
 });
 
 const mapDispatchToProps = {
-    toggleDark
+    toggleDark,
+    setFooterStats
 };
 
 export default connect(

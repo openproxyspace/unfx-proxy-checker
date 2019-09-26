@@ -8,15 +8,19 @@ import Blacklist from '../core/blacklist';
 import { CHECKING_UP_COUNTER_STATUS, CHECKING_OPEN, CHECKING_OTHER_CHANGES } from '../constants/ActionTypes';
 
 const validateJudges = (judges, targetProtocols) => {
-    if (targetProtocols.includes('https') && !judges.some(item => item.url.match(/https:\/\//))) {
+    if (targetProtocols.includes('https') && !judges.some(({ url }) => url.match(/https:\/\//))) {
         throw new Error('You have no judges for HTTPS');
     }
 
-    if (targetProtocols.some(protocol => ['http', 'socks4', 'socks5'].includes(protocol)) && !judges.some(item => !item.url.match(/https:\/\//))) {
-        throw new Error('You have no judges for HTTP/SOCKS4/SOCKS5');
+    if (targetProtocols.some(protocol => ['http'].includes(protocol)) && !judges.some(({ url }) => !url.match(/https:\/\//))) {
+        throw new Error('You have no judges for HTTP');
     }
 
-    if (judges.every(item => isURL(item.url))) {
+    if (judges.filter(({ active }) => active).length == 0) {
+        throw new Error('You have no active judges');
+    }
+
+    if (judges.every(({ url }) => isURL(url))) {
         return true;
     }
 
@@ -24,7 +28,7 @@ const validateJudges = (judges, targetProtocols) => {
 };
 
 const validateBlacklist = items => {
-    if (items.every(item => isURL(item.path) || isPath(item.path))) {
+    if (items.every(({ path }) => isURL(path) || isPath(path))) {
         return true;
     }
 
@@ -66,10 +70,13 @@ export const start = () => async (dispatch, getState) => {
         if (blacklist.filter) {
             validateBlacklist(blacklist.items);
         }
-        
+
         const proxyList = core.shuffle ? shuffle([...input.list]) : [...input.list];
-        const initJudges = await new Judges({ swap: judges.swap, items: activeJudges }, protocols);
         const initBlacklist = blacklist.filter ? await new Blacklist(blacklist.items) : false;
+        const initJudges = await new Judges({ swap: judges.swap, items: activeJudges }, protocols);
+
+        if (!initJudges) return;
+
         const chainCheck = ip => Core.start(proxyList, core, initJudges, protocols, ip, initBlacklist);
 
         if (isIP(ip.current)) {

@@ -1,18 +1,18 @@
 import { initial } from '../../core/settings';
 import {
-    SHOW_RESULT,
-    TOGGLE_ANON,
-    TOGGLE_PROTOCOL,
-    TOGGLE_COUNTRY,
-    TOGGLE_MISC,
-    SET_SEARCH,
-    LOAD_MORE,
+    RESULT_SHOW,
+    RESULT_TOGGLE_ANON,
+    RESULT_TOGGLE_PROTOCOL,
+    RESULT_TOGGLE_COUNTRY,
+    RESULT_TOGGLE_MISC,
+    RESULT_SET_SEARCH,
+    RESULT_LOAD_MORE,
     RESULT_CLOSE,
-    TOGGLE_BLACKLIST,
+    RESULT_TOGGLE_BLACKLIST,
     RESULT_TOGGLE_COUNTRIES,
-    SET_MAX_TIMEOUT,
-    CHANGE_PORTS_INPUT,
-    SET_PORTS_ALLOW,
+    RESULT_SET_MAX_TIMEOUT,
+    RESULT_CHANGE_PORTS_INPUT,
+    RESULT_SET_PORTS_ALLOW,
     RESULT_SORT,
     RESULT_EXPORT_TOGGLE,
     RESULT_EXPORT_CHANGE_TYPE
@@ -59,7 +59,7 @@ const initialState = {
 
 const result = (state = initialState, action) => {
     switch (action.type) {
-        case SHOW_RESULT:
+        case RESULT_SHOW:
             return {
                 ...state,
                 isOpened: true,
@@ -71,7 +71,7 @@ const result = (state = initialState, action) => {
                 inBlacklists: action.inBlacklists,
                 timeout: action.timeout
             };
-        case CHANGE_PORTS_INPUT:
+        case RESULT_CHANGE_PORTS_INPUT:
             return {
                 ...state,
                 countOfResults: 25,
@@ -89,7 +89,7 @@ const result = (state = initialState, action) => {
                     by: action.by
                 }
             };
-        case SET_PORTS_ALLOW:
+        case RESULT_SET_PORTS_ALLOW:
             return {
                 ...state,
                 countOfResults: 25,
@@ -98,7 +98,7 @@ const result = (state = initialState, action) => {
                     allow: action.allow
                 }
             };
-        case TOGGLE_ANON:
+        case RESULT_TOGGLE_ANON:
             return {
                 ...state,
                 countOfResults: 25,
@@ -107,7 +107,7 @@ const result = (state = initialState, action) => {
                     [action.anon]: !state.anons[action.anon]
                 }
             };
-        case TOGGLE_PROTOCOL:
+        case RESULT_TOGGLE_PROTOCOL:
             return {
                 ...state,
                 countOfResults: 25,
@@ -116,7 +116,7 @@ const result = (state = initialState, action) => {
                     [action.protocol]: !state.protocols[action.protocol]
                 }
             };
-        case TOGGLE_COUNTRY:
+        case RESULT_TOGGLE_COUNTRY:
             if (action.all) {
                 return {
                     ...state,
@@ -158,13 +158,13 @@ const result = (state = initialState, action) => {
                     active: !state.countries.active
                 }
             };
-        case SET_MAX_TIMEOUT:
+        case RESULT_SET_MAX_TIMEOUT:
             return {
                 ...state,
                 countOfResults: 25,
                 timeout: action.timeout
             };
-        case TOGGLE_MISC:
+        case RESULT_TOGGLE_MISC:
             return {
                 ...state,
                 countOfResults: 25,
@@ -173,20 +173,20 @@ const result = (state = initialState, action) => {
                     [action.misc]: !state.misc[action.misc]
                 }
             };
-        case SET_SEARCH:
+        case RESULT_SET_SEARCH:
             return {
                 ...state,
                 countOfResults: 25,
                 search: action.value
             };
-        case LOAD_MORE:
+        case RESULT_LOAD_MORE:
             return {
                 ...state,
                 countOfResults: state.countOfResults + 25
             };
         case RESULT_CLOSE:
             return initialState;
-        case TOGGLE_BLACKLIST:
+        case RESULT_TOGGLE_BLACKLIST:
             return {
                 ...state,
                 countOfResults: 25,

@@ -16,7 +16,10 @@ const devWindow = () => {
         width: 1220,
         height: 846,
         show: false,
-        frame: false
+        frame: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     window.webContents.openDevTools();
@@ -30,10 +33,13 @@ const prodWindow = () => {
         height: 836,
         show: false,
         frame: false,
-        resizable: true
+        resizable: true,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
-    window.setMenu(null);
+    window.removeMenu();
 };
 
 const createWindow = () => {
@@ -87,14 +93,6 @@ app.on('window-all-closed', () => {
 // updater events
 
 autoUpdater.on('update-downloaded', () => {
-    window.webContents.send('update-is-downloaded');
-});
-
-autoUpdater.on('download-progress', progress => {
-    window.webContents.send('update-download-progress', progress.percent);
-});
-
-ipcMain.on('quit-and-install', () => {
     autoUpdater.quitAndInstall(true, true);
 });
 

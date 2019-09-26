@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeOption, toggleOption, toggleProtocol } from '../actions/CoreActions';
 import Checkbox from '../components/ui/Checkbox';
+import { splitByKK } from '../misc/text';
+import { getMaxThreads } from '../misc/other';
 
-const Core = ({ protocols, captureFullData, captureServer, threads, timeout, retry, keepAlive, changeOption, toggleOption, toggleProtocol }) => (
+const Core = ({ protocols, captureFullData, captureServer, threads, timeout, retries, keepAlive, changeOption, toggleOption, toggleProtocol }) => (
     <>
         <div className="block middle">
             <div className="title">
@@ -16,13 +18,21 @@ const Core = ({ protocols, captureFullData, captureServer, threads, timeout, ret
                 <Checkbox id="socks5-protocol" name="socks5" checked={protocols.socks5} onChange={toggleProtocol} text="Socks5" />
             </div>
         </div>
-        <div className="block middle">
+        <div className="block small">
             <div className="title">
-                <span className="name">Data capturing</span>
+                <span className="name">Data Capturing</span>
             </div>
             <div className="content no-flex">
-                <Checkbox id="captureFullData" name="captureFullData" checked={captureFullData} onChange={toggleOption} text="Capture Full Data" />
-                <Checkbox id="captureServer" name="captureServer" checked={captureServer} onChange={toggleOption} text="Capture Server" />
+                <Checkbox id="captureFullData" name="captureFullData" checked={captureFullData} onChange={toggleOption} text="Full Data" />
+                <Checkbox id="captureServer" name="captureServer" checked={captureServer} onChange={toggleOption} text="Server" />
+            </div>
+        </div>
+        <div className="block small">
+            <div className="title">
+                <span className="name">Options</span>
+            </div>
+            <div className="content no-flex">
+                <Checkbox id="core-k-a" name="keepAlive" checked={keepAlive} onChange={toggleOption} text="Keep-Alive" />
             </div>
         </div>
         <div className="blocks-row bottom">
@@ -32,25 +42,25 @@ const Core = ({ protocols, captureFullData, captureServer, threads, timeout, ret
                     <span className="value">{threads}</span>
                 </div>
                 <div className="content">
-                    <input type="range" name="threads" min="1" max="500" onChange={changeOption} value={threads} />
+                    <input type="range" name="threads" min="1" max={getMaxThreads(protocols)} onChange={changeOption} value={threads} />
+                </div>
+            </div>
+            <div className="block slider small">
+                <div className="title">
+                    <span className="name">Retries</span>
+                    <span className="value">{retries > 0 ? retries : 'Off'}</span>
+                </div>
+                <div className="content">
+                    <input type="range" name="retries" min="0" max="10" onChange={changeOption} value={retries} />
                 </div>
             </div>
             <div className="block slider small">
                 <div className="title">
                     <span className="name">Timeout</span>
-                    <span className="value">{timeout} ms</span>
+                    <span className="value">{splitByKK(timeout)} ms</span>
                 </div>
                 <div className="content">
-                    <input type="range" name="timeout" min="1000" max="60000" onChange={changeOption} value={timeout} />
-                </div>
-            </div>
-            <div className="block middle">
-                <div className="title">
-                    <span className="name">Options</span>
-                </div>
-                <div className="content no-flex">
-                    <Checkbox id="retry" name="retry" checked={retry} onChange={toggleOption} text="Retry" />
-                    <Checkbox id="core-k-a" name="keepAlive" checked={keepAlive} onChange={toggleOption} text="Keep-Alive" />
+                    <input type="range" name="timeout" min="1000" max="60000" step="100" onChange={changeOption} value={timeout} />
                 </div>
             </div>
         </div>

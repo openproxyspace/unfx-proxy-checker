@@ -3,6 +3,7 @@ import ResultListItem from '../components/ResultListItem';
 import ResultCountries from '../components/ResultCountries';
 import ResultBlacklist from '../components/ResultBlacklist';
 import ResultItemsHeader from '../components/ResultItemsHeader';
+import Footer from '../components/Footer';
 import ResultExport from '../components/ResultExport';
 import Checkbox from '../components/ui/Checkbox';
 import { connect } from 'react-redux';
@@ -26,10 +27,10 @@ import {
     changeExportType
 } from '../actions/ResultActions';
 import { getFilteredProxies } from '../store/selectors/getFilteredProxies';
+import { splitByKK } from '../misc/text';
 
 import '../../public/styles/Result.postcss';
 import '../../public/styles/Icons.postcss';
-import Footer from '../components/Footer';
 
 class Result extends React.PureComponent {
     isMoreAvailable = () => this.props.state.countOfResults < this.props.filteredItems.length;
@@ -37,6 +38,7 @@ class Result extends React.PureComponent {
     render = () => {
         const {
             state: { isOpened, anons, protocols, misc, search, countries, items, countOfResults, inBlacklists, timeout, ports, sorting, exporting },
+            stats,
             captureServer,
             keepAlive,
             close,
@@ -130,10 +132,10 @@ class Result extends React.PureComponent {
                             <div className="block middle slider">
                                 <div className="title">
                                     <span className="name">Max timeout</span>
-                                    <span className="value">{timeout} ms</span>
+                                    <span className="value">{splitByKK(timeout)} ms</span>
                                 </div>
                                 <div className="content">
-                                    <input type="range" name="max-timeout" min={1000} max={maxTimeoutRange} onChange={setMaxTimeout} value={timeout} />
+                                    <input type="range" name="max-timeout" min="1000" max={maxTimeoutRange} step="100" onChange={setMaxTimeout} value={timeout} />
                                 </div>
                             </div>
                         </div>
@@ -142,8 +144,8 @@ class Result extends React.PureComponent {
                                 {displayActiveCountries}
                             </button>
                             <div className="counters">
-                                <div className="counter">Filtered: {filteredItems.length}</div>
-                                <div className="counter">Total: {items.length}</div>
+                                <div className="counter">Filtered: {splitByKK(filteredItems.length)}</div>
+                                <div className="counter">Total: {splitByKK(items.length)}</div>
                             </div>
                         </div>
                         <ResultItemsHeader sortResults={sortResults} keepAlive={keepAlive} captureServer={captureServer} inBlacklists={inBlacklists} sorting={sorting} />
@@ -158,7 +160,7 @@ class Result extends React.PureComponent {
                             </button>
                         )}
                     </div>
-                    <Footer />
+                    <Footer stats={stats} />
                     <div className="bottom-block">
                         <button className="button-two save-button" onClick={toggleExport}>
                             Export
@@ -178,6 +180,7 @@ class Result extends React.PureComponent {
 const mapStateToProps = state => ({
     filteredItems: getFilteredProxies(state),
     state: state.result,
+    stats: state.main.stats,
     captureServer: state.core.captureServer,
     keepAlive: state.core.keepAlive,
     maxTimeoutRange: state.core.timeout

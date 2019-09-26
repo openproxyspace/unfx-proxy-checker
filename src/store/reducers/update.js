@@ -1,15 +1,13 @@
-import { CHANGE_UPDATE_STATE } from '../../constants/ActionTypes';
+import { UPDATE_CHANGE_STATE } from '../../constants/ActionTypes';
 
 const initialState = {
     active: true,
-    isAvailable: false,
-    isChecking: true,
-    info: null
+    isChecking: true
 };
 
 const update = (state = initialState, action) => {
     switch (action.type) {
-        case CHANGE_UPDATE_STATE:
+        case UPDATE_CHANGE_STATE:
             return {
                 ...state,
                 ...action.nextState

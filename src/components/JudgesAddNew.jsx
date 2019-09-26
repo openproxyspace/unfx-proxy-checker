@@ -9,12 +9,10 @@ export default class JudgesAddNew extends React.PureComponent {
     changeUrl = e => this.setState({ url: e.target.value });
 
     addUrl = () => {
-        if (this.state.url.length == 0 || !isURL(this.state.url)) {
-            return;
+        if (this.state.url.length > 0 && isURL(this.state.url)) {
+            const { add } = this.props;
+            add(this.state.url);
         }
-
-        const { add } = this.props;
-        add(this.state.url);
     };
 
     render = () => (

@@ -1,42 +1,24 @@
 import React from 'react';
+import CounterProtocol from './CounterProtocol';
+import { splitByKK } from '../misc/text';
 
 import '../../public/styles/Counter.postcss';
 
-const Counter = ({ all, done, protocols }) => {
+const Counter = ({ all, done, protocols: { http, https, socks4, socks5 } }) => {
     const progressStyle = {
         width: Math.floor((done / all) * 100) + '%'
     };
 
     return (
         <div className="counter-container">
-            <div className={`protocol http ${protocols.http ? 'active' : ''}`}>
-                <div className="protocol-wrap">
-                    <div className="type">Http</div>
-                    <div className="count">{protocols.http}</div>
-                </div>
-            </div>
-            <div className={`protocol http ${protocols.https ? 'active' : ''}`}>
-                <div className="protocol-wrap">
-                    <div className="type">Https</div>
-                    <div className="count">{protocols.https}</div>
-                </div>
-            </div>
-            <div className={`protocol socks ${protocols.socks4 ? 'active' : ''}`}>
-                <div className="protocol-wrap">
-                    <div className="type">Socks4</div>
-                    <div className="count">{protocols.socks4}</div>
-                </div>
-            </div>
-            <div className={`protocol socks ${protocols.socks5 ? 'active' : ''}`}>
-                <div className="protocol-wrap">
-                    <div className="type">Socks5</div>
-                    <div className="count">{protocols.socks5}</div>
-                </div>
-            </div>
+            <CounterProtocol count={http} name="Http" className="http" />
+            <CounterProtocol count={https} name="Https" className="http" />
+            <CounterProtocol count={socks4} name="Socks4" className="socks" />
+            <CounterProtocol count={socks5} name="Socks5" className="socks" />
             <div className="progress">
                 <div className="bar" style={progressStyle} />
                 <h1>
-                    Total checked {done} of {all}
+                    Total checked {splitByKK(done)} of {splitByKK(all)}
                 </h1>
             </div>
         </div>

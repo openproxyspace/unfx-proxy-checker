@@ -1,5 +1,5 @@
 .titlebar {
-    background-color: #fafafa;
+    background-color: var(--white-color-back);
     height: 2em;
     display: flex;
     align-items: center;
@@ -28,14 +28,10 @@
     }
 
     & .misc {
+        display: flex;
+        align-items: center;
+        height: 100%;
         margin-left: auto;
-        -webkit-app-region: no-drag;
-
-        & svg {
-            width: 0.85em;
-            height: 0.85em;
-            cursor: pointer;
-        }
     }
 
     & ul.buttons {
@@ -44,7 +40,6 @@
         height: 100%;
 
         & svg {
-            width: 0.75em;
             height: 0.75em;
 
             &.minimize {
@@ -67,7 +62,7 @@
                 background-color: color(var(--red-color));
 
                 & svg polygon {
-                    fill: #fafafa !important;
+                    fill: var(--white-color-back) !important;
                 }
             }
         }

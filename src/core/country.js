@@ -1,9 +1,7 @@
 import path from 'path';
-import MMDBReader from 'mmdb-reader';
-
-const pathToMmdb = process.env.NODE_ENV !== 'production' ? './files/GeoLite2-City.mmdb' : './resources/files/GeoLite2-City.mmdb';
-
-const reader = new MMDBReader(path.resolve(pathToMmdb));
+import { isDev } from '../constants/AppConstants';
+import { Reader } from 'maxmind';
+import { readFileSync } from 'fs';
 
 const codes = {
     AF: { flag: 'afghanistan', name: 'Afghanistan' },
@@ -263,26 +261,29 @@ const codes = {
     SX: { flag: 'sint-maarten', name: 'Sint Maarten' },
     TL: { flag: 'timor-leste', name: 'Timor-leste' },
     YT: { flag: 'mayotte', name: 'Mayotte' },
-    ZZ: { flag: 'reserved', name: 'Reserved' }
+    ZZ: { flag: 'unknown', name: 'Unknown' }
+};
+
+const mmdbPath = path.resolve(isDev ? './files/GeoLite2-City.mmdb' : './resources/files/GeoLite2-City.mmdb');
+const reader = new Reader(readFileSync(mmdbPath));
+
+const extractCity = city => {
+    try {
+        return city.names.en;
+    } catch {
+        return '';
+    }
 };
 
 export const lookup = ip => {
     try {
-        const { city: city = '', country } = reader.lookup(ip);
-
-        const extractCity = city => {
-            try {
-                return city.names.en;
-            } catch (error) {
-                return '';
-            }
-        };
+        const { city: city = '', country } = reader.get(ip);
 
         return {
             city: extractCity(city),
             ...codes[country.iso_code]
         };
-    } catch (error) {
+    } catch {
         return {
             city: '',
             ...codes.ZZ

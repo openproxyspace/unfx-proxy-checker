@@ -19,6 +19,12 @@ module.exports = {
                 },
                 '--neo-black-color': {
                     value: '#2C3A47'
+                },
+                '--white-color': {
+                    value: '#f5f6fa'
+                },
+                '--white-color-back': {
+                    value: '#f0f2fa'
                 }
             }
         },

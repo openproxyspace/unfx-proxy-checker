@@ -6,7 +6,7 @@ export const getLinesCount = content => {
     return splitByKK(content.split(/\r\n|\r|\n/).length);
 };
 
-export const splitByKK = content => content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+export const splitByKK = content => (content > 999 ? content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : content);
 
 export const getContentSize = content => {
     let size = content.length;
@@ -26,6 +26,7 @@ export const bytesToSize = bytes => {
 
     const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
     const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+
     return `${Math.round(bytes / Math.pow(1024, i))} ${sizes[i]}`;
 };
 

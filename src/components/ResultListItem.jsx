@@ -1,5 +1,6 @@
 import React from 'react';
 import ResultItemData from './ResultItemData';
+import { splitByKK } from '../misc/text';
 
 export default class ResultListItem extends React.PureComponent {
     state = {
@@ -14,7 +15,7 @@ export default class ResultListItem extends React.PureComponent {
         }
     };
 
-    getClass = protocols => (protocols[0].match(/http/) ? 'http' : 'socks');
+    getClass = ([protocol]) => (protocol.match(/http/) ? 'http' : 'socks');
 
     render = () => {
         const { ip, port, protocols, anon, country, timeout, keepAlive, server, data, blacklist } = this.props;
@@ -55,7 +56,7 @@ export default class ResultListItem extends React.PureComponent {
                     </div>
                     <div className="k-a">{keepAlive && <span title="Connection: Keep-Alive">K-A</span>}</div>
                     <div className="server">{server && <span>{server}</span>}</div>
-                    <div className="timeout">{timeout}</div>
+                    <div className="timeout">{splitByKK(timeout)}</div>
                 </div>
                 {this.state.isDataOpened && <ResultItemData data={data} />}
             </div>
