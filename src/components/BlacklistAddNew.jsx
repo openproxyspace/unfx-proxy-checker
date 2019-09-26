@@ -13,8 +13,10 @@ export default class BlacklistAddNew extends React.PureComponent {
 
     changePath = e => this.setState({ path: e.target.value });
 
-    selectPath = () => {
-        let readPath = dialog.showOpenDialog({
+    selectPath = async () => {
+        const {
+            filePaths: [path]
+        } = await dialog.showOpenDialog({
             filters: [
                 {
                     name: 'Text Files',
@@ -22,10 +24,10 @@ export default class BlacklistAddNew extends React.PureComponent {
                 }
             ]
         });
-
-        if (!readPath) return;
-
-        this.setState({ path: readPath[0] });
+    
+        if (path) {
+            this.setState({ path });
+        }
     };
 
     add = () => {

@@ -18,7 +18,9 @@ export const setLoadedData = nextState => ({
 
 export const loadFromTxt = () => async dispatch => {
     try {
-        let [path] = dialog.showOpenDialog({
+        const {
+            filePaths: [path]
+        } = await dialog.showOpenDialog({
             filters: [
                 {
                     name: 'Text Files',

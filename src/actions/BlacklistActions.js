@@ -1,16 +1,18 @@
 import { remote } from 'electron';
-import { CHANGE_BLACKLIST_ITEM_PATH, ADD_BLACKLIST_ITEM, REMOVE_BLACKLIST_ITEM, TOGGLE_BLACKLIST_OPTION, SET_ACTIVE_BLACKLIST_ITEM } from '../constants/ActionTypes';
+import { BLACKLIST_CHANGE_ITEM_PATH, BLACKLIST_ADD_ITEM, BLACKLIST_REMOVE_ITEM, BLACKLIST_TOGGLE_OPTION, BLACKLIST_SET_ACTIVE_ITEM } from '../constants/ActionTypes';
 
 const { dialog } = remote;
 
 export const changePath = (title, path) => ({
-    type: CHANGE_BLACKLIST_ITEM_PATH,
+    type: BLACKLIST_CHANGE_ITEM_PATH,
     title,
     path
 });
 
-export const selectPath = title => dispatch => {
-    let readPath = dialog.showOpenDialog({
+export const selectPath = title => async dispatch => {
+    const {
+        filePaths: [path]
+    } = await dialog.showOpenDialog({
         filters: [
             {
                 name: 'Text Files',
@@ -19,29 +21,29 @@ export const selectPath = title => dispatch => {
         ]
     });
 
-    if (!readPath) return;
-    
-    dispatch(changePath(title, readPath[0]));
+    if (path) {
+        dispatch(changePath(title, path));
+    }
 };
 
 export const add = (title, path) => ({
-    type: ADD_BLACKLIST_ITEM,
+    type: BLACKLIST_ADD_ITEM,
     title,
     path
 });
 
 export const setActive = (title, active) => ({
-    type: SET_ACTIVE_BLACKLIST_ITEM,
+    type: BLACKLIST_SET_ACTIVE_ITEM,
     title,
     active
 });
 
 export const remove = title => ({
-    type: REMOVE_BLACKLIST_ITEM,
+    type: BLACKLIST_REMOVE_ITEM,
     title
 });
 
 export const toggleOption = e => ({
-    type: TOGGLE_BLACKLIST_OPTION,
+    type: BLACKLIST_TOGGLE_OPTION,
     target: e.target.name
 });
