@@ -13,6 +13,10 @@ export default class Judges {
             usual: {
                 current: 0,
                 max: null
+            },
+            any: {
+                current: 0,
+                max: null
             }
         };
 
@@ -26,7 +30,8 @@ export default class Judges {
 
         this.list = {
             ssl: [],
-            usual: []
+            usual: [],
+            any: []
         };
 
         this.data = {
@@ -48,6 +53,19 @@ export default class Judges {
         return () => {
             const current = this.list.ssl[this.usingStatus.ssl.current];
             this.usingStatus.ssl.current = this.usingStatus.ssl.current == this.usingStatus.ssl.max - 1 ? 0 : this.usingStatus.ssl.current + 1;
+
+            return current;
+        };
+    }
+
+    buildGetAny() {
+        if (this.list.any.length == 1 || !this.swap) {
+            return () => this.list.any[0];
+        }
+
+        return () => {
+            const current = this.list.any[this.usingStatus.any.current];
+            this.usingStatus.any.current = this.usingStatus.any.current == this.usingStatus.any.max - 1 ? 0 : this.usingStatus.any.current + 1;
 
             return current;
         };
@@ -78,14 +96,14 @@ export default class Judges {
         store.dispatch(startPing());
         await wait(1500);
 
-        list.forEach(async judge => {
+        for (const judge of list) {
             try {
                 const response = await rp.get({ url: judge.url, resolveWithFullResponse: true, time: true, timeout: 10000 });
                 this.onSuccess(judge, response);
-            } catch (error) {
+            } catch {
                 this.onError(judge);
             }
-        });
+        }
     }
 
     onSuccess(judge, response) {
@@ -129,10 +147,15 @@ export default class Judges {
         if (this.counter.done == this.counter.all) {
             this.checkAtAliveJudges();
 
+            this.list.any = [...this.list.usual, ...this.list.ssl];
+
             this.usingStatus.ssl.max = this.list.ssl.length;
             this.usingStatus.usual.max = this.list.usual.length;
+            this.usingStatus.any.max = this.list.any.length;
+
             this.getSSL = this.buildGetSSL();
             this.getUsual = this.buildGetUsual();
+            this.getAny = this.buildGetAny();
 
             await wait(1500);
             store.dispatch(changeState({ isActive: false, locked: false }));
@@ -156,6 +179,6 @@ export default class Judges {
     }
 
     isRequiredUsualButNotContains() {
-        return this.targetProtocols.some(protocol => ['http', 'socks4', 'socks5'].includes(protocol)) && this.list.usual.length == 0;
+        return this.targetProtocols.some(protocol => ['http'].includes(protocol)) && this.list.usual.length == 0;
     }
 }
