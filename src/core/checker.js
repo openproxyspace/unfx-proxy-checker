@@ -16,57 +16,13 @@ export default class Checker {
         this.judges = judges;
         this.options = options;
         this.blacklist = blacklist;
+        this.currentProxy = 0;
 
         this.initialRequestConfig = {
             time: true,
             timeout: Number(this.options.timeout),
             resolveWithFullResponse: true,
             ...(options.keepAlive ? { headers: { connection: 'keep-alive' } } : {})
-        };
-
-        this.checkAt = {
-            http: async (proxy, retry) => {
-                try {
-                    const response = await collar(rp.get(this.judges.getUsual(), { ...this.initialRequestConfig, proxy: 'http://' + proxy }), this.initialRequestConfig.timeout);
-
-                    this.onResponse(response, proxy, 'http');
-                } catch ({ statusCode }) {
-                    this.onError(proxy, 'http', retry, statusCode);
-                }
-            },
-            https: async (proxy, retry) => {
-                try {
-                    const response = await collar(rp.get(this.judges.getSSL(), { ...this.initialRequestConfig, proxy: 'http://' + proxy }), this.initialRequestConfig.timeout);
-
-                    this.onResponse(response, proxy, 'https');
-                } catch ({ statusCode }) {
-                    this.onError(proxy, 'https', retry, statusCode);
-                }
-            },
-            socks4: async (proxy, retry) => {
-                try {
-                    const agent = new SocksProxyAgent('socks4://' + proxy);
-                    agent.timeout = this.initialRequestConfig.timeout;
-
-                    const response = await collar(rp.get(this.judges.getUsual(), { ...this.initialRequestConfig, agent }), this.initialRequestConfig.timeout);
-
-                    this.onResponse(response, proxy, 'socks4');
-                } catch ({ statusCode }) {
-                    this.onError(proxy, 'socks4', retry, statusCode);
-                }
-            },
-            socks5: async (proxy, retry) => {
-                try {
-                    const agent = new SocksProxyAgent('socks5://' + proxy);
-                    agent.timeout = this.initialRequestConfig.timeout;
-
-                    const response = await collar(rp.get(this.judges.getUsual(), { ...this.initialRequestConfig, agent }), this.initialRequestConfig.timeout);
-
-                    this.onResponse(response, proxy, 'socks5');
-                } catch ({ statusCode }) {
-                    this.onError(proxy, 'socks5', retry, statusCode);
-                }
-            }
         };
 
         this.counter = {
@@ -99,6 +55,28 @@ export default class Checker {
                 ...(this.options.captureFullData ? { data: [] } : {})
             }
         };
+    }
+
+    async checkProtocol(proxy, protocol, retries = 0) {
+        try {
+            const url = protocol == 'http' ? this.judges.getUsual() : protocol == 'https' ? this.judges.getSSL() : this.judges.getAny();
+            const response = await collar(rp.get(url, { ...this.initialRequestConfig, ...this.getAgent(proxy, protocol) }), this.initialRequestConfig.timeout);
+
+            this.onResponse(response, proxy, protocol);
+        } catch ({ statusCode }) {
+            this.onError(proxy, protocol, retries, statusCode);
+        }
+    }
+
+    getAgent(proxy, protocol) {
+        if (protocol == 'socks4' || protocol == 'socks5') {
+            const agent = new SocksProxyAgent(protocol + '://' + proxy);
+            agent.timeout = this.initialRequestConfig.timeout;
+
+            return { agent };
+        }
+
+        return { proxy: 'http://' + proxy };
     }
 
     getServer(body) {
@@ -134,7 +112,7 @@ export default class Checker {
             return 'transparent';
         }
 
-        if (body.match(/HTTP_VIA/)) {
+        if (body.match(/HTTP_VIA|PROXY_REMOTE_ADDR/)) {
             return 'anonymous';
         }
 
@@ -142,7 +120,7 @@ export default class Checker {
     }
 
     setKeepAlive(proxy, headers) {
-        if (!this.states[proxy].permanent.keepAlive && headers['keep-alive']) {
+        if (!this.states[proxy].permanent.keepAlive && (headers['keep-alive'] || headers['connection'] == 'keep-alive')) {
             this.states[proxy].permanent.keepAlive = true;
         }
     }
@@ -162,8 +140,7 @@ export default class Checker {
                 this.states[proxy].permanent.anon = anon;
 
                 if (this.options.captureServer) {
-                    const server = this.getServer(response.body);
-                    this.states[proxy].permanent.server = server;
+                    this.states[proxy].permanent.server = this.getServer(response.body);
                 }
             }
 
@@ -192,13 +169,13 @@ export default class Checker {
         this.isDone(proxy);
     }
 
-    onError(proxy, protocol, retry, statusCode) {
+    onError(proxy, protocol, retries, statusCode) {
         if (this.stopped) {
             return;
         }
 
-        if (this.options.retry && !statusCode && !retry) {
-            this.checkAt[protocol](proxy, true);
+        if (!statusCode && this.options.retries > 0 && retries < this.options.retries) {
+            this.checkProtocol(proxy, protocol, ++retries);
         } else {
             this.states[proxy].doneLevel++;
             this.isDone(proxy);
@@ -207,27 +184,25 @@ export default class Checker {
 
     buildCheck(protocols) {
         if (protocols.length == 1) {
-            return this.checkAt[protocols[0]];
+            return proxy => {
+                this.checkProtocol(proxy, protocols[0]);
+            };
         }
 
         if (protocols.length == 4) {
-            const all = proxy => {
-                this.checkAt.http(proxy);
-                this.checkAt.https(proxy);
-                this.checkAt.socks4(proxy);
-                this.checkAt.socks5(proxy);
+            return proxy => {
+                this.checkProtocol(proxy, 'http');
+                this.checkProtocol(proxy, 'https');
+                this.checkProtocol(proxy, 'socks4');
+                this.checkProtocol(proxy, 'socks5');
             };
-
-            return all;
         }
 
-        const other = proxy => {
+        return proxy => {
             protocols.forEach(protocol => {
-                this.checkAt[protocol](proxy);
+                this.checkProtocol(proxy, protocol);
             });
         };
-
-        return other;
     }
 
     getResult() {
@@ -248,8 +223,6 @@ export default class Checker {
                 });
             }
         }
-
-        delete this.states;
 
         return {
             items: result,
@@ -274,7 +247,7 @@ export default class Checker {
             return;
         }
 
-        const proxy = this.queue.shift();
+        const proxy = this.queue[this.currentProxy++];
 
         this.initializeProxyState(proxy);
         this.check(proxy);

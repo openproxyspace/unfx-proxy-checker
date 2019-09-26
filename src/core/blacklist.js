@@ -26,6 +26,7 @@ export default class Blacklist {
 
     check(ip) {
         let inLists = [];
+        
         const inMultipleRanges = (ip, arrayOfRanges) => {
             return arrayOfRanges.some(range => {
                 if (range.indexOf('/') != -1) {
@@ -43,6 +44,7 @@ export default class Blacklist {
         });
 
         const res = inLists.length > 0 ? inLists : false;
+
         if (res) {
             this.setInListsCounter(inLists);
         }
@@ -82,8 +84,8 @@ export default class Blacklist {
         try {
             const response = isURL(item.path) ? await rp.get(item.path) : await readFilePromisify(item.path, 'utf8');
             this.onSuccess(item, response);
-        } catch (error) {
-            this.onError(item, error);
+        } catch {
+            this.isDone();
         }
     }
 
@@ -105,12 +107,6 @@ export default class Blacklist {
             addresses: this.getIPs(content)
         });
 
-        this.isDone();
-    }
-
-    onError(item, error) {
-        // if error code == ENOENT
-        // local path is not exists
         this.isDone();
     }
 }
