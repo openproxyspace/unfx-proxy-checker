@@ -18,13 +18,13 @@
             color: color(var(--green-color) alpha(65%));
 
             &:not(.react-tabs__tab--selected):hover {
-                color: #fff;
+                color: var(--white-color);
                 background-color: color(var(--green-color) alpha(75%));
             }
         }
 
         & .react-tabs__tab--selected {
-            color: #fff;
+            color: var(--white-color);
             background-color: color(var(--green-color) alpha(85%));
         }
     }
@@ -52,7 +52,7 @@
                     display: flex;
                     font-weight: 700;
                     justify-content: center;
-                    color: #fff;
+                    color: var(--white-color);
                     background-color: color(var(--green-color) alpha(35%));
                     padding: 1em;
                     border-radius: 0.35em;
@@ -64,7 +64,7 @@
             & .item {
                 margin-bottom: 1em;
                 padding-bottom: 1em;
-                border-bottom: 1px solid color(#fff alpha(35%));
+                border-bottom: 1px solid color(var(--white-color) alpha(35%));
 
                 &:last-child {
                     margin-bottom: 0;
@@ -79,15 +79,23 @@
                 }
 
                 & .title-remove {
-                    width: 100%;
                     display: flex;
-                    flex-flow: row wrap;
+                    flex-flow: row nowrap;
 
                     & label {
                         white-space: nowrap;
                         text-overflow: ellipsis;
+                        overflow: hidden;
                         padding: 0;
                         width: calc(100% - 1em);
+                        margin-right: 1em;
+                    }
+
+                    & span:nth-child(2) {
+                        width: calc(100% - 1em);
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
 
                     & svg.close-svg {
@@ -142,7 +150,7 @@
                     display: flex;
                     font-weight: 700;
                     justify-content: center;
-                    color: #fff;
+                    color: var(--white-color);
                     background-color: color(var(--green-color) alpha(35%));
                     padding: 1em;
                     border-radius: 0.35em;
@@ -154,7 +162,7 @@
             & .item {
                 margin-bottom: 1em;
                 padding-bottom: 1em;
-                border-bottom: 1px solid color(#fff alpha(35%));
+                border-bottom: 1px solid color(var(--white-color) alpha(35%));
 
                 &:last-child {
                     margin-bottom: 0;
@@ -176,8 +184,16 @@
                     & label {
                         white-space: nowrap;
                         text-overflow: ellipsis;
+                        overflow: hidden;
                         padding: 0;
                         width: calc(100% - 1em);
+                    }
+
+                    & span:nth-child(2) {
+                        width: calc(100% - 2.35em);
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
 
                     & svg.close-svg {
@@ -263,7 +279,7 @@
             display: flex;
             width: 100%;
             padding-bottom: 1em;
-            border-bottom: 1px solid #fafafa;
+            border-bottom: 1px solid var(--white-color-back);
 
             &.no-bot {
                 padding-bottom: 0;
@@ -314,7 +330,7 @@
             }
 
             & span.name {
-                background-color: color(var(--grey-color) alpha(7.5%));
+                background-color: color(var(--grey-color) alpha(5%));
                 padding: 0.25em 0.75em;
                 border-radius: 0.75em;
             }
@@ -372,7 +388,13 @@
         }
 
         & .item {
-            border-bottom: 1px solid color(#fff alpha(5%));
+            border-bottom: 1px solid color(var(--white-color) alpha(5%));
+
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+                padding-bottom: 0;
+            }
         }
     }
 
@@ -384,7 +406,13 @@
         }
 
         & .item {
-            border-bottom: 1px solid color(#fff alpha(5%));
+            border-bottom: 1px solid color(var(--white-color) alpha(5%));
+
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+                padding-bottom: 0;
+            }
         }
     }
 
@@ -394,7 +422,7 @@
 
     & .block {
         & .content {
-            border-bottom: 1px solid color(#fff alpha(5%));
+            border-bottom: 1px solid color(var(--white-color) alpha(5%));
 
             &.no-bot {
                 border-bottom: none;

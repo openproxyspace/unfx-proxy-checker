@@ -1,9 +1,11 @@
 footer {
     padding: 2em;
     display: flex;
+    flex-flow: row wrap;
+    max-width: 1600px;
+    margin: auto;
 
     & .links {
-        border-right: 1px solid #fafafa;
         margin-right: 1.5em;
         display: flex;
         flex-flow: row wrap;
@@ -11,73 +13,197 @@ footer {
 
         & a {
             display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 2em;
+            color: color(var(--grey-color) alpha(80%));
+            text-decoration: none;
 
-            &:nth-child(2) svg {
+            &:hover {
+                color: var(--grey-color);
+
+                & svg {
+                    fill: var(--grey-color);
+                }
+            }
+
+            &.rocket svg {
                 height: 1.75em;
                 width: 1.75em;
             }
-        }
 
-        & svg {
-            width: 2em;
-            height: 2em;
-            margin-right: 1.5em;
-            fill: color(var(--grey-color) alpha(80%));
-            transition: fill 0.5s easeOne;
+            & span {
+                font-weight: 700;
+                margin-left: 0.5em;
+                transition: color 0.5s easeOne;
+            }
 
-            &:hover {
-                fill: var(--grey-color);
+            & svg {
+                width: 2em;
+                height: 2em;
+                fill: color(var(--grey-color) alpha(80%));
+                transition: fill 0.5s easeOne;
             }
         }
     }
 
-    & .bottom-rocket {
+    & .get-em {
         display: flex;
-        flex-flow: row wrap;
-        user-select: none;
-        margin: 2em auto;
-        padding: 1em 2em;
-        background-color: #fff;
-        border-radius: 2.75em;
+        align-items: center;
+        margin-left: auto;
+        animation: fade-footer-get-em 0.7s easeOne both;
 
-        & .details {
-            display: flex;
-            flex-flow: column wrap;
+        & p {
+            margin: 0;
+            border-radius: 1.25em;
+            color: var(--blue-color);
 
-            & h2 {
+            & a {
+                display: inline-flex;
+                align-items: center;
+                margin: 0 0.25em;
+                text-decoration: none;
                 font-weight: 700;
-                font-size: 0.9em;
-                margin: 0;
-                color: color(var(--grey-color) alpha(80%));
+                transition: color 0.5s easeOne;
+                color: color(var(--green-color) alpha(70%));
+
+                &:hover {
+                    color: var(--green-color);
+
+                    & svg {
+                        fill: var(--green-color);
+                    }
+                }
+
+                & svg {
+                    width: 1em;
+                    height: 1em;
+                    margin-left: 0.35em;
+                    transition: fill 0.5s easeOne;
+                    fill: color(var(--green-color) alpha(70%));
+                }
+            }
+        }
+    }
+
+    & .ops {
+        display: flex;
+        width: 100%;
+        margin: 2em auto 0 auto;
+        padding: 0.5em 1em;
+        max-width: 960px;
+        font-weight: 700;
+        border-radius: 1.5em;
+        position: relative;
+        color: var(--white-color-back);
+        background: linear-gradient(127deg, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+
+        & .d {
+            margin-left: auto;
+        }
+
+        &:before {
+            content: attr(data-version);
+            position: absolute;
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: color(var(--green-color) alpha(65%));
+            height: 50px;
+            margin-top: -17px;
+            border-radius: 50px;
+            left: calc(50% - 40px);
+            background-color: color(var(--white-color-back) alpha(85%));
+        }
+
+        & a {
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+            color: var(--white-color-back);
+            transition: color 0.5s easeOne;
+
+            &:nth-child(1):hover {
+                color: var(--green-color);
+
+                & svg {
+                    fill: var(--green-color);
+                }
             }
 
-            & span {
-                font-size: 0.78em;
-                font-weight: 700;
-                color: color(var(--green-color) alpha(85%));
+            &:nth-child(2):hover {
+                color: var(--blue-color);
+
+                & svg {
+                    fill: var(--blue-color);
+                }
+            }
+
+            & svg {
+                margin-right: 0.5em;
+                width: 1em;
+                transition: fill 0.5s easeOne;
+                height: 1em;
+                fill: var(--white-color-back);
             }
         }
     }
 }
 
+@keyframes fade-footer-get-em {
+    from {
+        opacity: 0;
+        transform: translateX(15%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .container.dark footer {
-    & .links {
-        border-right: 1px solid color(var(--green-color) alpha(5%));
+    & .ops:before {
+        background-color: color(var(--back-black-color) alpha(85%));
+    }
 
-        & svg {
-            fill: color(var(--green-color) alpha(60%));
+    & .ops a {
+        color: var(--back-black-color);
 
-            &:hover {
+        &:nth-child(1):hover {
+            color: var(--green-color);
+
+            & svg {
                 fill: var(--green-color);
             }
         }
+
+        &:nth-child(2):hover {
+            color: var(--blue-color);
+
+            & svg {
+                fill: var(--blue-color);
+            }
+        }
+
+        & svg {
+            fill: var(--back-black-color);
+        }
     }
 
-    & .bottom-rocket {
-        background-color: color(var(--neo-black-color) alpha(85%));
+    & .links a {
+        color: color(var(--green-color) alpha(60%));
 
-        & .details h2 {
-            color: color(#ddd alpha(65%));
+        &:hover {
+            color: color(var(--green-color) alpha(85%));
+
+            & svg {
+                fill: var(--green-color);
+            }
+        }
+
+        & svg {
+            fill: color(var(--green-color) alpha(60%));
         }
     }
 }

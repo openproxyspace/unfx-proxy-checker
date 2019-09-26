@@ -11,7 +11,7 @@
 
 ::-webkit-scrollbar-track {
     border-radius: 0.5em;
-    background-color: #fafafa;
+    background-color: var(--white-color-back);
 }
 
 /* --------------------------------
@@ -42,7 +42,7 @@ button {
     }
 
     &:not(.less):hover {
-        color: color(#fff alpha(85%));
+        color: color(var(--white-color) alpha(85%));
         background-color: color(var(--green-color) alpha(85%));
     }
 }
@@ -85,7 +85,7 @@ input.field {
     }
 
     &:focus {
-        color: #fff;
+        color: var(--white-color);
         background-color: color(var(--green-color) alpha(85%));
 
         &::-webkit-input-placeholder {
@@ -107,13 +107,13 @@ input[type='range'] {
         height: 0.8em;
         cursor: pointer;
         border-radius: 1em;
-        background-color: color(var(--green-color) alpha(25%));
+        background-color: color(var(--green-color) alpha(30%));
     }
 
     &::-webkit-slider-thumb {
         height: 16px;
         width: 16px;
-        background-color: color(var(--green-color) alpha(85%));
+        background-color: var(--green-color);
         cursor: pointer;
         -webkit-appearance: none;
         border-radius: 1em;
@@ -165,7 +165,7 @@ input[type='range'] {
                 top: 5px;
                 left: 4px;
                 fill: none;
-                stroke: #ffffff;
+                stroke: var(--white-color);
                 stroke-width: 1.1;
                 stroke-linecap: round;
                 stroke-linejoin: round;
@@ -179,7 +179,7 @@ input[type='range'] {
                 content: '';
                 width: 100%;
                 height: 100%;
-                background-color: color(var(--green-color) alpha(85%));
+                background-color: var(--green-color);
                 display: block;
                 transform: scale(0);
                 opacity: 1;
@@ -194,7 +194,7 @@ input[type='range'] {
     }
 
     &:hover span:first-child {
-        border-color: color(var(--green-color) alpha(85%));
+        border-color: var(--green-color);
     }
 }
 

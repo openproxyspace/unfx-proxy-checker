@@ -9,7 +9,7 @@
     top: 2em;
     left: 0;
     overflow-y: auto;
-    background-color: color(#fff alpha(95%));
+    background-color: color(var(--white-color) alpha(95%));
     transition: opacity 0.7s easeOne, visibility 0.7s easeOne, z-index 0.7s easeOne;
     opacity: 0;
     visibility: hidden;
@@ -47,7 +47,7 @@
         }
 
         & .items {
-            border-top: 1px solid #fafafa;
+            border-top: 1px solid var(--white-color-back);
             margin-top: 2em;
         }
 
@@ -60,7 +60,7 @@
             font-weight: 700;
             transition: color 0.7s easeOne;
             color: color(var(--grey-color) alpha(65%));
-            border-bottom: 1px solid #fafafa;
+            border-bottom: 1px solid var(--white-color-back);
 
             & svg {
                 width: 1.25em;
@@ -78,7 +78,7 @@
                 }
 
                 & .response {
-                    color: #fff;
+                    color: var(--white-color);
                     background-color: color(var(--green-color) alpha(65%));
                 }
             }
@@ -91,7 +91,7 @@
                 }
 
                 & .response {
-                    color: #fff;
+                    color: var(--white-color);
                     background-color: color(var(--red-color) alpha(65%));
                 }
             }
@@ -147,12 +147,12 @@
         }
 
         & .items {
-            border-top: 1px solid color(#fff alpha(5%));
+            border-top: 1px solid color(var(--white-color) alpha(5%));
         }
 
         & .item {
             color: color(#ddd alpha(50%));
-            border-bottom: 1px solid color(#fff alpha(5%));
+            border-bottom: 1px solid color(var(--white-color) alpha(5%));
 
             &:last-child {
                 border-bottom: none;
