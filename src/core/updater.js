@@ -1,7 +1,6 @@
 import rp from 'request-promise';
-import { remote } from 'electron';
 import { FETCH_CONFIG } from '../constants/UpdateConstants';
-import { isPortable } from '../constants/AppConstants';
+import { remote } from 'electron';
 
 const {
     app: { getVersion }
@@ -16,25 +15,19 @@ export const getLatestVersionInfo = async () => {
         const version = latest.tag_name.slice(1);
 
         if (version > currentVersion) {
-            const releaseNotes = releases
-                .filter(item => item.tag_name.slice(1) > currentVersion)
-                .map(item => ({
-                    version: item.tag_name.slice(1),
-                    body: item.body
-                }));
-
             const [portableAsset] = latest.assets.filter(asset => asset.name.match(/portable/i));
 
             return {
-                latestVersion: version,
-                isPortable,
-                releaseNotes,
+                available: true,
+                releases,
                 portableAsset
             };
         } else {
-            return false;
+            return {
+                releases
+            };
         }
-    } catch (error) {
+    } catch {
         return false;
     }
 };
