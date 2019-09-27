@@ -1,6 +1,6 @@
 {
     "name": "unfx-proxy-checker",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "main": "public/main.js",
     "license": "MIT",
     "author": {
