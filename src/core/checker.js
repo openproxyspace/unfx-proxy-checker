@@ -243,7 +243,7 @@ export default class Checker {
     }
 
     run() {
-        if (!this.queue.length) {
+        if (this.currentProxy == this.counter.all) {
             return;
         }
 
