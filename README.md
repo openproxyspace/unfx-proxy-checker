@@ -11,8 +11,8 @@
 Full description & Documentation for [Proxy Checker](https://openproxy.space/software/proxy-checker)
 
 #### Open Proxy Space
-[Darth](https://openproxy.space/darth) - Buy Proxy List  
-[Free Proxy List](https://openproxy.space/list/) - Always Updated Proxy Lists
+[Premium](https://openproxy.space/premium) - Buy Proxy List  
+[Free Proxy List](https://openproxy.space/list) - Always Updated Proxy Lists
 
 #### Unfx Proxy Tools
 [Unfx Proxy Checker](https://openproxy.space/software/proxy-checker) - Powerful proxy checker with huge features and beautiful design.  
