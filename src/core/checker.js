@@ -151,7 +151,7 @@ export default class Checker {
             return 'transparent';
         }
 
-        if (body.match(/HTTP_VIA|PROXY_REMOTE_ADDR|PROXY/i)) {
+        if (body.match(/HTTP_VIA|PROXY_REMOTE_ADDR/i)) {
             return 'anonymous';
         }
 
