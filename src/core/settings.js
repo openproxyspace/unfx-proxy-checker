@@ -1,11 +1,50 @@
 import store from '../store';
-import { remote } from 'electron';
-import { writeFile, readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { SETTINGS_FILE_PATH, MERGED_DEFAULT_SETTINGS } from '../constants/SettingsConstants';
 import { currentVersion } from './updater';
+import { rename, writeFile } from 'fs/promises';
 
-export const saveSettings = setting => {
-    writeFile(SETTINGS_FILE_PATH, JSON.stringify(setting, null, 4), () => null);
+let timeout;
+let prevSettings = '';
+
+export const saveSettings = () => {
+    if (timeout) clearTimeout(timeout);
+
+    timeout = setTimeout(async () => {
+        const { core, judges, ip, blacklist, result, main } = store.getState();
+        const json = JSON.stringify(
+            {
+                core,
+                judges: {
+                    ...judges,
+                    items: judges.items.map(judge => ({
+                        ...judge,
+                        validate: judge.validate.toString()
+                    }))
+                },
+                ip: {
+                    lookupUrl: ip.lookupUrl
+                },
+                blacklist,
+                exporting: {
+                    type: result.exporting.type,
+                    authType: result.exporting.authType
+                },
+                main: {
+                    dark: main.dark
+                },
+                version: currentVersion
+            },
+            null,
+            4
+        );
+
+        if (prevSettings !== json) {
+            await writeFile(SETTINGS_FILE_PATH + '.unfx', json);
+            await rename(SETTINGS_FILE_PATH + '.unfx', SETTINGS_FILE_PATH);
+            prevSettings = json;
+        }
+    }, 1000);
 };
 
 const getSettings = () => {
@@ -42,39 +81,14 @@ const transformPrevSettings = settings => {
         }
     ];
 
-    if (settings.version == undefined) return MERGED_DEFAULT_SETTINGS;
+    if (settings.version === undefined) return MERGED_DEFAULT_SETTINGS;
 
     if (settings.version < currentVersion) {
         return transforms.filter(({ version }) => version > settings.version).reduce((prev, { action }) => action(prev), settings);
     } else {
+        prevSettings = JSON.stringify(settings, null, 4);
         return settings;
     }
 };
-
-remote.getCurrentWindow().on('close', () => {
-    const { core, judges, ip, blacklist, result, main } = store.getState();
-
-    saveSettings({
-        core,
-        judges: {
-            ...judges,
-            items: judges.items.map(judge => ({
-                ...judge,
-                validate: judge.validate.toString()
-            }))
-        },
-        ip: {
-            lookupUrl: ip.lookupUrl
-        },
-        blacklist,
-        exporting: {
-            type: result.exporting.type
-        },
-        main: {
-            dark: main.dark
-        },
-        version: currentVersion
-    });
-});
 
 export const initial = getSettings();

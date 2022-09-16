@@ -1,57 +1,104 @@
-import { readFile, stat } from 'fs';
-import { remote } from 'electron';
+import findMixedProxies from '../misc/FindMixedProxies.js';
+import { readFile } from 'fs/promises';
+import { ipcRenderer } from 'electron';
 import { uniq } from '../misc/array';
-import { findProxies } from '../misc/regexes';
 import { INPUT_SET_LOADED_FILE_DATA } from '../constants/ActionTypes';
-import { promisify } from 'util';
 import { parse } from 'path';
-
-const { dialog } = remote;
-
-const readTextFile = promisify(readFile);
-const getFileStat = promisify(stat);
 
 export const setLoadedData = nextState => ({
     type: INPUT_SET_LOADED_FILE_DATA,
     nextState
 });
 
-export const loadFromTxt = () => async dispatch => {
+const getResult = (text, event, getState) => {
     try {
-        const {
-            filePaths: [path]
-        } = await dialog.showOpenDialog({
-            filters: [
-                {
-                    name: 'Text Files',
-                    extensions: ['txt']
-                }
-            ]
-        });
+        // if (event.ctrlKey) {
+        //     const { input } = getState();
 
-        if (path) {
-            const fileText = await readTextFile(path, 'utf8');
-            const totalProxies = findProxies(fileText);
+        //     const totalLines = text.split(/\r?\n/).filter(item => item.length > 0);
+        //     const uniqueLines = uniq([...totalLines, ...input.list]);
+        //     console.log(uniqueLines);
+        //     const { successed: list, failed: errors } = findMixedProxies(uniqueLines);
 
-            if (!totalProxies) throw { status: 'error', message: 'No proxies found' };
+        //     return {
+        //         list,
+        //         errors,
+        //         total: totalLines.length + input.list.length,
+        //         unique: uniqueLines.length
+        //     };
+        // }
 
-            const { size } = await getFileStat(path);
-            const uniqueProxies = uniq(totalProxies);
-            const total = totalProxies.length;
-            const unique = uniqueProxies.length;
+        const totalLines = text.split(/\r?\n/).filter(item => item.length > 0);
+        const uniqueLines = uniq(totalLines);
+        const { successed: list, failed: errors } = findMixedProxies(uniqueLines);
+
+        return {
+            list,
+            errors,
+            total: totalLines.length,
+            unique: uniqueLines.length
+        };
+    } catch (error) {
+        return {
+            list: [],
+            errors: [],
+            total: 0,
+            unique: 0
+        };
+    }
+};
+
+export const loadFromTxt = event => async (dispatch, getState) => {
+    try {
+        const paths = await ipcRenderer.invoke('choose-multi');
+
+        if (paths) {
+            let filesText;
+            const names = [];
+
+            for await (const path of paths) {
+                filesText += await readFile(path, 'utf8');
+                names.push(parse(path).base);
+            }
+
+            const { list, errors, total, unique } = getResult(filesText, event, getState);
+
+            if (!list.length) throw new Error('No proxies found');
 
             dispatch(
                 setLoadedData({
                     loaded: true,
-                    list: uniqueProxies,
-                    name: parse(path).base,
-                    size,
+                    list,
+                    errors,
+                    name: names.join(', '),
                     total,
                     unique
                 })
             );
         }
-    } catch ({ status }) {
-        if (status == 'error') alert('No proxies found');
+    } catch (error) {
+        alert(error);
+    }
+};
+
+export const pasteFromClipboard = event => async (dispatch, getState) => {
+    try {
+        const text = await navigator.clipboard.readText();
+        const { list, errors, total, unique } = getResult(text, event, getState);
+
+        if (!list.length) throw new Error('No proxies found');
+
+        dispatch(
+            setLoadedData({
+                loaded: true,
+                list,
+                errors,
+                name: 'Clipboard',
+                total,
+                unique
+            })
+        );
+    } catch (error) {
+        alert(error);
     }
 };

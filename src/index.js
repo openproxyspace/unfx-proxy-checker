@@ -1,6 +1,6 @@
 import path from 'path';
 import url from 'url';
-import { BrowserWindow, app, ipcMain } from 'electron';
+import { BrowserWindow, app, ipcMain, dialog } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import { isDev, isPortable } from './constants/AppConstants';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
@@ -18,7 +18,10 @@ const devWindow = () => {
         show: false,
         frame: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            nodeIntegrationInWorker: true,
+            sandbox: false
         }
     });
 
@@ -35,7 +38,10 @@ const prodWindow = () => {
         frame: false,
         resizable: true,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            nodeIntegrationInWorker: true,
+            sandbox: false
         }
     });
 
@@ -47,7 +53,7 @@ const createWindow = () => {
 
     window.loadURL(
         isDev
-            ? 'http://localhost:8080'
+            ? 'http://localhost:32321'
             : url.format({
                   pathname: path.join(__dirname, 'index.html'),
                   protocol: 'file:',
@@ -70,6 +76,43 @@ const createWindow = () => {
     window.on('unmaximize', () => {
         window.webContents.send('on-window-unmaximize');
     });
+
+    ipcMain.handle('choose-path', async (event, action = 'save') => {
+        try {
+            const { filePaths, filePath } = await (action === 'save' ? dialog.showSaveDialog : dialog.showOpenDialog)({
+                filters: [
+                    {
+                        name: 'Text Files',
+                        extensions: ['txt']
+                    }
+                ],
+                properties: ['multiSelections']
+            });
+
+            if (filePaths?.length) return filePaths[0];
+            if (filePath) return filePath;
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    ipcMain.handle('choose-multi', async () => {
+        try {
+            const { filePaths } = await dialog.showOpenDialog({
+                filters: [
+                    {
+                        name: 'Text Files',
+                        extensions: ['txt']
+                    }
+                ],
+                properties: ['multiSelections']
+            });
+
+            if (filePaths.length) return filePaths;
+        } catch (error) {
+            console.error(error);
+        }
+    });
 };
 
 app.on('ready', () => {
@@ -84,8 +127,9 @@ app.on('activate', () => {
     }
 });
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', async () => {
     if (process.platform !== 'darwin') {
+        // ipcMain.
         app.quit();
     }
 });

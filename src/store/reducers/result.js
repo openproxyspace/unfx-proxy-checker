@@ -15,7 +15,8 @@ import {
     RESULT_SET_PORTS_ALLOW,
     RESULT_SORT,
     RESULT_EXPORT_TOGGLE,
-    RESULT_EXPORT_CHANGE_TYPE
+    RESULT_EXPORT_CHANGE_TYPE,
+    RESULT_EXPORT_CHANGE_AUTH_TYPE
 } from '../../constants/ActionTypes';
 
 const initialState = {
@@ -53,6 +54,8 @@ const initialState = {
     search: '',
     exporting: {
         active: false,
+        authType: 1,
+        type: 1,
         ...initial.exporting
     }
 };
@@ -215,6 +218,14 @@ const result = (state = initialState, action) => {
                 exporting: {
                     ...state.exporting,
                     type: action.value
+                }
+            };
+        case RESULT_EXPORT_CHANGE_AUTH_TYPE:
+            return {
+                ...state,
+                exporting: {
+                    ...state.exporting,
+                    authType: action.value
                 }
             };
         default:

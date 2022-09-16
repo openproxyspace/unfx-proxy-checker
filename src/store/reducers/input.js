@@ -3,10 +3,10 @@ import { INPUT_SET_LOADED_FILE_DATA } from '../../constants/ActionTypes';
 const initial = {
     loaded: false,
     list: [],
+    errors: [],
     total: 0,
     unique: 0,
-    name: '',
-    size: 0
+    name: ''
 };
 
 const input = (state = initial, action) => {

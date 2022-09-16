@@ -2,6 +2,7 @@ import rp from 'request-promise';
 import store from '../store';
 import { changeState, changeJudgePingState, startPing } from '../actions/OverlayJudgesActions';
 import { wait } from '../misc/wait';
+import { arrayToChunks } from './misc.js';
 
 export default class Judges {
     constructor(config, targetProtocols) {
@@ -96,13 +97,17 @@ export default class Judges {
         store.dispatch(startPing());
         await wait(1500);
 
-        for (const judge of list) {
-            try {
-                const response = await rp.get({ url: judge.url, resolveWithFullResponse: true, time: true, timeout: 10000 });
-                this.onSuccess(judge, response);
-            } catch {
-                this.onError(judge);
-            }
+        for await (const chunk of arrayToChunks(list, 5)) {
+            await Promise.all(
+                chunk.map(async judge => {
+                    try {
+                        const response = await rp.get({ url: judge.url, resolveWithFullResponse: true, time: true, timeout: 10000 });
+                        this.onSuccess(judge, response);
+                    } catch {
+                        this.onError(judge);
+                    }
+                })
+            );
         }
     }
 

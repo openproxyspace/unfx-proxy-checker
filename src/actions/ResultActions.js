@@ -1,7 +1,5 @@
 import { getFilteredProxies } from '../store/selectors/getFilteredProxies';
 import { writeFile } from 'fs';
-import { sort } from 'js-flock';
-import { remote } from 'electron';
 import {
     RESULT_SHOW,
     RESULT_TOGGLE_ANON,
@@ -18,40 +16,84 @@ import {
     RESULT_SET_PORTS_ALLOW,
     RESULT_SORT,
     RESULT_EXPORT_TOGGLE,
-    RESULT_EXPORT_CHANGE_TYPE
+    RESULT_EXPORT_CHANGE_TYPE,
+    RESULT_EXPORT_CHANGE_AUTH_TYPE
 } from '../constants/ActionTypes';
 import { otherChanges } from './CheckingActions';
 import { wait } from '../misc/wait';
+import { ipcRenderer } from 'electron';
 
-const { dialog } = remote;
-
-export const getResultsInIpPort = items => {
+export const getResultsInIpPort = (items, authType = 1) => {
     let content = '';
 
     items.forEach(item => {
-        content += item.ip + ':' + item.port + '\r\n';
+        if (item.auth !== 'none') {
+            if (authType == 1) {
+                content += item.auth + '@' + item.host + ':' + item.port + '\r\n';
+            } else {
+                content += item.host + ':' + item.port + ':' + item.auth + '\r\n';
+            }
+        } else {
+            content += item.host + ':' + item.port + '\r\n';
+        }
     });
 
     return content;
 };
 
-export const getResultsInProtocolIpPort = items => {
+export const getResultsInProtocolIpPort = (items, authType = 1) => {
     let content = '';
 
     items.forEach(item => {
-        if (item.protocols.length == 1) {
-            if (item.protocols[0] == 'https') {
-                content += 'http://' + item.ip + ':' + item.port + '\r\n';
+        if (item.auth !== 'none') {
+            if (authType == 1) {
+                if (item.protocols.length == 1) {
+                    if (item.protocols[0] === 'https') {
+                        content += 'http://' + item.auth + '@' + item.host + ':' + item.port + '\r\n';
+                    } else {
+                        content += item.protocols[0] + '://' + item.auth + '@' + item.host + ':' + item.port + '\r\n';
+                    }
+                } else {
+                    if (item.protocols.indexOf('socks5') !== -1) {
+                        content += 'socks5://' + item.auth + '@' + item.host + ':' + item.port + '\r\n';
+                    } else if (item.protocols.indexOf('socks4') !== -1) {
+                        content += 'socks4://' + item.auth + '@' + item.host + ':' + item.port + '\r\n';
+                    } else {
+                        content += 'http://' + item.auth + '@' + item.host + ':' + item.port + '\r\n';
+                    }
+                }
             } else {
-                content += item.protocols[0] + '://' + item.ip + ':' + item.port + '\r\n';
+                if (item.protocols.length == 1) {
+                    if (item.protocols[0] === 'https') {
+                        content += 'http://' + item.host + ':' + item.port + ':' + item.auth + '\r\n';
+                    } else {
+                        content += item.protocols[0] + '://' + item.host + ':' + item.port + ':' + item.auth + '\r\n';
+                    }
+                } else {
+                    if (item.protocols.indexOf('socks5') !== -1) {
+                        content += 'socks5://' + item.host + ':' + item.port + ':' + item.auth + '\r\n';
+                    } else if (item.protocols.indexOf('socks4') !== -1) {
+                        content += 'socks4://' + item.host + ':' + item.port + ':' + item.auth + '\r\n';
+                    } else {
+                        content += 'http://' + item.host + ':' + item.port + ':' + item.auth + '\r\n';
+                    }
+                }
             }
         } else {
-            if (item.protocols.indexOf('socks5') !== -1) {
-                content += 'socks5://' + item.ip + ':' + item.port + '\r\n';
-            } else if (item.protocols.indexOf('socks4') !== -1) {
-                content += 'socks4://' + item.ip + ':' + item.port + '\r\n';
+            if (item.protocols.length == 1) {
+                if (item.protocols[0] === 'https') {
+                    content += 'http://' + item.host + ':' + item.port + '\r\n';
+                } else {
+                    content += item.protocols[0] + '://' + item.host + ':' + item.port + '\r\n';
+                }
             } else {
-                content += 'http://' + item.ip + ':' + item.port + '\r\n';
+                if (item.protocols.indexOf('socks5') !== -1) {
+                    content += 'socks5://' + item.host + ':' + item.port + '\r\n';
+                } else if (item.protocols.indexOf('socks4') !== -1) {
+                    content += 'socks4://' + item.host + ':' + item.port + '\r\n';
+                } else {
+                    content += 'http://' + item.host + ':' + item.port + '\r\n';
+                }
             }
         }
     });
@@ -60,22 +102,22 @@ export const getResultsInProtocolIpPort = items => {
 };
 
 export const save = () => async (dispatch, getState) => {
-    const saveType = getState().result.exporting.type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
+    const { type, authType } = getState().result.exporting;
+    const saveType = type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
+    const path = await ipcRenderer.invoke('choose-path', 'save');
 
-    const { filePath } = await dialog.showSaveDialog({
-        filters: [
-            {
-                name: 'Text Files',
-                extensions: ['txt']
-            }
-        ]
-    });
-
-    if (filePath) {
-        writeFile(filePath, saveType(getFilteredProxies(getState())), () => {
+    if (path) {
+        writeFile(path, saveType(getFilteredProxies(getState()), authType), () => {
             dispatch(toggleExport());
         });
     }
+};
+
+export const copy = () => async (dispatch, getState) => {
+    const { type, authType } = getState().result.exporting;
+    const saveType = type == 1 ? getResultsInIpPort : getResultsInProtocolIpPort;
+    navigator.clipboard.writeText(saveType(getFilteredProxies(getState()), authType));
+    dispatch(toggleExport());
 };
 
 export const close = () => ({
@@ -87,7 +129,7 @@ const createCountries = items => {
     const res = [];
 
     items.forEach(item => {
-        if (countries[item.country.name] == undefined) {
+        if (countries[item.country.name] === undefined) {
             countries[item.country.name] = {
                 count: 1,
                 flag: item.country.flag
@@ -105,7 +147,7 @@ const createCountries = items => {
         });
     });
 
-    return sort(res).desc(item => item.count);
+    return res.sort((a, b) => b.count - a.count);
 };
 
 export const showResult = result => async (dispatch, getState) => {
@@ -196,5 +238,10 @@ export const toggleExport = () => ({
 
 export const changeExportType = e => ({
     type: RESULT_EXPORT_CHANGE_TYPE,
+    value: e.target.value
+});
+
+export const changeExportAuthType = e => ({
+    type: RESULT_EXPORT_CHANGE_AUTH_TYPE,
     value: e.target.value
 });

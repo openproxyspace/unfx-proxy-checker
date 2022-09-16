@@ -47,7 +47,7 @@ export default class ResultItemsHeader extends React.PureComponent {
                     </svg>
                 </span>
                 <span className="main ip" onClick={this.sortBy.ip}>
-                    <span>Ip</span>
+                    <span>Host</span>
                     <SortSVG {...sorting} />
                 </span>
                 <span className="main port" onClick={this.sortBy.port}>

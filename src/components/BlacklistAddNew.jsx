@@ -1,7 +1,5 @@
 import React from 'react';
-import { remote } from 'electron';
-
-const { dialog } = remote;
+import { ipcRenderer } from 'electron';
 
 export default class BlacklistAddNew extends React.PureComponent {
     state = {
@@ -14,17 +12,8 @@ export default class BlacklistAddNew extends React.PureComponent {
     changePath = e => this.setState({ path: e.target.value });
 
     selectPath = async () => {
-        const {
-            filePaths: [path]
-        } = await dialog.showOpenDialog({
-            filters: [
-                {
-                    name: 'Text Files',
-                    extensions: ['txt']
-                }
-            ]
-        });
-    
+        const path = await ipcRenderer.invoke('choose-path', 'open');
+
         if (path) {
             this.setState({ path });
         }
@@ -38,13 +27,13 @@ export default class BlacklistAddNew extends React.PureComponent {
     };
 
     render = () => (
-        <div className="blacklist-add-new">
-            <input type="text" className="field" onChange={this.changeTitle} value={this.state.title} placeholder="Title" />
-            <div className="path">
-                <input type="text" className="field" onChange={this.changePath} value={this.state.path} placeholder="URL or Select path" />
+        <div className='blacklist-add-new'>
+            <input type='text' className='field' onChange={this.changeTitle} value={this.state.title} placeholder='Title' />
+            <div className='path'>
+                <input type='text' className='field' onChange={this.changePath} value={this.state.path} placeholder='URL or Select path' />
                 <button onClick={this.selectPath}>...</button>
             </div>
-            <button className="blacklist-add-new-button" onClick={this.add}>
+            <button className='blacklist-add-new-button' onClick={this.add}>
                 Add
             </button>
         </div>

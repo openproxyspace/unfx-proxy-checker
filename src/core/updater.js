@@ -1,12 +1,8 @@
 import rp from 'request-promise';
 import { FETCH_CONFIG } from '../constants/UpdateConstants';
-import { remote } from 'electron';
+import { version } from '../../package.json';
 
-const {
-    app: { getVersion }
-} = remote;
-
-export const currentVersion = getVersion();
+export const currentVersion = version;
 
 export const getLatestVersionInfo = async () => {
     try {

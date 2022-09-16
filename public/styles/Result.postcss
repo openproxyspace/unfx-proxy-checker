@@ -35,7 +35,7 @@
         margin: auto;
         overflow: hidden;
         background-color: var(--white-color);
-        border-radius: 0 0 0.5em 0.5em;
+        border-radius: 0 0 1em 1em;
 
         & input.search {
             padding: 1em 2em;
@@ -222,6 +222,17 @@
                     width: 100%;
                     transition: color 0.3s easeOne;
 
+                    & > div {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+
+                        &.ip {
+                            white-space: normal;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
                     &:hover {
                         & .counts {
                             background-color: var(--red-color);
@@ -260,6 +271,10 @@
                         color: var(--blue-color);
                         cursor: pointer;
 
+                        & .ip span {
+                            background-color: transparent;
+                        }
+
                         & span {
                             background-color: var(--blue-color);
                         }
@@ -282,6 +297,10 @@
                         color: var(--green-color);
                         cursor: pointer;
 
+                        & .ip span {
+                            background-color: transparent;
+                        }
+
                         & span {
                             background-color: var(--green-color);
                         }
@@ -300,6 +319,19 @@
 
                 & .ip {
                     width: 15%;
+
+                    & span {
+                        width: 100%;
+                        font-size: 0.75em;
+                        font-weight: 700;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        transition: color 0.3s easeOne;
+                        color: color(var(--grey-color) alpha(75%));
+                        padding: 0;
+                        background-color: transparent;
+                    }
                 }
 
                 & .port {
@@ -627,11 +659,13 @@
                     color: color(var(--neo-black-color) alpha(85%));
                 }
 
-                &:hover .country .city {
+                &:hover .country .city,
+                &:hover .ip span {
                     color: color(#ddd alpha(85%)) !important;
                 }
 
-                & .country .city:not(:empty) {
+                & .country .city:not(:empty),
+                & .ip span:not(:empty) {
                     color: color(#ddd alpha(75%));
                 }
 

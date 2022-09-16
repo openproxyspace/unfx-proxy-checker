@@ -15,6 +15,8 @@ export default {
         contentBase: baseConfig.output.path,
         publicPath: baseConfig.output.publicPath,
         historyApiFallback: true,
+        host: 'localhost',
+        port: 32321,
         hotOnly: true
     },
     ...(isDev

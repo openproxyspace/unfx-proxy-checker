@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { sort } from 'js-flock';
+import { sort } from 'fast-sort';
 
 const getItems = state => state.result.items;
 
@@ -134,16 +134,4 @@ const sortFilter = (items, sorting) => {
     }
 };
 
-export const getFilteredProxies = createSelector(
-    getItems,
-    getProtocols,
-    getAnons,
-    getCountries,
-    getSearch,
-    isOnlyKeepAlive,
-    getInBlacklists,
-    getMaxTimeout,
-    getPorts,
-    getCurrentSorting,
-    filter
-);
+export const getFilteredProxies = createSelector(getItems, getProtocols, getAnons, getCountries, getSearch, isOnlyKeepAlive, getInBlacklists, getMaxTimeout, getPorts, getCurrentSorting, filter);

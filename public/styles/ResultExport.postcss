@@ -50,77 +50,101 @@
         }
 
         & .export-types {
-            display: flex;
-            flex-flow: row nowrap;
-            align-items: center;
             margin-bottom: 2em;
-            justify-content: space-between;
+            width: 100%;
 
-            & label {
-                cursor: pointer;
-                width: calc(50% - 1em);
-                user-select: none;
+            & .title {
+                color: color(var(--grey-color) alpha(85%));
+                margin-bottom: 1rem;
+                font-weight: 700;
+                font-size: 0.9em;
+            }
 
-                & input {
-                    display: none;
+            & .items {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: space-between;
 
-                    &:checked + .type-card {
-                        border: 1px solid color(var(--green-color) alpha(45%));
+                & label {
+                    cursor: pointer;
+                    width: calc(50% - 1em);
+                    user-select: none;
 
-                        & textarea {
-                            color: color(var(--green-color) alpha(85%));
-                        }
+                    & input {
+                        display: none;
 
-                        & .type-desc {
-                            border-bottom: 1px dashed color(var(--green-color) alpha(45%));
-                            color: color(var(--green-color) alpha(60%));
+                        &:checked + .type-card {
+                            border: 1px solid color(var(--green-color) alpha(45%));
 
-                            & span {
-                                background-color: color(var(--green-color) alpha(85%));
+                            & textarea {
+                                color: color(var(--green-color) alpha(85%));
+                            }
+
+                            & .type-desc {
+                                border-bottom: 1px dashed color(var(--green-color) alpha(45%));
+                                color: color(var(--green-color) alpha(60%));
+
+                                &:last-child {
+                                    border-bottom: none;
+                                }
+
+                                & span {
+                                    background-color: color(var(--green-color) alpha(85%));
+                                }
                             }
                         }
                     }
-                }
 
-                & .type-card {
-                    padding: 0.75em 1em;
-                    border-radius: 0.5em;
-                    border: 1px solid color(var(--grey-color) alpha(15%));
-                    transition: border-color 0.5s easeOne;
+                    & .type-card {
+                        padding: 0.75em 1em;
+                        border-radius: 0.5em;
+                        border: 1px solid color(var(--grey-color) alpha(15%));
+                        transition: border-color 0.5s easeOne;
 
-                    & textarea {
-                        resize: none;
-                        padding: 0;
-                        border-radius: 0;
-                        cursor: default;
-                        background-color: transparent;
-                        font-size: 0.9em;
-                        width: 275px;
-                        color: color(var(--grey-color) alpha(45%));
-                        user-select: none;
-                        transition: color 0.5s easeOne;
-                    }
+                        & textarea {
+                            resize: none;
+                            padding: 0;
+                            border-radius: 0;
+                            cursor: default;
+                            background-color: transparent;
+                            font-size: 0.9em;
+                            width: 275px;
+                            color: color(var(--grey-color) alpha(45%));
+                            user-select: none;
+                            transition: color 0.5s easeOne;
+                            white-space: pre;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
 
-                    & .type-desc {
-                        border-bottom: 1px dashed color(var(--grey-color) alpha(15%));
-                        padding-bottom: 0.75em;
-                        margin-bottom: 0.75em;
-                        font-weight: 700;
-                        color: color(var(--grey-color) alpha(45%));
-                        transition: color 0.5s easeOne, border-color 0.5s easeOne;
+                        & .type-desc {
+                            border-bottom: 1px dashed color(var(--grey-color) alpha(15%));
+                            padding-bottom: 0.75em;
+                            margin-bottom: 0.75em;
+                            font-weight: 700;
+                            color: color(var(--grey-color) alpha(45%));
+                            transition: color 0.5s easeOne, border-color 0.5s easeOne;
 
-                        & span {
-                            font-size: 0.75em;
-                            display: inline-block;
-                            padding: 0.25em 0.75em;
-                            border-radius: 1.75em;
-                            background-color: color(var(--grey-color) alpha(45%));
-                            color: var(--white-color);
-                            margin: 0 0.25em;
-                            transition: background-color 0.5s easeOne;
+                            &:last-child {
+                                border-bottom: none;
+                                padding-bottom: 0;
+                                margin-bottom: 0;
+                            }
 
-                            &:first-child {
-                                margin-left: 0;
+                            & span {
+                                font-size: 0.75em;
+                                display: inline-block;
+                                padding: 0.25em 0.75em;
+                                border-radius: 1.75em;
+                                background-color: color(var(--grey-color) alpha(45%));
+                                color: var(--white-color);
+                                margin: 0 0.25em;
+                                transition: background-color 0.5s easeOne;
+
+                                &:first-child {
+                                    margin-left: 0;
+                                }
                             }
                         }
                     }
@@ -142,6 +166,10 @@
             }
         }
 
+        & .export-types .title {
+            color: color(#ddd alpha(65%));
+        }
+
         & .export-types label {
             & input:checked + .type-card {
                 border: 1px solid color(var(--green-color) alpha(45%));
@@ -153,6 +181,10 @@
                 & .type-desc {
                     border-bottom: 1px dashed color(var(--green-color) alpha(45%));
                     color: color(var(--green-color) alpha(60%));
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
 
                     & span {
                         color: color(var(--neo-black-color) alpha(85%));
@@ -171,6 +203,10 @@
                 & .type-desc {
                     border-bottom: 1px dashed color(#ddd alpha(15%));
                     color: color(#ddd alpha(45%));
+                    
+                    &:last-child {
+                        border-bottom: none;
+                    }
 
                     & span {
                         background-color: color(#ddd alpha(5%));

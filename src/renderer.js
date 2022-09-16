@@ -1,18 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import Main from './containers/Main';
 import { Provider } from 'react-redux';
 import store from './store/index';
 
-const root = document.getElementById('root');
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const render = () => {
-    ReactDOM.render(
-        <Provider store={store}>
-            <Main />
-        </Provider>,
-        root
-    );
-};
-
-render();
+root.render(
+    <Provider store={store}>
+        <Main />
+    </Provider>
+);

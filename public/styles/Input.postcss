@@ -10,47 +10,76 @@
         user-select: none;
         margin-bottom: 2em;
         align-items: center;
+        width: 100%;
 
-        & .select-event {
-            min-height: 11em;
-            display: flex;
+        & .wrap {
             width: calc(50% - 1em);
-            background-color: color(var(--green-color) alpha(25%));
-            justify-content: center;
-            align-items: center;
-            border-radius: 0.5em;
-            color: var(--white-color);
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.5s easeOne, color 0.5s easeOne;
 
-            &:hover {
-                color: color(var(--white-color) alpha(85%));
-                background-color: color(var(--green-color) alpha(75%));
+            & .from-clipboard {
+                padding: 0.25rem 0.75rem;
+                font-size: 0.85em;
+                border-radius: 1rem 1rem 0.5rem 0.5rem;
+                font-weight: 700;
+                color: var(--white-color);
+                white-space: nowrap;
+                background-color: color(var(--green-color) alpha(45%));
+                margin-bottom: 0.5rem;
+                cursor: pointer;
+                text-align: center;
+                transition: background-color 0.5s easeOne, color 0.5s easeOne;
 
-                & svg {
-                    fill: color(var(--white-color) alpha(85%));
+                &:hover {
+                    color: color(var(--white-color) alpha(95%));
+                    background-color: color(var(--green-color) alpha(95%));
+
+                    & svg {
+                        fill: color(var(--white-color) alpha(95%));
+                    }
                 }
             }
 
-            & svg {
-                width: 2em;
-                height: 2em;
-                fill: var(--white-color);
-                margin-right: 1em;
-                transition: fill 0.5s easeOne;
+            & .select-event {
+                min-height: 11em;
+                display: flex;
+                background-color: color(var(--green-color) alpha(45%));
+                justify-content: center;
+                align-items: center;
+                border-radius: 0.5em;
+                color: var(--white-color);
+                font-weight: 700;
+                cursor: pointer;
+                transition: background-color 0.5s easeOne, color 0.5s easeOne;
+
+                &:hover {
+                    color: color(var(--white-color) alpha(95%));
+                    background-color: color(var(--green-color) alpha(95%));
+
+                    & svg {
+                        fill: color(var(--white-color) alpha(95%));
+                    }
+                }
+
+                & svg {
+                    width: 2em;
+                    height: 2em;
+                    fill: var(--white-color);
+                    margin-right: 1em;
+                    transition: fill 0.5s easeOne;
+                }
             }
         }
 
         & .data {
             width: calc(50% - 1em);
             animation: fade-left 0.7s easeOne both;
+            overflow: hidden;
 
             & .stat {
                 margin-top: 1em;
 
                 & .item {
                     padding-bottom: 0.5em;
+                    display: flex;
 
                     &:last-child {
                         padding-bottom: 0;
@@ -63,6 +92,13 @@
                         border-radius: 1em;
                         font-weight: 700;
                         color: var(--white-color);
+                        white-space: nowrap;
+
+                        &:last-child {
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
 
                         &:nth-child(1) {
                             margin-right: 0.5em;
@@ -86,7 +122,7 @@
             width: 2em;
             height: 2em;
             margin: auto;
-            fill: color(var(--green-color) alpha(75%));
+            fill: color(var(--green-color) alpha(85%));
         }
 
         & .preview {
@@ -110,6 +146,14 @@
     border-top: 1px solid color(var(--white-color) alpha(5%));
 
     & section.load-file-area {
+        & .from-clipboard {
+            color: color(var(--neo-black-color) alpha(75%));
+
+            &:hover {
+                color: color(var(--neo-black-color) alpha(95%));
+            }
+        }
+
         & .select-event {
             color: color(var(--neo-black-color) alpha(75%));
 

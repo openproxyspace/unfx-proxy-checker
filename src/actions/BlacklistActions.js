@@ -1,7 +1,5 @@
-import { remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { BLACKLIST_CHANGE_ITEM_PATH, BLACKLIST_ADD_ITEM, BLACKLIST_REMOVE_ITEM, BLACKLIST_TOGGLE_OPTION, BLACKLIST_SET_ACTIVE_ITEM } from '../constants/ActionTypes';
-
-const { dialog } = remote;
 
 export const changePath = (title, path) => ({
     type: BLACKLIST_CHANGE_ITEM_PATH,
@@ -10,16 +8,7 @@ export const changePath = (title, path) => ({
 });
 
 export const selectPath = title => async dispatch => {
-    const {
-        filePaths: [path]
-    } = await dialog.showOpenDialog({
-        filters: [
-            {
-                name: 'Text Files',
-                extensions: ['txt']
-            }
-        ]
-    });
+    const path = await ipcRenderer.invoke('choose-path', 'open');
 
     if (path) {
         dispatch(changePath(title, path));
