@@ -76,44 +76,48 @@ const createWindow = () => {
     window.on('unmaximize', () => {
         window.webContents.send('on-window-unmaximize');
     });
-
-    ipcMain.handle('choose-path', async (event, action = 'save') => {
-        try {
-            const { filePaths, filePath } = await (action === 'save' ? dialog.showSaveDialog : dialog.showOpenDialog)({
-                filters: [
-                    {
-                        name: 'Text Files',
-                        extensions: ['txt']
-                    }
-                ],
-                properties: ['multiSelections']
-            });
-
-            if (filePaths?.length) return filePaths[0];
-            if (filePath) return filePath;
-        } catch (error) {
-            console.error(error);
-        }
-    });
-
-    ipcMain.handle('choose-multi', async () => {
-        try {
-            const { filePaths } = await dialog.showOpenDialog({
-                filters: [
-                    {
-                        name: 'Text Files',
-                        extensions: ['txt']
-                    }
-                ],
-                properties: ['multiSelections']
-            });
-
-            if (filePaths.length) return filePaths;
-        } catch (error) {
-            console.error(error);
-        }
-    });
 };
+
+ipcMain.handle('choose-path', async (event, action = 'save') => {
+    try {
+        const { filePaths, filePath } = await (action === 'save' ? dialog.showSaveDialog : dialog.showOpenDialog)({
+            filters: [
+                {
+                    name: 'Text Files',
+                    extensions: ['txt']
+                }
+            ],
+            properties: ['multiSelections']
+        });
+
+        if (filePaths) return filePaths[0];
+        if (filePath) return filePath;
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+ipcMain.handle('choose-multi', async () => {
+    try {
+        const { filePaths } = await dialog.showOpenDialog({
+            filters: [
+                {
+                    name: 'Text Files',
+                    extensions: ['txt']
+                }
+            ],
+            properties: ['multiSelections']
+        });
+
+        if (filePaths.length) return filePaths;
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+ipcMain.on('getUserData', event => {
+    event.returnValue = app.getPath('userData');
+});
 
 app.on('ready', () => {
     createWindow();

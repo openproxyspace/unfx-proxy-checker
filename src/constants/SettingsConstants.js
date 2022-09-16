@@ -1,13 +1,15 @@
 import path from 'path';
-import { remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { isDev, isPortable } from './AppConstants';
+
+const userData = ipcRenderer.sendSync('getUserData');
 
 export const SETTINGS_FILE_NAME = 'settings.unfx.checker.json';
 export const SETTINGS_FILE_PATH = isPortable
     ? path.resolve(process.env.PORTABLE_EXECUTABLE_DIR, SETTINGS_FILE_NAME)
     : isDev
     ? path.resolve(SETTINGS_FILE_NAME)
-    : path.resolve(remote.app.getPath('userData'), SETTINGS_FILE_NAME);
+    : path.resolve(userData, SETTINGS_FILE_NAME);
 
 export const DEFAULT_CORE_SETTINGS = {
     threads: 350,
@@ -66,14 +68,12 @@ export const DEFAULT_JUDGES_SETTINGS = {
         {
             active: true,
             url: 'https://api.ipify.org/',
-            validate:
-                '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
         },
         {
             active: true,
             url: 'https://ident.me/',
-            validate:
-                '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
         }
     ]
 };
