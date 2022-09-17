@@ -133,7 +133,6 @@ app.on('activate', () => {
 
 app.on('window-all-closed', async () => {
     if (process.platform !== 'darwin') {
-        // ipcMain.
         app.quit();
     }
 });
