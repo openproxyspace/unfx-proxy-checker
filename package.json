@@ -1,6 +1,6 @@
 {
     "name": "unfx-proxy-checker",
-    "version": "1.7.0",
+    "version": "1.7.2",
     "main": "public/main.js",
     "license": "MIT",
     "author": {
@@ -71,7 +71,7 @@
         "request": "^2.88.2",
         "request-promise": "^4.2.6",
         "reselect": "^4.1.6",
-        "socks-proxy-agent": "^7.0.0",
+        "socks-proxy-agent": "^4.0.2",
         "style-loader": "^1.0.0",
         "url-loader": "^2.1.0",
         "webpack": "^4.25.1",
@@ -99,25 +99,12 @@
             "icon": "/public/icons/icon.ico",
             "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
         },
-        "dmg": {
-            "contents": [
-                {
-                    "x": 130,
-                    "y": 220
-                },
-                {
-                    "x": 410,
-                    "y": 220,
-                    "type": "link",
-                    "path": "/Applications"
-                }
-            ]
-        },
         "linux": {
+            "icon": "./public/icons/icon.png",
             "target": [
-                "AppImage",
-                "deb"
-            ]
+                "AppImage"
+            ],
+            "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
         },
         "publish": [
             {
