@@ -96,7 +96,7 @@ export default class Checker {
         return null;
     }
 
-    getAgent({ type, auth, host, port }, protocol) {
+    getAgent({ auth, host, port }, protocol) {
         if (auth !== 'none') {
             if (protocol === 'socks4' || protocol === 'socks5') {
                 const agent = new SocksProxyAgent(`${protocol}://${auth}@${host}:${port}`);
