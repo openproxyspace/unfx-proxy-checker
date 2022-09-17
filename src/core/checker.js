@@ -71,10 +71,10 @@ export default class Checker {
 
     async checkProtocol(proxyObject, protocol, retries = 0) {
         try {
-            const url = protocol === 'http' ? this.judges.getUsual() : protocol === 'https' ? this.judges.getSSL() : this.judges.getAny();
-            const response = await collar(rp.get(url, { ...this.initialRequestConfig, ...this.getAgent(proxyObject, protocol) }), this.initialRequestConfig.timeout);
+            const judge = protocol === 'http' ? this.judges.getUsual() : protocol === 'https' ? this.judges.getSSL() : this.judges.getAny();
+            const response = await collar(rp.get(judge, { ...this.initialRequestConfig, ...this.getAgent(proxyObject, protocol) }), this.initialRequestConfig.timeout);
 
-            this.onResponse(response, proxyObject, protocol);
+            this.onResponse(response, proxyObject, protocol, judge);
         } catch ({ statusCode }) {
             this.onError(proxyObject, protocol, retries, statusCode);
         }
@@ -164,14 +164,14 @@ export default class Checker {
         }
     }
 
-    onResponse(response, proxyObject, protocol) {
+    onResponse(response, proxyObject, protocol, judge) {
         if (this.stopped) {
             return;
         }
 
         const proxyLink = this.getProxyObjectLink(proxyObject);
 
-        if (this.judges.validate(response.body, response.request.href)) {
+        if (this.judges.validate(response.body, judge)) {
             this.states[proxyLink].permanent.timeout = response.elapsedTime;
             this.states[proxyLink].permanent.ip = this.getIp(response.body);
 
@@ -219,7 +219,7 @@ export default class Checker {
         const proxyLink = this.getProxyObjectLink(proxyObject);
 
         if (!statusCode && this.options.retries > 0 && retries < this.options.retries) {
-            this.checkProtocol(proxyLink, protocol, ++retries);
+            this.checkProtocol(proxyObject, protocol, ++retries);
         } else {
             this.states[proxyLink].doneLevel++;
             this.isDone(proxyLink);
