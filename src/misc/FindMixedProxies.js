@@ -1,4 +1,5 @@
 import url from 'url';
+import { isIP } from './regexes.js';
 
 const getProxyType = string => {
     try {
@@ -29,7 +30,7 @@ const getProxyType = string => {
 
                 if (nextPort >= 0 && nextPort <= 65535) {
                     return {
-                        type: 'url',
+                        type: isIP(second.hostname) ? 'v4' : 'url',
                         auth: `${log}:${pass}`,
                         host: second.hostname,
                         port: nextPort
@@ -40,7 +41,7 @@ const getProxyType = string => {
             }
 
             return {
-                type: 'url',
+                type: isIP(second.hostname) ? 'v4' : 'url',
                 auth: second.auth ? second.auth : 'none',
                 host: second.hostname,
                 port: Number(second.port)
