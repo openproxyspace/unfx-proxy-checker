@@ -264,7 +264,7 @@ const codes = {
     ZZ: { flag: 'unknown', name: 'Unknown' }
 };
 
-const mmdbPath = path.resolve(isDev ? './files/GeoLite2-City.mmdb' : './resources/files/GeoLite2-City.mmdb');
+const mmdbPath = path.resolve(isDev ? './files/GeoLite2-City.mmdb' : process.resourcesPath + '/files/GeoLite2-City.mmdb');
 const reader = new Reader(readFileSync(mmdbPath));
 
 const extractCity = city => {

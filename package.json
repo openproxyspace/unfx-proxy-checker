@@ -29,7 +29,9 @@
         "start:main": "electron --require @babel/register src/index",
         "start:renderer": "cross-env NODE_ENV=development webpack-dev-server -d --config webpack.config.renderer.babel.js",
         "package": "npm run build && electron-builder --win",
-        "publish": "npm run build && electron-builder --win --publish always"
+        "package-linux": "npm run build && electron-builder --linux",
+        "publish": "npm run build && electron-builder --win --publish always",
+        "publish-linux": "npm run build && electron-builder --linux --publish always"
     },
     "devDependencies": {
         "@babel/cli": "^7.18.10",
@@ -104,7 +106,8 @@
             "target": [
                 "AppImage"
             ],
-            "artifactName": "${name}-v${version}-${arch}-${os}-installer.${ext}"
+            "category": "Network",
+            "artifactName": "${name}-v${version}-${arch}-${os}.${ext}"
         },
         "publish": [
             {
