@@ -67,7 +67,7 @@ export const DEFAULT_JUDGES_SETTINGS = {
         },
         {
             active: true,
-            url: 'https://api.ipify.org/',
+            url: 'https://api.proxyscrape.com/ip.php',
             validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
         },
         {
@@ -80,7 +80,7 @@ export const DEFAULT_JUDGES_SETTINGS = {
 
 export const DEFAULT_IP_SETTINGS = {
     current: '',
-    lookupUrl: 'https://api.ipify.org'
+    lookupUrl: 'https://api.proxyscrape.com/ip.php'
 };
 
 export const DEFAULT_BLACKLIST_SETTINGS = {
