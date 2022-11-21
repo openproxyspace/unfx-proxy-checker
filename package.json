@@ -1,6 +1,6 @@
 {
     "name": "proxy-checker",
-    "version": "1.7.3",
+    "version": "1.7.4",
     "main": "public/main.js",
     "license": "MIT",
     "author": {
