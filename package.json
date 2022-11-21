@@ -15,12 +15,12 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/assnctr/unfx-proxy-checker"
+        "url": "https://github.com/ProxyScrape/proxy-checker"
     },
     "bugs": {
-        "url": "https://github.com/assnctr/unfx-proxy-checker/issues"
+        "url": "https://github.com/ProxyScrape/proxy-checker/issues"
     },
-    "homepage": "https://openproxy.space/software/proxy-checker",
+    "homepage": "https://proxyscrape.com/proxy-checker",
     "scripts": {
         "build": "run-p build:*",
         "build:main": "cross-env NODE_ENV=production webpack -p --config webpack.config.main.babel.js",
