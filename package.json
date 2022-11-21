@@ -1,12 +1,12 @@
 {
-    "name": "unfx-proxy-checker",
-    "version": "1.7.2",
+    "name": "proxy-checker",
+    "version": "1.7.3",
     "main": "public/main.js",
     "license": "MIT",
     "author": {
-        "name": "Open Proxy Space",
-        "email": "r060773d@openproxy.space",
-        "url": "https://openproxy.space/"
+        "name": "ProxyScrape",
+        "email": "support@proxyscrape.com",
+        "url": "https://proxyscrape.com/home"
     },
     "keywords": [
         "unfx",
@@ -112,13 +112,13 @@
         "publish": [
             {
                 "provider": "github",
-                "owner": "assnctr",
-                "repo": "unfx-proxy-checker",
+                "owner": "ProxyScrape",
+                "repo": "proxy-checker",
                 "private": false
             }
         ],
-        "productName": "Unfx Proxy Checker",
-        "copyright": "2018-Present Open Proxy Space",
+        "productName": "ProxyScrape Proxy Checker",
+        "copyright": "ProxyScrape",
         "extraResources": [
             "./files/**"
         ],
