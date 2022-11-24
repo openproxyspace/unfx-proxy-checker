@@ -6,3 +6,4 @@ settings.unfx.checker.json
 dist
 package-lock.json
 tests
+yarn.lock
