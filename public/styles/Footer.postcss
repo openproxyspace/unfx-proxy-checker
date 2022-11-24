@@ -1,9 +1,14 @@
 footer {
-    padding: 2em;
+    padding-top: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
     display: flex;
     flex-flow: row wrap;
-    max-width: 1600px;
+    width: 100%;
     margin: auto;
+    background-color: #E9F6FF;
+    position: fixed;
+    bottom: 0;
 
     & .links {
         margin-right: 1.5em;
@@ -39,9 +44,9 @@ footer {
             }
 
             & svg {
-                width: 2em;
-                height: 2em;
-                fill: color(var(--grey-color) alpha(80%));
+                width: 20px;
+                height: 20px;
+                fill: #3464E0;
                 transition: fill 0.5s easeOne;
             }
         }
@@ -56,22 +61,22 @@ footer {
         & p {
             margin: 0;
             border-radius: 1.25em;
-            color: var(--blue-color);
+            color: var(--grey-color);
 
             & a {
                 display: inline-flex;
                 align-items: center;
                 margin: 0 0.25em;
-                text-decoration: none;
+                text-decoration: underline;
                 font-weight: 700;
                 transition: color 0.5s easeOne;
-                color: color(var(--green-color) alpha(70%));
+                color: #3464E0;
 
                 &:hover {
-                    color: var(--green-color);
+                    color: var(--blue-color);
 
                     & svg {
-                        fill: var(--green-color);
+                        fill: var(--blue-color);
                     }
                 }
 
@@ -80,7 +85,7 @@ footer {
                     height: 1em;
                     margin-left: 0.35em;
                     transition: fill 0.5s easeOne;
-                    fill: color(var(--green-color) alpha(70%));
+                    fill: color(var(--blue-color) alpha(70%));
                 }
             }
         }
@@ -91,12 +96,12 @@ footer {
         width: 100%;
         margin: 2em auto 0 auto;
         padding: 0.5em 1em;
-        max-width: 960px;
         font-weight: 700;
-        border-radius: 1.5em;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         position: relative;
         color: var(--white-color-back);
-        background: linear-gradient(127deg, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+        background: #3A4368;
 
         & .d {
             margin-left: auto;
@@ -105,16 +110,16 @@ footer {
         &:before {
             content: attr(data-version);
             position: absolute;
+            right: 30px;
             width: 80px;
             display: flex;
+            float: right;
             justify-content: center;
             align-items: center;
-            color: color(var(--green-color) alpha(65%));
+            color: #fff;
             height: 50px;
             margin-top: -17px;
             border-radius: 50px;
-            left: calc(50% - 40px);
-            background-color: color(var(--white-color-back) alpha(85%));
         }
 
         & a {
@@ -125,10 +130,10 @@ footer {
             transition: color 0.5s easeOne;
 
             &:nth-child(1):hover {
-                color: var(--green-color);
+                color: var(--blue-color);
 
                 & svg {
-                    fill: var(--green-color);
+                    fill: var(--blue-color);
                 }
             }
 
@@ -171,10 +176,10 @@ footer {
         color: var(--back-black-color);
 
         &:nth-child(1):hover {
-            color: var(--green-color);
+            color: var(--blue-color);
 
             & svg {
-                fill: var(--green-color);
+                fill: var(--blue-color);
             }
         }
 
@@ -192,18 +197,18 @@ footer {
     }
 
     & .links a {
-        color: color(var(--green-color) alpha(60%));
+        color: color(var(--blue-color) alpha(60%));
 
         &:hover {
-            color: color(var(--green-color) alpha(85%));
+            color: #3464E0;
 
             & svg {
-                fill: var(--green-color);
+                fill: var(--blue-color);
             }
         }
 
         & svg {
-            fill: color(var(--green-color) alpha(60%));
+            fill: color(var(--blue-color) alpha(60%));
         }
     }
 }

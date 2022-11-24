@@ -21,7 +21,7 @@ const Judges = ({ items, swap, change, add, remove, toggleOption }) => (
                 </div>
             </div>
         </div>
-        <div className="block middle">
+        <div className="block sub-middle">
             <div className="sub-block">
                 <div className="title">
                     <span className="name">Options</span>

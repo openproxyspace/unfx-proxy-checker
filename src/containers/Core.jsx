@@ -51,7 +51,7 @@ const Core = ({ protocols, captureFullData, captureServer, threads, timeout, ret
                     <span className='value'>{retries > 0 ? retries : 'Off'}</span>
                 </div>
                 <div className='content'>
-                    <input type='range' name='retries' min='0' max='10' onChange={changeOption} value={retries} />
+                    <input type='range' name='retries' min='0' max='10' onChange={changeOption} value={retries}/>
                 </div>
             </div>
             <div className='block slider small'>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
+import DropDocIcon from './ui/DropDocIcon';
 
 export default class BlacklistAddNew extends React.PureComponent {
     state = {
@@ -28,14 +29,17 @@ export default class BlacklistAddNew extends React.PureComponent {
 
     render = () => (
         <div className='blacklist-add-new'>
-            <input type='text' className='field' onChange={this.changeTitle} value={this.state.title} placeholder='Title' />
+            
             <div className='path'>
                 <input type='text' className='field' onChange={this.changePath} value={this.state.path} placeholder='URL or Select path' />
-                <button onClick={this.selectPath}>...</button>
+                <button className="block-list-btn" onClick={this.selectPath}><DropDocIcon scale="30"/></button>
             </div>
-            <button className='blacklist-add-new-button' onClick={this.add}>
-                Add
-            </button>
+            <div className="path">
+                <input type='text' className='field' onChange={this.changeTitle} value={this.state.title} placeholder='Title' />
+                <button className='blacklist-add-new-button' onClick={this.add}>
+                    Add
+                </button>
+            </div>
         </div>
     );
 }

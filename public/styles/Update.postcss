@@ -40,7 +40,7 @@
 
         & div {
             position: absolute;
-            border: 4px solid color(var(--green-color) alpha(80%));
+            border: 4px solid color(var(--blue-color) alpha(80%));
             opacity: 1;
             border-radius: 50%;
             animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -62,7 +62,7 @@
             transform: translateY(0);
             border-radius: 0.75em;
             background-color: var(--white-color);
-            background: linear-gradient(127deg, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+            background: linear-gradient(127deg, color(var(--blue-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
             opacity: 1;
             transition: transform 0.7s easeOne;
             padding: 2em;
@@ -71,15 +71,15 @@
             & a {
                 font-weight: 700;
                 text-decoration: none;
-                color: color(var(--green-color) alpha(75%));
-                background-color: color(var(--green-color) alpha(25%));
+                color: color(var(--blue-color) alpha(75%));
+                background-color: color(var(--blue-color) alpha(25%));
                 transition: color 0.7s easeOne, background-color 0.7s easeOne;
                 border-radius: 1.25em;
                 padding: 0.5em 1.25em;
 
                 &:hover {
                     color: var(--white-color);
-                    background-color: color(var(--green-color) alpha(80%));
+                    background-color: color(var(--blue-color) alpha(80%));
                 }
             }
 
@@ -120,13 +120,13 @@
 
 @keyframes background-color-change {
     0% {
-        background-color: color(var(--green-color) alpha(35%));
+        background-color: color(var(--blue-color) alpha(35%));
     }
     50% {
         background-color: color(var(--blue-color) alpha(35%));
     }
     100% {
-        background-color: color(var(--green-color) alpha(35%));
+        background-color: color(var(--blue-color) alpha(35%));
     }
 }
 

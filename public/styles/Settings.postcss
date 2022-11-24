@@ -13,28 +13,24 @@
             margin-right: 1em;
             transition: color 0.3s easeOne, background-color 0.3s easeOne;
             outline: none;
-            border-radius: 1.75em;
-            background-color: color(var(--green-color) alpha(25%));
-            color: color(var(--green-color) alpha(65%));
+            border-radius: 0.75em;
+            border: 1px solid #3464E0;
+            color: #3464E0;
 
             &:not(.react-tabs__tab--selected):hover {
                 color: var(--white-color);
-                background-color: color(var(--green-color) alpha(75%));
+                background-color: color(var(--blue-color) alpha(75%));
             }
         }
 
         & .react-tabs__tab--selected {
             color: var(--white-color);
-            background-color: color(var(--green-color) alpha(85%));
+            background-color: #3464E0;
         }
     }
 
-    & .react-tabs__tab-panel {
-        margin-right: -2em;
-    }
-
     & .judges-list {
-        background-image: linear-gradient(to right, color(var(--green-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
+        
         border-radius: 0.35em;
         overflow: hidden;
 
@@ -53,7 +49,7 @@
                     font-weight: 700;
                     justify-content: center;
                     color: var(--white-color);
-                    background-color: color(var(--green-color) alpha(35%));
+                    background-color: color(var(--blue-color) alpha(35%));
                     padding: 1em;
                     border-radius: 0.35em;
                     width: 100%;
@@ -64,18 +60,12 @@
             & .item {
                 margin-bottom: 1em;
                 padding-bottom: 1em;
-                border-bottom: 1px solid color(var(--white-color) alpha(35%));
+                border-bottom: 1px solid #C1C1C1;
 
                 &:last-child {
                     margin-bottom: 0;
                     border-bottom: none;
                     padding-bottom: 0em;
-                }
-
-                &:hover {
-                    & svg.close-svg {
-                        opacity: 1 !important;
-                    }
                 }
 
                 & .title-remove {
@@ -100,15 +90,14 @@
 
                     & svg.close-svg {
                         margin-left: auto;
-                        fill: color(var(--green-color) alpha(35%));
+                        fill: #3464E0;
                         cursor: pointer;
                         width: 1em;
                         height: 1em;
-                        opacity: 0;
                         transition: fill 0.5s easeOne;
 
                         &:hover {
-                            fill: color(var(--green-color) alpha(75%));
+                            fill: #3464E055;
                         }
                     }
                 }
@@ -132,7 +121,7 @@
 
     & .black-list {
         overflow: hidden;
-        background-image: linear-gradient(to right, color(var(--green-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
+        background-image: linear-gradient(to right, color(var(--blue-color) alpha(25%)), color(var(--blue-color) alpha(25%)));
         border-radius: 0.35em;
         margin-top: 1em;
 
@@ -151,7 +140,7 @@
                     font-weight: 700;
                     justify-content: center;
                     color: var(--white-color);
-                    background-color: color(var(--green-color) alpha(35%));
+                    background-color: color(var(--blue-color) alpha(35%));
                     padding: 1em;
                     border-radius: 0.35em;
                     width: 100%;
@@ -162,18 +151,12 @@
             & .item {
                 margin-bottom: 1em;
                 padding-bottom: 1em;
-                border-bottom: 1px solid color(var(--white-color) alpha(35%));
+                border-bottom: 1px solid #C1C1C1;
 
                 &:last-child {
                     margin-bottom: 0;
                     border-bottom: none;
                     padding-bottom: 0em;
-                }
-
-                &:hover {
-                    & svg.close-svg {
-                        opacity: 1 !important;
-                    }
                 }
 
                 & .title-remove {
@@ -198,15 +181,15 @@
 
                     & svg.close-svg {
                         margin-left: auto;
-                        fill: color(var(--green-color) alpha(35%));
+                        fill: #3464E0;
                         cursor: pointer;
                         width: 1em;
                         height: 1em;
-                        opacity: 0;
+                        
                         transition: fill 0.5s easeOne;
 
                         &:hover {
-                            fill: color(var(--green-color) alpha(75%));
+                            fill: #3464E055;
                         }
                     }
                 }
@@ -240,7 +223,7 @@
         }
 
         & .blacklist-add-new-button {
-            margin-top: 1em;
+            margin-top: 0;
         }
     }
 
@@ -260,7 +243,6 @@
         display: inline-flex;
         flex-flow: row wrap;
         margin-bottom: 2em;
-        padding-right: 2em;
         animation: fade-one 0.7s easeOne;
 
         &.slider .content {
@@ -269,20 +251,22 @@
 
         & .sub-block {
             width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
 
             &:not(:first-child) .title {
-                margin-top: 2em;
+                margin-top: 1em;
             }
-        }
 
+        }
+       
         & .content {
             display: flex;
             width: 100%;
-            padding-bottom: 1em;
-            border-bottom: 1px solid var(--white-color-back);
-
+            
             &.no-bot {
-                padding-bottom: 0;
                 border-bottom: none;
             }
 
@@ -290,10 +274,16 @@
                 display: block;
             }
 
-            & button.ip-lookup-button,
-            & button.add-url-button {
+            & button.ip-lookup-button {
                 margin: 0;
-                margin-left: 2em;
+                margin-left: 20px;
+            }
+
+            & button.add-url-button {
+                font-size: 20px;
+                border-radius: 50%;
+                padding: 2px 10px;
+                margin-top: 2px;
             }
         }
 
@@ -307,10 +297,31 @@
 
         &.middle {
             width: 50%;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+
+        }
+        &.sub-middle{
+            width: 48%;
+            margin-left: 2%;
+        }
+        
+        &.small {
+            width: 23%;
+            margin-left: 2%;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
         }
 
-        &.small {
-            width: 25%;
+        &.slider.small:first-child {
+            margin-left: 0 !important;
+        }
+
+        &.slider.small {
+            width: 24%;
+            margin-left: 2%;
         }
 
         &.third {
@@ -322,7 +333,7 @@
             justify-content: space-between;
             font-size: 0.85em;
             font-weight: 100;
-            color: color(var(--green-color) alpha(85%));
+            color: #757DA1;
             width: 100%;
 
             &.space-bot {
@@ -330,14 +341,13 @@
             }
 
             & span.name {
-                background-color: color(var(--grey-color) alpha(5%));
                 padding: 0.25em 0.75em;
-                border-radius: 0.75em;
             }
 
             & span.value {
                 padding: 0.25em 0;
-                color: color(var(--grey-color) alpha(65%));
+                color: #3A4368;
+                font-weight: 700;
             }
         }
     }
@@ -388,7 +398,7 @@
         }
 
         & .item {
-            border-bottom: 1px solid color(var(--white-color) alpha(5%));
+            border-bottom: 1px solid #C1C1C1;
 
             &:last-child {
                 margin-bottom: 0;
@@ -406,7 +416,7 @@
         }
 
         & .item {
-            border-bottom: 1px solid color(var(--white-color) alpha(5%));
+            border-bottom: 1px solid #C1C1C1;
 
             &:last-child {
                 margin-bottom: 0;
@@ -422,7 +432,7 @@
 
     & .block {
         & .content {
-            border-bottom: 1px solid color(var(--white-color) alpha(5%));
+            border-bottom: 1px solid #3464E0;
 
             &.no-bot {
                 border-bottom: none;
@@ -430,14 +440,14 @@
         }
 
         & .title {
-            color: color(var(--green-color) alpha(85%));
+            color: #3464E0;
 
             & span.name {
                 background-color: color(#ddd alpha(5%));
             }
 
             & span.value {
-                color: color(var(--green-color) alpha(50%));
+                color: color(var(--blue-color) alpha(50%));
             }
         }
     }

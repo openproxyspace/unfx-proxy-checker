@@ -1,19 +1,3 @@
-::-webkit-scrollbar {
-    width: 15px;
-    border-radius: 0.5em;
-    overflow: hidden;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: color(var(--green-color) alpha(25%));
-    border-radius: 0.5em;
-}
-
-::-webkit-scrollbar-track {
-    border-radius: 0.5em;
-    background-color: var(--white-color-back);
-}
-
 /* --------------------------------
   Buttons section
 -------------------------------- */
@@ -21,30 +5,35 @@
 button {
     font-weight: 900;
     font-size: 1em;
-    border-radius: 1.75em;
+    border-radius: 10px;
     outline: 0;
     border: 0;
     cursor: pointer;
     padding: 0.5em 1.5em;
     margin-right: 2em;
-    background-color: color(var(--green-color) alpha(25%));
-    color: color(var(--green-color) alpha(85%));
+    background-color: #3464E0;
+    color: #fff;
     transition: color 0.3s easeOne, background-color 0.3s easeOne;
+    margin-top: 20px;
 
     &.less {
         padding: 0;
         background-color: transparent;
-        color: color(var(--green-color) alpha(60%));
+        color: color(var(--blue-color) alpha(60%));
 
         &:hover {
-            color: color(var(--green-color) alpha(85%));
+            color: #3464E0;
         }
     }
 
     &:not(.less):hover {
         color: color(var(--white-color) alpha(85%));
-        background-color: color(var(--green-color) alpha(85%));
+        background-color: #3464E0;
     }
+}
+button.check-button{
+    width: 100%;
+    margin-top: 20px;
 }
 
 /* --------------------------------
@@ -59,8 +48,8 @@ textarea {
     padding: 1em;
     width: 100%;
     font-size: 1em;
-    background-color: color(var(--green-color) alpha(5%));
-    color: var(--green-color);
+    background-color: color(var(--blue-color) alpha(5%));
+    color: var(--blue-color);
     resize: vertical;
 }
 
@@ -68,25 +57,25 @@ input.field {
     width: 100%;
     border: 0;
     outline: 0;
-    background-color: color(var(--green-color) alpha(25%));
+    background-color: #84AEFF;
     font-weight: 900;
     padding: 0.5em 1em;
-    border-radius: 1.75em;
+    border-radius: 0.75em;
     font-size: 1em;
-    color: color(var(--green-color) alpha(85%));
+    color: #fff;
     transition: color 0.5s easeOne, background-color 0.5s easeOne;
 
     &::-webkit-input-placeholder {
-        color: color(var(--green-color) alpha(50%));
+        color: #fff;
     }
 
     &:not([value='']) {
-        background-color: color(var(--green-color) alpha(25%));
+        background-color: #84AEFF;
     }
 
     &:focus {
         color: var(--white-color);
-        background-color: color(var(--green-color) alpha(85%));
+        background-color: #3464E0;
 
         &::-webkit-input-placeholder {
             color: transparent;
@@ -95,30 +84,8 @@ input.field {
 }
 
 input[type='range'] {
-    -webkit-appearance: none;
     width: 100%;
-    margin: 0;
-    outline: none;
-    padding: 0;
-    background-color: transparent;
-
-    &::-webkit-slider-runnable-track {
-        width: 100%;
-        height: 0.8em;
-        cursor: pointer;
-        border-radius: 1em;
-        background-color: color(var(--green-color) alpha(30%));
-    }
-
-    &::-webkit-slider-thumb {
-        height: 16px;
-        width: 16px;
-        background-color: var(--green-color);
-        cursor: pointer;
-        -webkit-appearance: none;
-        border-radius: 1em;
-        margin-top: -0.2em;
-    }
+    
 }
 
 /* --------------------------------
@@ -148,7 +115,7 @@ input[type='range'] {
         vertical-align: middle;
         font-weight: 900;
         transform: translate3d(0, 0, 0);
-        color: color(var(--green-color) alpha(45%));
+        color: #3A4368;
         transition: all 0.3s easeOne;
 
         &:first-child {
@@ -158,7 +125,7 @@ input[type='range'] {
             border-radius: 1.25em;
             vertical-align: middle;
             transition: all 0.3s easeOne;
-            background-color: color(var(--green-color) alpha(25%));
+            border: 1px solid #3464E0;
 
             & svg {
                 position: absolute;
@@ -179,7 +146,7 @@ input[type='range'] {
                 content: '';
                 width: 100%;
                 height: 100%;
-                background-color: var(--green-color);
+                background-color: var(--blue-color);
                 display: block;
                 transform: scale(0);
                 opacity: 1;
@@ -194,7 +161,7 @@ input[type='range'] {
     }
 
     &:hover span:first-child {
-        border-color: var(--green-color);
+        border-color: var(--blue-color);
     }
 }
 
@@ -207,11 +174,11 @@ input[type='range'] {
 }
 
 .input-checkbox:checked + .checkbox span:not(.count) {
-    color: color(var(--green-color) alpha(85%));
+    color: #3A4368;
 
     &:first-child {
-        background-color: rgba(49, 188, 135, 0.85);
-        border-color: rgba(49, 188, 135, 0.85);
+        background-color: #3464E0;
+        border-color: #3464E0;
 
         & svg {
             stroke-dashoffset: 0;
@@ -245,4 +212,9 @@ input[type='range'] {
     & .input-checkbox:checked + .checkbox span.count {
         color: color(#ddd alpha(65%));
     }
+}
+.block-list-btn{
+    
+    margin: 0;
+    padding: 0 3px;
 }

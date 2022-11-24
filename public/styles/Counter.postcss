@@ -13,22 +13,22 @@
         font-weight: 700;
 
         &.http {
-            color: var(--green-color);
+            color: var(--blue-color);
 
             & .protocol-wrap {
-                background-color: color(var(--green-color) alpha(25%));
+                background-color: color(var(--blue-color) alpha(25%));
             }
 
             &.active {
                 color: var(--white-color);
 
                 & .type {
-                    background-color: color(var(--green-color) alpha(85%));
+                    background-color: #3464E0;
                 }
 
                 & .count {
                     opacity: 1;
-                    color: color(var(--green-color) alpha(85%));
+                    color: #3464E0;
                 }
             }
         }
@@ -44,12 +44,12 @@
                 color: var(--white-color);
 
                 & .type {
-                    background-color: color(var(--blue-color) alpha(85%));
+                    background-color: #3464E0;
                 }
 
                 & .count {
                     opacity: 1;
-                    color: color(var(--blue-color) alpha(85%));
+                    color: #3464E0;
                 }
             }
         }
@@ -87,7 +87,7 @@
         margin: 3em 0;
         border-radius: 1em;
         overflow: hidden;
-        background-image: linear-gradient(to right, color(var(--green-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+        background-image: linear-gradient(to right, color(var(--blue-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
 
         & .bar {
             position: absolute;

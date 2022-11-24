@@ -1,0 +1,95 @@
+.modal-info-wrap {
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 2em);
+    top: 2em;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: auto;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.7s easeOne, visibility 0.7s easeOne;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+
+        & .modal-content {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    & .modal-content {
+        
+        width: 80%;
+        position: absolute;
+        transition: transform 0.5s easeOne, opacity 0.5s easeOne;
+        transform: translateX(50px);
+        opacity: 1;
+        background: #fff;
+        padding: 6em 2em 2em 2em;
+        top: 5%;
+        left: 10%;
+        border-radius: 10px;
+        
+        & .close-svg {
+            width: 1.5em;
+            height: 1.5em;
+            margin-right: 0.5em;
+            fill: #3464E0;
+            position:absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        & .section {
+            align-items: center;
+            margin: 0 auto 2em auto;
+            float: left;
+            color: #3A4368;
+            font-size: 14px;
+            &.rel {
+                margin-top: 6em;
+            }
+
+            & svg {
+                width: 3em;
+                height: 3em;
+                margin-right: 0.5em;
+                fill: #3464E0;
+            }
+            & .title{
+                display:flex;
+                font-size: 12px;
+            }
+            & .title-name{
+                font-size: 16px;
+                font-weight: 700;
+                color: black;
+            }
+
+            & .content{
+                margin-top: 20px;
+            }
+        }
+        & .section-description{
+            width: 30%;
+
+        }
+        & .section-permissions{
+            width: 20%;
+            margin-left: 5%;
+        }
+        & .section-limitations{
+            width: 15%;
+            margin-left: 5%;
+        }
+        & .section-conditions{
+            width: 20%;
+            margin-left: 5%;
+        }
+
+    }
+}

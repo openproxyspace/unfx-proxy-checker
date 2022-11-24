@@ -7,6 +7,7 @@ import Overlay from './Overlay';
 import Update from './Update';
 import Footer from '../components/Footer';
 import Info from '../components/Info';
+import LicenseModal from '../components/LicenseModal';
 import Result from './Result';
 import Titlebar from './Titlebar';
 import { toggleDark, setFooterStats } from '../actions/MainActions';
@@ -16,7 +17,8 @@ import '../../public/styles/Elements.postcss';
 
 class Main extends React.PureComponent {
     state = {
-        showInfo: false
+        showInfo: false,
+        showModal: false,
     };
 
     componentDidMount = () => {
@@ -25,6 +27,7 @@ class Main extends React.PureComponent {
     };
 
     toggleInfo = () => this.setState({ showInfo: !this.state.showInfo });
+    toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
     render = () => {
         const { dark, toggleDark, stats, releases } = this.props;
@@ -38,9 +41,10 @@ class Main extends React.PureComponent {
                             <Settings />
                             <Input />
                         </div>
-                        <Footer stats={stats} />
+                        <Footer stats={stats} toggleModal={this.toggleModal}/>
                     </div>
                     <Info show={this.state.showInfo} releases={releases} />
+                    <LicenseModal show={this.state.showModal} toggleModal={this.toggleModal}/>
                     <Result />
                     <Checking />
                     <Overlay />

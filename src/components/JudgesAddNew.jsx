@@ -19,7 +19,7 @@ export default class JudgesAddNew extends React.PureComponent {
         <div className="judges-add-new">
             <input type="text" className="field" onChange={this.changeUrl} value={this.state.url} placeholder="Url" />
             <button className="add-url-button" onClick={this.addUrl}>
-                Add
+                +
             </button>
         </div>
     );
