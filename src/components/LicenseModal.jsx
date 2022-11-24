@@ -5,6 +5,9 @@ import { openLink } from '../misc/other';
 import '../../public/styles/Modal.postcss';
 import LicenseIcon from './ui/LicenseIcon';
 import CloseIcon from './ui/CloseIcon';
+import CheckIcon from './ui/CheckIcon';
+import XIcon from './ui/XIcon';
+import PlusIcon from './ui/PlusIcon';
 
 const LicenseModal = memo(({ show, toggleModal }) => {
     return (
@@ -22,16 +25,54 @@ const LicenseModal = memo(({ show, toggleModal }) => {
 
                 </div>
                 <div className='section section-permissions'>
-                    <div><span className="title-name"> Permissions </span></div>
+                    <div className="title"><span className="title-name"> Permissions </span></div>
+                    <div className="content">
+                        <div className="item-list">
+                            <CheckIcon /> <div> Commercial Use</div>
+                        </div>
+                        <div className="item-list">
+                            <CheckIcon /> <div> Modification</div>
+                        </div>
+                        <div className="item-list">
+                            <CheckIcon /> <div> Distribution</div>
+                        </div>
+                        <div className="item-list">
+                            <CheckIcon /> <div> Private Use</div>
+                        </div>
+                    </div>
+
                 </div>
                 <div className='section section-limitations'>
-                    <div><span className="title-name"> Limitations </span></div>
+                    <div className="title"><span className="title-name"> Limitations </span></div>
+                    <div className="content">
+                        <div className="item-list">
+                            <XIcon /> <div> Liability</div>
+                        </div>
+                        <div className="item-list">
+                            <XIcon /> <div> Warranty</div>
+                        </div>
+                    </div>
+
                 </div>
                 <div className='section section-conditions'>
-                    <div><span className="title-name"> Conditions </span></div>
+                    <div className="title"><span className="title-name"> Conditions </span></div>
+                    <div className="content">
+                        <div className="item-list">
+                            <PlusIcon /> <div> License and copyright notice</div>
+                        </div>
+                    </div>
+
                 </div>
                 <div className="section section-footer">
-                    
+                    <p>MIT License </p>
+
+                    <p>Copyright (c) 2018 assnctr </p>
+
+                    <p>Permission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the "Software"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions: </p>
+
+                    <p>The above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software. </p>
+
+                    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.</p>
                 </div>
             </div>
 

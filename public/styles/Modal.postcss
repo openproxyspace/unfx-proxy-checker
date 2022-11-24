@@ -73,6 +73,14 @@
             & .content{
                 margin-top: 20px;
             }
+            & .item-list{
+                display: flex;
+                padding: 3px;
+
+                & div{
+                    margin-top: -3px;
+                }
+            }
         }
         & .section-description{
             width: 30%;
@@ -81,14 +89,43 @@
         & .section-permissions{
             width: 20%;
             margin-left: 5%;
+
+            & svg {
+                width: 1.5em;
+                height: 1.5em;
+                margin-right: 0.5em;
+                fill: #3464E0;
+            }
         }
         & .section-limitations{
             width: 15%;
             margin-left: 5%;
+            & svg {
+                width: 1.5em;
+                height: 1.5em;
+                margin-right: 0.5em;
+                fill: #3A4368;
+            }
         }
         & .section-conditions{
             width: 20%;
             margin-left: 5%;
+            & svg {
+                width: 1.5em;
+                height: 1.5em;
+                margin-right: 0.5em;
+                fill: #3464E0;
+            }
+        }
+
+        & .section-footer{
+            overflow-y: scroll;
+            padding: 25px;
+            margin-top: 20px;
+            max-height: 250px;
+            background: #3A4368;
+            color: #fff;
+            border-radius: 10px; 
         }
 
     }
