@@ -32,48 +32,38 @@ export const DEFAULT_JUDGES_SETTINGS = {
     items: [
         {
             active: true,
-            url: 'http://proxyjudge.info/azenv.php',
+            url: 'http://judge1.api.proxyscrape.com',
             validate: 'AZ Environment variables'
         },
         {
             active: true,
-            url: 'http://www.sbjudge3.com/azenv.php',
+            url: 'http://judge2.api.proxyscrape.com',
             validate: 'AZ Environment variables'
         },
         {
             active: true,
-            url: 'http://proxyjudge.us/azenv.php',
+            url: 'http://judge3.api.proxyscrape.com',
             validate: 'AZ Environment variables'
         },
         {
             active: true,
-            url: 'http://azenv.net/',
+            url: 'http://judge4.api.proxyscrape.com',
             validate: 'AZ Environment variables'
         },
         {
             active: true,
-            url: 'http://www.cooleasy.com/azenv.php',
+            url: 'http://judge5.api.proxyscrape.com',
             validate: 'AZ Environment variables'
         },
         {
             active: true,
-            url: 'http://pascal.hoez.free.fr/azenv.php',
-            validate: 'AZ Environment variables'
+            url: 'https://ssl-judge1.api.proxyscrape.com',
+            validate: 'REMOTE_ADDR = (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
         },
         {
             active: true,
-            url: 'http://www.proxy-listen.de/azenv.php',
-            validate: 'AZ Environment variables'
-        },
-        {
-            active: true,
-            url: 'https://api.proxyscrape.com/ip.php',
-            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
-        },
-        {
-            active: true,
-            url: 'https://ident.me/',
-            validate: '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+            url: 'https://ssl-judge2.api.proxyscrape.com',
+            validate: 'REMOTE_ADDR = (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
         }
     ]
 };
