@@ -17,7 +17,7 @@ const devWindow = () => {
         height: 846,
         show: false,
         frame: false,
-        icon: __dirname + '/icons/icon.ico',
+        icon: __dirname + '../public/icons/icon.png',
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -27,6 +27,7 @@ const devWindow = () => {
     });
 
     window.webContents.openDevTools();
+   
 };
 
 const prodWindow = () => {
@@ -35,7 +36,7 @@ const prodWindow = () => {
         minHeight: 680,
         width: 1220,
         height: 836,
-        icon: __dirname + '/Bluetooth.ico',
+        icon: __dirname + '../public/icons/icon.png',
         show: false,
         frame: false,
         resizable: true,
@@ -48,6 +49,7 @@ const prodWindow = () => {
     });
 
     window.removeMenu();
+    
 };
 
 const createWindow = () => {
