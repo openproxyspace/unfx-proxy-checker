@@ -4,7 +4,7 @@ import { isDev, isPortable } from './AppConstants';
 
 const userData = ipcRenderer.sendSync('getUserData');
 
-export const SETTINGS_FILE_NAME = 'settings.unfx.checker.json';
+export const SETTINGS_FILE_NAME = 'settings.proxyscrape.checker.json';
 export const SETTINGS_FILE_PATH = isPortable
     ? path.resolve(process.env.PORTABLE_EXECUTABLE_DIR, SETTINGS_FILE_NAME)
     : isDev

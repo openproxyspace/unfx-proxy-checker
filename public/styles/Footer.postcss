@@ -92,8 +92,11 @@ footer {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         position: relative;
-        color: var(--white-color-back);
+        color: #f0f2fa;
         background: #3A4368;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row-reverse;
 
 
         & .d {
@@ -102,23 +105,14 @@ footer {
 
         &:before {
             content: attr(data-version);
-            position: absolute;
-            right: 30px;
-            display: flex;
-            float: right;
-            justify-content: center;
-            align-items: center;
             color: #fff;
             font-size: 12px;
-            top: 14px;
         }
 
         & a {
-            display: flex;
             text-decoration: none;
-            align-items: center;
-            color: var(--white-color-back);
-            transition: color 0.5s easeOne;
+            color: #f0f2fa;
+            transition: color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             font-size: 15px;
             font-weight: 700;
 

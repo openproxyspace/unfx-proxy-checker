@@ -10,7 +10,7 @@ import Info from '../components/Info';
 import LicenseModal from '../components/LicenseModal';
 import Result from './Result';
 import Titlebar from './Titlebar';
-import { toggleDark, setFooterStats } from '../actions/MainActions';
+import { toggleDark } from '../actions/MainActions';
 
 import '../../public/styles/Main.postcss';
 import '../../public/styles/Elements.postcss';
@@ -21,16 +21,11 @@ class Main extends React.PureComponent {
         showModal: false,
     };
 
-    componentDidMount = () => {
-        const { setFooterStats } = this.props;
-        setFooterStats();
-    };
-
     toggleInfo = () => this.setState({ showInfo: !this.state.showInfo });
     toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
     render = () => {
-        const { dark, toggleDark, stats, releases } = this.props;
+        const { dark, toggleDark, releases } = this.props;
 
         return (
             <>
@@ -41,7 +36,7 @@ class Main extends React.PureComponent {
                             <Settings />
                             <Input />
                         </div>
-                        <Footer stats={stats} toggleModal={this.toggleModal}/>
+                        <Footer toggleModal={this.toggleModal}/>
                     </div>
                     <Info show={this.state.showInfo} releases={releases} />
                     <LicenseModal show={this.state.showModal} toggleModal={this.toggleModal}/>
@@ -61,8 +56,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    toggleDark,
-    setFooterStats
+    toggleDark
 };
 
 export default connect(

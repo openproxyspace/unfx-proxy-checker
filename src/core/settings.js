@@ -40,8 +40,8 @@ export const saveSettings = () => {
         );
 
         if (prevSettings !== json) {
-            await writeFile(SETTINGS_FILE_PATH + '.unfx', json);
-            await rename(SETTINGS_FILE_PATH + '.unfx', SETTINGS_FILE_PATH);
+            await writeFile(SETTINGS_FILE_PATH + '.proxyscrape', json);
+            await rename(SETTINGS_FILE_PATH + '.proxyscrape', SETTINGS_FILE_PATH);
             prevSettings = json;
         }
     }, 1000);

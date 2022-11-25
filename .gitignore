@@ -1,6 +1,6 @@
 node_modules
 npm-debug.log
-settings.unfx.checker.json
+settings.proxyscrape.checker.json
 /public/*.js
 /.vscode
 dist

@@ -12,8 +12,8 @@ const Core = ({ protocols, captureFullData, captureServer, threads, timeout, ret
                 <span className='name'>Protocols</span>
             </div>
             <div className='content no-flex'>
-                <Checkbox id='http-protocol' name='http' checked={protocols.http} onChange={toggleProtocol} text='Http' />
-                <Checkbox id='https-protocol' name='https' checked={protocols.https} onChange={toggleProtocol} text='Https' />
+                <Checkbox id='http-protocol' name='http' checked={protocols.http} onChange={toggleProtocol} text='HTTP' />
+                <Checkbox id='https-protocol' name='https' checked={protocols.https} onChange={toggleProtocol} text='HTTPs' />
                 <Checkbox id='socks4-protocol' name='socks4' checked={protocols.socks4} onChange={toggleProtocol} text='Socks4' />
                 <Checkbox id='socks5-protocol' name='socks5' checked={protocols.socks5} onChange={toggleProtocol} text='Socks5' />
             </div>

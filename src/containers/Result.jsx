@@ -95,8 +95,8 @@ class Result extends React.PureComponent {
                                     <span className='name'>Protocols</span>
                                 </div>
                                 <div className='content'>
-                                    <Checkbox id='protocol-http' name='http' checked={protocols.http} onChange={toggleProtocol} text='Http' />
-                                    <Checkbox id='protocol-https' name='https' checked={protocols.https} onChange={toggleProtocol} text='Https' />
+                                    <Checkbox id='protocol-http' name='http' checked={protocols.http} onChange={toggleProtocol} text='HTTP' />
+                                    <Checkbox id='protocol-https' name='https' checked={protocols.https} onChange={toggleProtocol} text='HTTPs' />
                                     <Checkbox id='protocol-socks4' name='socks4' checked={protocols.socks4} onChange={toggleProtocol} text='Socks4' />
                                     <Checkbox id='protocol-socks5' name='socks5' checked={protocols.socks5} onChange={toggleProtocol} text='Socks5' />
                                 </div>

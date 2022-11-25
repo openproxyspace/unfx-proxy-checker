@@ -13,7 +13,7 @@ const OverlayIp = ({ isActive, currentIP, isLookupDone, isLookupSuccess }) => (
                     </g>
                 </svg>
             )}
-            {<div className="ip-address">{isLookupDone && (isLookupSuccess ? `Your IP address: ${currentIP}` : 'Ip lookup error. Please try change lookup address.')}</div>}
+            {<div className="ip-address">{isLookupDone && (isLookupSuccess ? `Your IP address: ${currentIP}` : 'IP lookup error. Please try change lookup address.')}</div>}
         </div>
     </div>
 );
