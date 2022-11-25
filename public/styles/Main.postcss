@@ -60,20 +60,21 @@ button {
 }
 
 .main-page-container {
-    position: fixed;
     width: 100%;
     height: calc(100% - 2em);
     top: 2em;
     left: 0;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     background-color: var(--white-color-back);
 
     & .main-page-content {
-        max-width: 1600px;
-        margin: auto;
-        padding: 50px 40px;
-        background-color: var(--white-color);
+        width: 100%;
+        margin-bottom: 105.25px;
+        overflow-y: auto;
+        height: calc(100vh - 2rem - 105.25px);
+        padding: 50px 40px 0 40px;
+        background-color: #f5f6fa;
         border-radius: 0 0 1em 1em;
     }
 }

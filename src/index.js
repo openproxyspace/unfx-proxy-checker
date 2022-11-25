@@ -14,7 +14,7 @@ const devWindow = () => {
 
     window = new BrowserWindow({
         width: 1220,
-        height: 846,
+        height: 905,
         show: false,
         frame: false,
         icon: __dirname + '../public/icons/icon.png',
@@ -35,7 +35,7 @@ const prodWindow = () => {
         minWidth: 1000,
         minHeight: 680,
         width: 1220,
-        height: 836,
+        height: 905,
         icon: __dirname + '../public/icons/icon.png',
         show: false,
         frame: false,
