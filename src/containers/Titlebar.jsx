@@ -41,8 +41,9 @@ export default class Titlebar extends React.PureComponent {
 
         return (
             <div className={`titlebar ${dark ? 'dark' : ''}`}>
-                <LogoIcon/>
-                <span className="title">ProxyScrape</span>
+                <img src="../icons/Logo-ProxyScrape-colored.png" width="120" height="15.25"/>
+                {/*<LogoIcon/>*/}
+                {/*<span className="title">ProxyScrape</span>*/}
                 {/*<div className="misc">
                     <ul className="buttons">
                         <li onClick={toggleInfo} title="Toggle Info">

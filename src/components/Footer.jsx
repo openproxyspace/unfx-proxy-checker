@@ -37,8 +37,7 @@ const Footer = ({ stats, toggleModal }) => (
         </div>
         <div className='ops' data-version={`v${currentVersion}`}>
             <a href='https://proxyscrape.com/home' title='Official Website' onClick={openLink}>
-                <LogoIcon />
-                Proxy Space
+                <img src="../icons/Logo-ProxyScrape-white.png" width="120" height="15.25"/>
             </a>
             {/* <a className="d" href="https://utilify.me" title="Online Tools & Utilities" onClick={openLink}>
                 <svg viewBox="0 0 512 512">
