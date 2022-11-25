@@ -12,7 +12,7 @@ const OverlayJudges = ({ isActive, items }) => {
         <div className={`ping-judges-container ${isActive ? 'opened' : 'closed'}`}>
             <div className="ping-judges-content">
                 <span className="ping-progress">
-                    Total checked <span className="ping-counter"> {done} of {all} </span>
+                    Total Checked: <span className="ping-counter"> {done} of {all} </span>
                 </span>
                 <div className="ping-status">
                     <div className="items">

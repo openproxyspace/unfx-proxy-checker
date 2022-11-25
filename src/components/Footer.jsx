@@ -26,8 +26,8 @@ const Footer = ({ stats, toggleModal }) => (
         </div>
         <div className='get-em'>
             <p>
-                We have 10+ Million Rotating Residential Proxies.
-                <a href='https://openproxy.space/darth' onClick={openLink}>
+                We have 60 000 premium datacenter proxies.
+                <a href='https://proxyscrape.com/premium?ref=proxy-checker' onClick={openLink}>
                     <span>Get it all</span>
                 </a>
             </p>
