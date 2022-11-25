@@ -25,15 +25,12 @@ const Footer = ({ stats, toggleModal }) => (
             </a>
         </div>
         <div className='get-em'>
-            {stats ? stats : (
-                <p>
-                    We have 10+ Million Rotating Residential Proxies.
-                    <a href='https://openproxy.space/darth' onClick={openLink}>
-                        <span>Get it all</span>
-                    </a>
-                </p>
-            )}
-            
+            <p>
+                We have 10+ Million Rotating Residential Proxies.
+                <a href='https://openproxy.space/darth' onClick={openLink}>
+                    <span>Get it all</span>
+                </a>
+            </p>
         </div>
         <div className='ops' data-version={`v${currentVersion}`}>
             <a href='https://proxyscrape.com/home' title='Official Website' onClick={openLink}>
