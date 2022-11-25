@@ -17,6 +17,7 @@ const devWindow = () => {
         height: 846,
         show: false,
         frame: false,
+        icon: __dirname + '/icons/icon.ico',
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -34,6 +35,7 @@ const prodWindow = () => {
         minHeight: 680,
         width: 1220,
         height: 836,
+        icon: __dirname + '/Bluetooth.ico',
         show: false,
         frame: false,
         resizable: true,

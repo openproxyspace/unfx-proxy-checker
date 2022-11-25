@@ -73,7 +73,7 @@ class Result extends React.PureComponent {
         const displayActiveCountries = activeCountries.length == 0 ? 'Select countries' : countries.items.length == activeCountries.length ? 'All' : activeCountries.map(item => item.name).join(', ');
 
         return (
-            <div className={`result-container opened ${isOpened ? 'opened' : ''}`}>
+            <div className={`result-container ${isOpened ? 'opened' : ''}`}>
                 <div className='result-content-pre'>
                     <div className='result-content'>
 
