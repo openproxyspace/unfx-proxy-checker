@@ -74,20 +74,22 @@
                 }
 
                 &.ports-filter .states {
-                    font-size: 13px;
-                    font-weight: 500;
-                    color: #3A4368;
+                    padding: 0.25em 0;
+                    color: color(var(--grey-color) alpha(65%));
 
                     &.allow span.allow-key,
                     &.disallow span.disallow-key {
-                        font-weight: 700;
-                        text-decoration-line: underline;
+                        color: var(--white-color);
+                        background-color: color(var(--blue-color) alpha(85%));
                     }
 
                     & span {
-                        margin-left: 15px;
+                        margin-left: 0.75em;
                         cursor: pointer;
+                        padding: 0.25em 0.75em;
+                        border-radius: 1em;
                         transition: background-color 0.5s easeOne, color 0.5s easeOne;
+                        background-color: color(var(--grey-color) alpha(5%));
                     }
                 }
 
