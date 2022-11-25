@@ -7,7 +7,7 @@ import Checkbox from '../components/ui/Checkbox';
 
 const Judges = ({ items, swap, change, add, remove, toggleOption }) => (
     <>
-        <div className="block middle">
+        <div className="block middle judge-middle">
             <div className="title space-bot">
                 <span className="name">Currently active</span>
             </div>

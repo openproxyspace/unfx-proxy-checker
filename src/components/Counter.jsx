@@ -10,18 +10,20 @@ const Counter = ({ all, done, protocols: { http, https, socks4, socks5 } }) => {
     };
 
     return (
-        <div className="counter-container">
-            <CounterProtocol count={http} name="Http" className="http" />
-            <CounterProtocol count={https} name="Https" className="http" />
-            <CounterProtocol count={socks4} name="Socks4" className="socks" />
-            <CounterProtocol count={socks5} name="Socks5" className="socks" />
+        <>
+            <div className="protocol-wrap">
+                <CounterProtocol count={http} name="Http" className="http" />
+                <CounterProtocol count={https} name="Https" className="http" />
+                <CounterProtocol count={socks4} name="Socks4" className="socks" />
+                <CounterProtocol count={socks5} name="Socks5" className="socks" />
+            </div>
             <div className="progress">
                 <div className="bar" style={progressStyle} />
                 <h1>
                     Total checked {splitByKK(done)} of {splitByKK(all)}
                 </h1>
             </div>
-        </div>
+        </>
     );
 };
 

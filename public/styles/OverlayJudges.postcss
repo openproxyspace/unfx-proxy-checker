@@ -28,30 +28,36 @@
     }
 
     & .ping-judges-content {
-        max-width: 960px;
-        width: 100%;
+        width: 80%;
         opacity: 0;
         transform: translateY(-10%);
-        transition: opacity 0.7s easeOne, transform 0.7s easeOne;
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px 25px 10px 25px;
 
         & .ping-progress {
             display: inline-flex;
-            font-size: 1em;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 600;
             user-select: none;
-            border-radius: 1.75em;
-            padding: 0.5em 1.75em;
+            border-radius: 10px;
             border: 1px solid transparent;
-            color: color(var(--grey-color) alpha(75%));
-            background-color: color(var(--grey-color) alpha(15%));
+            color: #757DA1;
+
+            & .ping-counter {
+                padding: 0 20px;
+                font-size: 13px;
+                font-weight: 700;
+                color: #3A4368; 
+            }
         }
 
         & .items {
-            border-top: 1px solid var(--white-color-back);
-            margin-top: 2em;
+            margin-top: 30px;
         }
 
         & .item {
+            font-size: 14px;
             display: flex;
             flex-flow: row wrap;
             padding: 1.15em 0;
@@ -60,39 +66,39 @@
             font-weight: 700;
             transition: color 0.7s easeOne;
             color: color(var(--grey-color) alpha(65%));
-            border-bottom: 1px solid var(--white-color-back);
+            border-bottom: 1px dotted #C1C1C1;
 
             & svg {
-                width: 1.25em;
-                height: 1.25em;
+                width: 24px;
+                height: 24px;
                 margin-right: 0.75em;
                 fill: color(var(--grey-color) alpha(65%));
                 transition: fill 0.7s easeOne;
             }
 
             &.success {
-                color: color(var(--blue-color) alpha(65%));
+                color: #3464E0;
 
                 & svg {
-                    fill: color(var(--blue-color) alpha(65%));
+                    fill: #3464E0;
                 }
 
                 & .response {
                     color: var(--white-color);
-                    background-color: color(var(--blue-color) alpha(65%));
+                    background-color: #3464E0;
                 }
             }
 
             &.error {
-                color: color(var(--red-color) alpha(65%));
+                color: #3A4368;
 
                 & svg {
-                    fill: color(var(--red-color) alpha(65%));
+                    fill: #3A4368;
                 }
 
                 & .response {
                     color: var(--white-color);
-                    background-color: color(var(--red-color) alpha(65%));
+                    background-color: #3A4368;
                 }
             }
 
@@ -104,6 +110,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                margin-top: -9px;
             }
 
             & .status {
@@ -115,9 +122,11 @@
 
                 & .response {
                     display: inline-block;
-                    padding: 0.35em 0.75em;
-                    border-radius: 1em;
-                    font-size: 0.85em;
+                    padding: 2px 20px;
+                    border-radius: 10px;
+                    font-size: 12px;
+                    line-height: 24px;
+                    font-weight: 700;
                     animation: fade-judge-status 0.7s easeOne;
                     text-align: center;
                 }
@@ -143,7 +152,7 @@
     & .ping-judges-content {
         & .ping-progress {
             color: color(#ddd alpha(50%));
-            background-color: color(var(--back-black-color) alpha(35%));
+            background-color: #fff;
         }
 
         & .items {

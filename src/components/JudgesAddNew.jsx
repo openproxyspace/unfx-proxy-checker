@@ -1,5 +1,6 @@
 import React from 'react';
 import { isURL } from '../misc/regexes';
+import FillPlusIcon from './ui/FillPlusIcon';
 
 export default class JudgesAddNew extends React.PureComponent {
     state = {
@@ -18,9 +19,9 @@ export default class JudgesAddNew extends React.PureComponent {
     render = () => (
         <div className="judges-add-new">
             <input type="text" className="field" onChange={this.changeUrl} value={this.state.url} placeholder="Url" />
-            <button className="add-url-button" onClick={this.addUrl}>
-                +
-            </button>
+            <div className="add-url-button" onClick={this.addUrl}>
+                <FillPlusIcon />
+            </div>
         </div>
     );
 }

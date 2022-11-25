@@ -27,7 +27,7 @@ const getResult = (text, event, getState) => {
         //         unique: uniqueLines.length
         //     };
         // }
-
+       
         const totalLines = text.split(/\r?\n/).filter(item => item.length > 0);
         const uniqueLines = uniq(totalLines);
         const { successed: list, failed: errors } = findMixedProxies(uniqueLines);
@@ -36,7 +36,8 @@ const getResult = (text, event, getState) => {
             list,
             errors,
             total: totalLines.length,
-            unique: uniqueLines.length
+            unique: uniqueLines.length,
+            size: text.length
         };
     } catch (error) {
         return {
@@ -61,7 +62,7 @@ export const loadFromTxt = event => async (dispatch, getState) => {
                 names.push(parse(path).base);
             }
 
-            const { list, errors, total, unique } = getResult(filesText, event, getState);
+            const { list, errors, total, unique, size } = getResult(filesText, event, getState);
 
             if (!list.length) throw new Error('No proxies found');
 
@@ -72,7 +73,8 @@ export const loadFromTxt = event => async (dispatch, getState) => {
                     errors,
                     name: names.join(', '),
                     total,
-                    unique
+                    unique,
+                    size
                 })
             );
         }
@@ -84,7 +86,7 @@ export const loadFromTxt = event => async (dispatch, getState) => {
 export const pasteFromClipboard = event => async (dispatch, getState) => {
     try {
         const text = await navigator.clipboard.readText();
-        const { list, errors, total, unique } = getResult(text, event, getState);
+        const { list, errors, total, unique, size } = getResult(text, event, getState);
 
         if (!list.length) throw new Error('No proxies found');
 
@@ -95,7 +97,8 @@ export const pasteFromClipboard = event => async (dispatch, getState) => {
                 errors,
                 name: 'Clipboard',
                 total,
-                unique
+                unique,
+                size
             })
         );
     } catch (error) {

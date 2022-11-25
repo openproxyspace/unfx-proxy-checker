@@ -5,73 +5,29 @@
     max-width: 1600px;
     margin: auto;
     justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+    position: absolute;
+    top: 5%;
+    padding: 15px 25px 30px 25px;
 
-    & .protocol {
-        display: inline-flex;
-        width: 25%;
-        justify-content: center;
-        font-weight: 700;
-
-        &.http {
-            color: var(--blue-color);
-
-            & .protocol-wrap {
-                background-color: color(var(--blue-color) alpha(25%));
-            }
-
-            &.active {
-                color: var(--white-color);
-
-                & .type {
-                    background-color: #3464E0;
-                }
-
-                & .count {
-                    opacity: 1;
-                    color: #3464E0;
-                }
-            }
-        }
-
-        &.socks {
-            color: var(--blue-color);
-
-            & .protocol-wrap {
-                background-color: color(var(--blue-color) alpha(25%));
-            }
-
-            &.active {
-                color: var(--white-color);
-
-                & .type {
-                    background-color: #3464E0;
-                }
-
-                & .count {
-                    opacity: 1;
-                    color: #3464E0;
-                }
-            }
-        }
-
-        & .protocol-wrap {
+    & .protocol-wrap {
+        display: flex;
+        
+        & .protocol {
             display: inline-flex;
-            border-radius: 1em;
-            overflow: hidden;
-
+            margin-left: 80px;
+            
             & .type {
-                padding: 0.5em 0.75em;
-                opacity: 0.75;
-                border-radius: 1em;
-                transition: background-color 0.7s easeOne;
+                font-size: 12px;
+                font-weight: 600;
+                color: #757DA1;
             }
 
             & .count {
-                padding: 0.5em 0.75em;
-                margin-left: 1em;
-                opacity: 0.5;
-                transition: color 0.7s easeOne, opacity 0.7s easeOne;
-
+                margin-left: 20px;
+                font-weight: 700;
+                font-size: 13px;
                 &:empty {
                     padding: 0;
                     margin-left: 0;
@@ -82,21 +38,22 @@
 
     & .progress {
         position: relative;
-        width: 100%;
-        height: 1.5em;
-        margin: 3em 0;
-        border-radius: 1em;
+        width: 80%;
+        height: 34px;
+        margin-top: 30px;
+        border-radius: 10px;
         overflow: hidden;
-        background-image: linear-gradient(to right, color(var(--blue-color) alpha(35%)), color(var(--blue-color) alpha(35%)));
+        background: #84AEFF;
+        border: 1px solid #3464E0;
 
         & .bar {
             position: absolute;
             height: 100%;
             top: 0;
             left: 0;
-            border-radius: 1em;
+            border-radius: 10px;
             transition: width 0.7s easeOne;
-            background-color: color(#333 alpha(5%));
+            background-color: #3464E0;
         }
 
         & h1 {
@@ -111,6 +68,11 @@
             color: var(--white-color);
             text-align: center;
         }
+    }
+
+    & button {
+        margin: 30px 0 0 20px;
+        width: calc(20% - 20px);
     }
 }
 

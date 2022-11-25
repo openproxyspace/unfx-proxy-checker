@@ -9,7 +9,7 @@ import { toggleOption } from '../actions/CoreActions';
 import '../../public/styles/Input.postcss';
 import DropDocIcon from '../components/ui/DropDocIcon';
 
-const Input = ({ loaded, total, errors, unique, name, loadFromTxt, pasteFromClipboard, start, shuffle, toggleOption }) => {
+const Input = ({ loaded, total, errors, unique, name, size, loadFromTxt, pasteFromClipboard, start, shuffle, toggleOption }) => {
     const copyErrors = () => {
         navigator.clipboard.writeText(errors.join('\r\n'));
     };
@@ -23,11 +23,11 @@ const Input = ({ loaded, total, errors, unique, name, loadFromTxt, pasteFromClip
                     <div className='from-clipboard' onClick={pasteFromClipboard}>
                         Paste From Clipboard
                     </div>
-                    <div className='select-event'>
+                    <div className='select-event' onClick={loadFromTxt} onDrop={loadFromTxt}>
                         <DropDocIcon scale="70" />
                         <div>
                             <div> Drag & Drop Txt Here </div>
-                            <div onClick={loadFromTxt}> <span>or </span> <span className="text-underline"> Browse File </span> </div>
+                            <div> <span>or </span> <span className="text-underline"> Browse File </span> </div>
                         </div>
                     </div>
                     <button className='button check-button' onClick={start}>
@@ -39,12 +39,12 @@ const Input = ({ loaded, total, errors, unique, name, loadFromTxt, pasteFromClip
                         <Checkbox id='core-shuffle' name='shuffle' checked={shuffle} onChange={toggleOption} text='Shuffle' />
                         <div className='stat'>
                             <div className='item'>
-                                <span>Total Lines</span>
-                                <span>{splitByKK(total)}</span>
+                                <div>Total</div>
+                                <div>{splitByKK(total)}</div>
                             </div>
                             <div className='item'>
-                                <span>Unique Parsed</span>
-                                <span>{splitByKK(unique)}</span>
+                                <div>Unique</div>
+                                <div>{splitByKK(unique)}</div>
                             </div>
                             {errors.length > 0 ? (
                                 <div className='item'>
@@ -57,13 +57,16 @@ const Input = ({ loaded, total, errors, unique, name, loadFromTxt, pasteFromClip
                                 </div>
                             ) : (
                                 <div className='item'>
-                                    <span>Parse Errors</span>
-                                    <span>0</span>
+                                    
                                 </div>
                             )}
                             <div className='item'>
-                                <span>File Names</span>
-                                <span>{name}</span>
+                                <div>File Names</div>
+                                <div>{name}</div>
+                            </div>
+                            <div className='item'>
+                                <div>Size</div>
+                                <div>{splitByKK(size)} bytes</div>
                             </div>
                         </div>
                     </div>

@@ -2,11 +2,12 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    border-top: 1px solid var(--white-color-back);
-    color: color(var(--grey-color) alpha(75%));
-    font-weight: 700;
+    color: #757DA2;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 24px;
     user-select: none;
-    min-height: 4em;
+    margin: 35px 0;
 
     & span {
         white-space: nowrap;
@@ -19,8 +20,7 @@
             align-items: center;
             cursor: pointer;
             height: 4em;
-            
-
+        
             & span {
                 transition: color 0.3s easeOne;
             }
@@ -127,8 +127,8 @@
         width: 5%;
 
         & svg {
-            width: 1.5em;
-            height: 1.5em;
+            width: 20px;
+            height: 20px;
 
             & path:nth-child(2) {
                 fill: color(var(--grey-color) alpha(65%));

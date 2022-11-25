@@ -6,10 +6,8 @@ const CounterProtocol = memo(({ count, name, className }) => {
 
     return (
         <div className={`protocol ${className} ${count > 0 ? 'active' : ''}`}>
-            <div className="protocol-wrap">
-                <div className="type">{name}</div>
-                <div className="count">{splitByKK(count)}</div>
-            </div>
+            <div className="type">{name}:</div>
+            <div className="count">{splitByKK(count)}</div>
         </div>
     );
 });

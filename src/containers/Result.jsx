@@ -6,6 +6,7 @@ import ResultItemsHeader from '../components/ResultItemsHeader';
 import Footer from '../components/Footer';
 import ResultExport from '../components/ResultExport';
 import Checkbox from '../components/ui/Checkbox';
+import SearchIcon from '../components/ui/SearchIcon';
 import { connect } from 'react-redux';
 import {
     save,
@@ -72,10 +73,12 @@ class Result extends React.PureComponent {
         const displayActiveCountries = activeCountries.length == 0 ? 'Select countries' : countries.items.length == activeCountries.length ? 'All' : activeCountries.map(item => item.name).join(', ');
 
         return (
-            <div className={`result-container ${isOpened ? 'opened' : ''}`}>
+            <div className={`result-container opened ${isOpened ? 'opened' : ''}`}>
                 <div className='result-content-pre'>
                     <div className='result-content'>
+
                         <input type='text' name='search' className='field search' onChange={onSearchInput} value={search} placeholder='Search' />
+                        <SearchIcon/>
                         <div className='filters'>
                             <div className='block middle'>
                                 <div className='title'>
@@ -118,7 +121,7 @@ class Result extends React.PureComponent {
                                     </div>
                                 </div>
                             )}
-                            <div className='block middle ports-filter slider'>
+                            <div className='block middle ports-filter'>
                                 <div className='title'>
                                     <span className='name'>Ports</span>
                                     <span className={`states ${ports.allow ? 'allow' : 'disallow'}`}>
@@ -144,36 +147,39 @@ class Result extends React.PureComponent {
                                 </div>
                             </div>
                         </div>
-                        <div className='up-panel'>
-                            <button className='open-countries-button' onClick={toggleCountries}>
-                                {displayActiveCountries}
-                            </button>
-                            <div className='counters'>
-                                <div className='counter'>Filtered: {splitByKK(filteredItems.length)}</div>
-                                <div className='counter'>Total: {splitByKK(items.length)}</div>
+                        <div className="show-result">
+                            <div className='up-panel'>
+                                <button className='open-countries-button' onClick={toggleCountries}>
+                                    {displayActiveCountries}
+                                </button>
+                                <div className='counters'>
+                                    <div className='counter'>Filtered: {splitByKK(filteredItems.length)}</div>
+                                    <div className='counter'>Total: {splitByKK(items.length)}</div>
+                                </div>
                             </div>
+                            <ResultItemsHeader sortResults={sortResults} keepAlive={keepAlive} captureServer={captureServer} inBlacklists={inBlacklists} sorting={sorting} />
+                            <div className='result-list'>
+                                {filteredItems.slice(0, countOfResults).map(item => (
+                                    <ResultListItem key={`${item.auth}@${item.host}:${item.port}`} {...item} />
+                                ))}
+                            </div>
+                            {this.isMoreAvailable() && (
+                                <button className='button-two load-more-button' onClick={loadMore}>
+                                    Load more
+                                </button>
+                            )}
                         </div>
-                        <ResultItemsHeader sortResults={sortResults} keepAlive={keepAlive} captureServer={captureServer} inBlacklists={inBlacklists} sorting={sorting} />
-                        <div className='result-list'>
-                            {filteredItems.slice(0, countOfResults).map(item => (
-                                <ResultListItem key={`${item.auth}@${item.host}:${item.port}`} {...item} />
-                            ))}
-                        </div>
-                        {this.isMoreAvailable() && (
-                            <button className='button-two load-more-button' onClick={loadMore}>
-                                Load more
+
+                        <div className='bottom-block'>
+                            <button className='button-two save-button' onClick={toggleExport}>
+                                Export
                             </button>
-                        )}
+                            <button className='button-two new-check-button' onClick={close}>
+                                Close
+                            </button>
+                        </div>
                     </div>
                     <Footer stats={stats} />
-                    <div className='bottom-block'>
-                        <button className='button-two save-button' onClick={toggleExport}>
-                            Export
-                        </button>
-                        <button className='button-two new-check-button' onClick={close}>
-                            Close
-                        </button>
-                    </div>
                 </div>
                 <ResultCountries {...countries} toggleCountries={toggleCountries} activeCount={activeCountries.length} toggle={toggleCountry} />
                 <ResultExport

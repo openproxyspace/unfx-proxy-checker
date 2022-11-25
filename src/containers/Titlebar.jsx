@@ -43,7 +43,7 @@ export default class Titlebar extends React.PureComponent {
             <div className={`titlebar ${dark ? 'dark' : ''}`}>
                 <LogoIcon/>
                 <span className="title">ProxyScrape</span>
-                <div className="misc">
+                {/*<div className="misc">
                     <ul className="buttons">
                         <li onClick={toggleInfo} title="Toggle Info">
                             <svg viewBox="0 0 522.468 522.469">
@@ -67,7 +67,7 @@ export default class Titlebar extends React.PureComponent {
                             )}
                         </li>
                     </ul>
-                </div>
+                </div>*/}
                 <ul className="buttons">
                     <li onClick={this.minimize}>
                         <svg viewBox="0 0 512 512" className="minimize">

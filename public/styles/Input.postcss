@@ -1,7 +1,6 @@
 .proxy-input {
     display: flex;
     flex-flow: column wrap;
-    padding-top: 2em;
     border-top: 1px solid var(--white-color-back);
     margin-bottom: 90px;
 
@@ -13,27 +12,28 @@
         align-items: center;
         width: 76%;
         background: #fff;
-        padding: 20px;
+        padding: 15px 25px 30px 25px;
         border-radius: 10px;
+        font-size: 14px;
 
         & .wrap {
             width: calc(50% - 1em);
             & .title {
                 color: #757DA1;
-                padding-bottom: 10px;
+                padding-bottom: 30px;
+                font-size: 12px;
             }
             & .text-underline{
                 text-decoration: underline;
             }
             & .from-clipboard {
-                padding: 0.25rem 0.75rem;
-                font-size: 0.85em;
+                padding: 8px;
                 border-radius: 0.5rem;
                 font-weight: 700;
                 color: var(--white-color);
                 white-space: nowrap;
                 background-color: #84AEFF;
-                margin-bottom: 0.5rem;
+                margin-bottom: 20px;
                 cursor: pointer;
                 text-align: center;
                 transition: background-color 0.5s easeOne, color 0.5s easeOne;
@@ -87,19 +87,17 @@
 
                 & .item {
                     padding-bottom: 0.5em;
-                    display: flex;
-
+                    
                     &:last-child {
                         padding-bottom: 0;
                     }
 
-                    & span {
-                        display: inline-block;
-                        padding: 0.25em 0.75em;
-                        font-size: 0.75em;
-                        border-radius: 1em;
-                        font-weight: 700;
-                        color: var(--white-color);
+                    & div {
+                        
+                        font-size: 0.95em;
+                       
+                        
+                        
                         white-space: nowrap;
 
                         &:last-child {
@@ -110,12 +108,14 @@
 
                         &:nth-child(1) {
                             margin-right: 0.5em;
-                            background-color: color(var(--blue-color) alpha(80%));
+                            color: #757DA1;    
                         }
 
                         &:nth-child(2) {
-                            color: color(var(--blue-color) alpha(80%));
-                            background-color: color(var(--grey-color) alpha(5%));
+                            color: #3464E0;
+                            font-weight: 700;
+                            font-size: 1em;
+                            
                         }
                     }
                 }
