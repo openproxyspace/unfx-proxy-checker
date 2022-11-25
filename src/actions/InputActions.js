@@ -50,6 +50,7 @@ const getResult = (text, event, getState) => {
 };
 
 export const loadFromTxt = event => async (dispatch, getState) => {
+ 
     try {
         const paths = await ipcRenderer.invoke('choose-multi');
 
@@ -78,6 +79,53 @@ export const loadFromTxt = event => async (dispatch, getState) => {
                 })
             );
         }
+    } catch (error) {
+        alert(error);
+    }
+};
+export const overrideEventDefaults = event => async (dispatch, getState) => {
+    try {
+        event.preventDefault();
+        event.stopPropagation();
+    } catch (error) {
+        alert(error);
+    }
+};
+
+export const onFileDrop = event => async (dispatch, getState) => {
+    
+    try {
+            event.preventDefault();
+            event.stopPropagation();
+
+   
+            if (event.dataTransfer.files.length) {
+                
+                let filesText;
+                const names = [];
+
+                for await (const file of event.dataTransfer.files) {
+                    filesText += await readFile(file.path, 'utf8');
+                    names.push(parse(file.path).base);
+                }
+
+                const { list, errors, total, unique, size } = getResult(filesText, event, getState);
+
+                if (!list.length) throw new Error('No proxies found');
+
+                dispatch(
+                    setLoadedData({
+                        loaded: true,
+                        list,
+                        errors,
+                        name: names.join(', '),
+                        total,
+                        unique,
+                        size
+                    })
+                );
+            }
+        
     } catch (error) {
         alert(error);
     }

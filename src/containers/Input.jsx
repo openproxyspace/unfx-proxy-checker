@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadFromTxt, pasteFromClipboard } from '../actions/InputActions';
+import { loadFromTxt, 
+        pasteFromClipboard,
+        overrideEventDefaults,
+        onFileDrop} from '../actions/InputActions';
 import { start } from '../actions/CheckingActions';
 import Checkbox from '../components/ui/Checkbox';
 import { splitByKK } from '../misc/text';
@@ -9,7 +12,7 @@ import { toggleOption } from '../actions/CoreActions';
 import '../../public/styles/Input.postcss';
 import DropDocIcon from '../components/ui/DropDocIcon';
 
-const Input = ({ loaded, total, errors, unique, name, size, loadFromTxt, pasteFromClipboard, start, shuffle, toggleOption }) => {
+const Input = ({ loaded, total, errors, unique, name, size, loadFromTxt, onFileDrop, overrideEventDefaults, pasteFromClipboard, start, shuffle, toggleOption }) => {
     const copyErrors = () => {
         navigator.clipboard.writeText(errors.join('\r\n'));
     };
@@ -23,7 +26,13 @@ const Input = ({ loaded, total, errors, unique, name, size, loadFromTxt, pasteFr
                     <div className='from-clipboard' onClick={pasteFromClipboard}>
                         Paste From Clipboard
                     </div>
-                    <div className='select-event' onClick={loadFromTxt} onDrop={loadFromTxt}>
+                    <div className='select-event' 
+                        onClick={loadFromTxt} 
+                        onDragEnter = {overrideEventDefaults}
+                        onDragLeave={overrideEventDefaults}
+                        onDragOver={overrideEventDefaults}
+                        onDrop={onFileDrop}>
+
                         <DropDocIcon scale="70" />
                         <div>
                             <div> Drag & Drop Txt Here </div>
@@ -92,6 +101,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     loadFromTxt,
     pasteFromClipboard,
+    overrideEventDefaults,
+    onFileDrop,
     start,
     toggleOption
 };
