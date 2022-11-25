@@ -58,7 +58,7 @@ export default class ResultListItem extends React.PureComponent {
                     </div>
                     <div className='k-a'>{keepAlive && <span title='Connection: Keep-Alive'>K-A</span>}</div>
                     <div className='server'>{server && <span>{server}</span>}</div>
-                    <div className='timeout'>{splitByKK(timeout)}</div>
+                    <div className='timeout'>{splitByKK(timeout)} ms</div>
                 </div>
                 {this.state.isDataOpened && <ResultItemData data={data} />}
             </div>

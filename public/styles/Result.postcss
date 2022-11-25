@@ -235,20 +235,10 @@
                             }
                         }
 
-                        &:hover {
-                            & .counts {
-                                background-color: var(--red-color);
-                            }
-
-                            & .country .city {
-                                color: color(var(--grey-color) alpha(85%));
-                            }
-                        }
                     }
 
                     & span {
                         display: inline-flex;
-                        font-size: 14px;
                         font-weight: 600;
                         border-radius: 10px;
                         text-transform: capitalize;
@@ -322,6 +312,8 @@
                     & .ip {
                         width: 15%;
                         color: #3A4368;
+                        font-weight: 700;
+                        font-size: 13px;
 
                         & span {
                             width: 100%;
@@ -329,10 +321,11 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
                             transition: color 0.3s easeOne;
-                            font-size: 12px;
                             color: #757DA1;
                             line-height: 12px;
+                            font-size: 12px;
                             padding: 0;
+                            background: none;
                             
                         }
                     }
@@ -340,6 +333,8 @@
                     & .port {
                         width: 10%;
                         color: #3A4368;
+                        font-size: 13px;
+                        font-weight: 700;
                     }
 
                     & .protocols {
@@ -352,6 +347,7 @@
                             color : #fff;
                             font-weight: 700;
                             line-height: 24px;
+                            font-size: 14px;
                             padding: 2px 15px;
                         }
                         
@@ -366,6 +362,7 @@
                             color : #fff;
                             font-weight: 700;
                             line-height: 24px;
+                            font-size: 14px;
                             padding: 2px 15px;
                         }
                     }
@@ -387,6 +384,7 @@
                                 background-position: center;
                                 background-size: cover;
                                 border-radius: 10px;
+                                border: none;
                                 margin: 2px;
                             }
                         }
@@ -395,6 +393,7 @@
                             font-size: 14px;
                             white-space: nowrap;
                             overflow: hidden;
+                            font-weight: 700;
                             text-overflow: ellipsis;
                             color: #3A4368;
                         }
@@ -439,13 +438,6 @@
                         font-size: 14px;
                         font-weight: 600;
                         color: #3A4368;
-                        &::after {
-                            content: ' ms';
-
-                            @media screen and (max-width: 1060px) {
-                                content: none;
-                            }
-                        }
                     }
 
                     & .data {
@@ -476,14 +468,14 @@
     }
 
     & .bottom-block {
-        position: absolute;
+        position: fixed;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        bottom: 0;
+        bottom: 115px;
         padding: 10px;
         border-radius: 10px;
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.7);
         margin-left: calc(50% - 125px);
 
         & button {
