@@ -1,26 +1,26 @@
 {
-    "name": "unfx-proxy-checker",
+    "name": "hproxy",
     "version": "1.7.2",
     "main": "public/main.js",
     "license": "MIT",
     "author": {
-        "name": "Open Proxy Space",
-        "email": "r060773d@openproxy.space",
-        "url": "https://openproxy.space/"
+        "name": "hproxy",
+        "email": "",
+        "url": ""
     },
     "keywords": [
-        "unfx",
+        "hproxy",
         "proxy",
         "checker"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/assnctr/unfx-proxy-checker"
+        "url": ""
     },
     "bugs": {
-        "url": "https://github.com/assnctr/unfx-proxy-checker/issues"
+        "url": ""
     },
-    "homepage": "https://openproxy.space/software/proxy-checker",
+    "homepage": "",
     "scripts": {
         "build": "run-p build:*",
         "build:main": "cross-env NODE_ENV=production webpack -p --config webpack.config.main.babel.js",
@@ -112,13 +112,13 @@
         "publish": [
             {
                 "provider": "github",
-                "owner": "assnctr",
-                "repo": "unfx-proxy-checker",
+                "owner": "",
+                "repo": "",
                 "private": false
             }
         ],
-        "productName": "Unfx Proxy Checker",
-        "copyright": "2018-Present Open Proxy Space",
+        "productName": "hproxy",
+        "copyright": "",
         "extraResources": [
             "./files/**"
         ],
